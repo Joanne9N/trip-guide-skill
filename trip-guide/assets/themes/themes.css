@@ -1,0 +1,192 @@
+/* =========================================================
+   trip-guide 風格系統（6 種）
+   用法：<html data-theme="picturebook">，換風格只要改這個值
+   picturebook 日系繪本｜tropical 熱帶活潑｜scrapbook 手帳剪貼簿
+   boarding 復古登機證｜glass 液態玻璃｜magazine 雜誌編輯
+   這份是母版：改完執行 node tools/sync-themes.mjs，
+   會把內容同步進各版本 index.html 的 THEMES 區塊
+   ========================================================= */
+
+/* ---------- 共用變數（每種風格覆寫） ---------- */
+:root{
+  --bg:#FFFCF6; --paper:#FFFFFF; --ink:#3E3A39; --muted:#6B6563; --line:#E8DCCB;
+  --c1:#F2A497; --c2:#F6D27A; --c3:#A8D3E6; --c4:#B9DAA5;
+  --c1-ink:#9A3E2E; --c3-ink:#2F6F8C; --c4-ink:#3F6E2C;
+  --on-c1:#3E3A39; --alert:#C8553D;
+  --bw:3px; --bc:#3E3A39; --radius:22px; --radius-s:14px;
+  --shadow:none; --shadow-lift:none;
+  --font-body:"Huninn",-apple-system,"PingFang TC","Noto Sans TC",sans-serif;
+  --font-head:var(--font-body);
+  --font-mono:ui-monospace,"SF Mono",Menlo,monospace;
+  --hero-bg:var(--bg);
+}
+
+/* 🎨 日系繪本：和紙白、墨灰粗框、大圓角、平塗 */
+[data-theme="picturebook"]{
+  --alert:#C8553D;
+  --bg:#FFFCF6; --paper:#FFFFFF; --ink:#3E3A39; --muted:#6B6563; --line:#E8DCCB;
+  --c1:#F2A497; --c2:#F6D27A; --c3:#A8D3E6; --c4:#B9DAA5;
+  --c1-ink:#9A3E2E; --c3-ink:#2F6F8C; --c4-ink:#3F6E2C; --on-c1:#3E3A39;
+  --bw:3px; --bc:#3E3A39; --radius:22px; --radius-s:14px;
+  --shadow:4px 4px 0 #3E3A39; --shadow-lift:6px 6px 0 #3E3A39;
+  --font-body:"Huninn",-apple-system,"PingFang TC",sans-serif;
+  --hero-bg:#FFF3D6;
+}
+
+/* 🌴 熱帶活潑：芒果橘、廟綠、辣椒紅（曼谷團原版） */
+[data-theme="tropical"]{
+  --alert:#E0452B;
+  --bg:#FFF8EC; --paper:#FFFFFF; --ink:#2B1B0E; --muted:#7A6450; --line:#F1E3CC;
+  --c1:#FF8A1F; --c2:#F5B700; --c3:#2F7DD1; --c4:#1F7A5C;
+  --c1-ink:#A4520A; --c3-ink:#2F7DD1; --c4-ink:#1F7A5C; --on-c1:#FFFFFF;
+  --bw:0px; --bc:transparent; --radius:18px; --radius-s:12px;
+  --shadow:0 4px 14px rgba(120,70,10,.08); --shadow-lift:0 8px 22px rgba(120,70,10,.14);
+  --font-body:"Chiron GoRound TC",-apple-system,"PingFang TC",sans-serif;
+  --hero-bg:linear-gradient(135deg,#FF8A1F,#F5B700);
+}
+
+/* 📒 手帳剪貼簿：方格紙、紙膠帶、微歪的卡片 */
+[data-theme="scrapbook"]{
+  --alert:#B9503F;
+  --bg:#F7F1E6; --paper:#FFFEFA; --ink:#4A3F35; --muted:#7D6E60; --line:#E6DACB;
+  --c1:#E89A8B; --c2:#EBC868; --c3:#9CC3D5; --c4:#A9C79A;
+  --c1-ink:#9C4A3B; --c3-ink:#3D6E85; --c4-ink:#4C6E3D; --on-c1:#4A3F35;
+  --bw:1.5px; --bc:#CDBFAE; --radius:6px; --radius-s:6px;
+  --shadow:0 2px 0 rgba(74,63,53,.08),0 6px 14px rgba(74,63,53,.10); --shadow-lift:0 10px 22px rgba(74,63,53,.16);
+  --font-body:"LXGW WenKai TC",-apple-system,"PingFang TC",serif;
+  --hero-bg:#F7F1E6;
+}
+
+/* 🎫 復古登機證：奶油紙、海軍藍、票根與打孔線 */
+[data-theme="boarding"]{
+  --alert:#C8553D;
+  --bg:#F3EBDD; --paper:#FFFBF2; --ink:#1F2A44; --muted:#5E6577; --line:#D9CDB8;
+  --c1:#C8553D; --c2:#E9B44C; --c3:#1F2A44; --c4:#4F7C6B;
+  --c1-ink:#A23F2A; --c3-ink:#1F2A44; --c4-ink:#35594B; --on-c1:#FFFBF2;
+  --bw:1.5px; --bc:#1F2A44; --radius:10px; --radius-s:8px;
+  --shadow:0 1px 0 rgba(31,42,68,.12); --shadow-lift:0 6px 16px rgba(31,42,68,.14);
+  --font-body:"Noto Sans TC",-apple-system,"PingFang TC",sans-serif;
+  --font-head:"Noto Serif TC","Songti TC",serif;
+  --font-mono:"Space Mono",ui-monospace,Menlo,monospace;
+  --hero-bg:#1F2A44;
+}
+
+/* 🫧 液態玻璃：半透明毛玻璃卡片，底下是風景照或漸層 */
+[data-theme="glass"]{
+  --alert:#D94A3A;
+  --bg:#DCE7F2; --paper:rgba(255,255,255,.55); --ink:#14202E; --muted:#3E4E60; --line:rgba(20,32,46,.12);
+  --c1:#3A7BD5; --c2:#F2B84B; --c3:#59B6C7; --c4:#6BBF8A;
+  --c1-ink:#1E5BAE; --c3-ink:#1F6E7C; --c4-ink:#2D7A4C; --on-c1:#FFFFFF;
+  --bw:1px; --bc:rgba(255,255,255,.7); --radius:26px; --radius-s:16px;
+  --shadow:0 8px 30px rgba(20,32,46,.12),inset 0 1px 0 rgba(255,255,255,.8); --shadow-lift:0 14px 40px rgba(20,32,46,.18),inset 0 1px 0 rgba(255,255,255,.9);
+  --font-body:"Noto Sans TC",-apple-system,"PingFang TC",sans-serif;
+  --hero-bg:transparent;
+}
+
+/* 📰 雜誌編輯：大字標題、細線、留白、黑白加一個重點色 */
+[data-theme="magazine"]{
+  --alert:#B5452E;
+  --bg:#FAF8F4; --paper:#FFFFFF; --ink:#151515; --muted:#6A6A6A; --line:#DEDAD2;
+  --c1:#B5452E; --c2:#C9A227; --c3:#2E5E7E; --c4:#5B7A4A;
+  --c1-ink:#B5452E; --c3-ink:#2E5E7E; --c4-ink:#4C6A3C; --on-c1:#FFFFFF;
+  --bw:1px; --bc:#151515; --radius:0px; --radius-s:0px;
+  --shadow:none; --shadow-lift:none;
+  --font-body:"Noto Sans TC",-apple-system,"PingFang TC",sans-serif;
+  --font-head:"Noto Serif TC","Songti TC",serif;
+  --hero-bg:#FAF8F4;
+}
+
+/* ---------- 共用元件（所有風格共用的骨架） ---------- */
+html{background:var(--bg)}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body)}
+h1,h2,h3,.head-font{font-family:var(--font-head)}
+.card{background:var(--paper);border:var(--bw) solid var(--bc);border-radius:var(--radius);box-shadow:var(--shadow)}
+.btn{border-radius:var(--radius-s)}
+.pill{border-radius:99px}
+.mono{font-family:var(--font-mono)}
+.tag{display:inline-block;font-size:12px;font-weight:700;padding:2px 9px;border-radius:99px;border:1.5px solid currentColor;line-height:1.5;vertical-align:2px}
+.tag.walk{color:var(--c4-ink);background:color-mix(in srgb,var(--c4) 28%,var(--paper))}
+.tag.train{color:var(--c3-ink);background:color-mix(in srgb,var(--c3) 28%,var(--paper))}
+.tag.bus{color:#7A5A00;background:color-mix(in srgb,var(--c2) 35%,var(--paper))}
+.tag.car{color:var(--c1-ink);background:color-mix(in srgb,var(--c1) 28%,var(--paper))}
+.tag.flight{color:var(--ink);background:color-mix(in srgb,var(--line) 60%,var(--paper))}
+.tag.must{color:var(--on-c1);background:var(--c1);border-color:var(--c1)}
+
+/* 插圖：線條吃 --ink，填色吃 --c1～--c4，各風格自動變色 */
+.ill .k{stroke:var(--ink);stroke-width:calc(var(--bw) + 1px);stroke-linejoin:round;stroke-linecap:round;fill:none}
+.ill .f1{fill:var(--c1)} .ill .f2{fill:var(--c2)} .ill .f3{fill:var(--c3)} .ill .f4{fill:var(--c4)}
+.ill .fp{fill:var(--paper)} .ill .fi{fill:var(--ink)}
+[data-theme="tropical"] .ill .k,[data-theme="glass"] .ill .k{stroke-width:0}
+[data-theme="magazine"] .ill .k{stroke-width:1.2px}
+[data-theme="magazine"] .ill .f1,[data-theme="magazine"] .ill .f2,[data-theme="magazine"] .ill .f3,[data-theme="magazine"] .ill .f4{fill:none}
+[data-theme="magazine"] .ill .sun{fill:var(--c1)}
+
+/* 動畫：插圖輕輕動、切換日期彈一下 */
+@keyframes bob{50%{transform:translateY(-4px)}}
+@keyframes drift{50%{transform:translateX(10px)}}
+@keyframes ride{0%{transform:translateX(-30px)}100%{transform:translateX(30px)}}
+@keyframes twinkle{50%{opacity:.35}}
+@keyframes boing{0%{transform:scale(.96) translateY(6px);opacity:.2}60%{transform:scale(1.02) translateY(-2px);opacity:1}100%{transform:none}}
+.ill .bob{animation:bob 3.2s ease-in-out infinite}
+.ill .drift{animation:drift 7s ease-in-out infinite}
+.ill .ride{animation:ride 6s ease-in-out infinite alternate}
+.ill .twinkle{animation:twinkle 2.4s ease-in-out infinite}
+.boing{animation:boing .45s cubic-bezier(.3,1.4,.5,1)}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none !important;transition:none !important;scroll-behavior:auto !important}
+}
+
+/* ---------- 各風格的裝飾 ---------- */
+
+/* 🎨 繪本：硬陰影、粗框按鈕 */
+[data-theme="picturebook"] .btn,[data-theme="picturebook"] .day-chip{border:var(--bw) solid var(--bc)}
+[data-theme="picturebook"] .day-chip.on{box-shadow:3px 3px 0 var(--bc)}
+[data-theme="picturebook"] .hero{border-bottom:var(--bw) solid var(--bc)}
+
+/* 🌴 熱帶：漸層頁首、白字 */
+[data-theme="tropical"] .hero{color:#fff;border-radius:0 0 28px 28px}
+[data-theme="tropical"] .hero .sub,[data-theme="tropical"] .hero .stat span{color:rgba(255,255,255,.92)}
+[data-theme="tropical"] .hero .stat b{color:#fff}
+[data-theme="tropical"] .hero .kicker{color:rgba(255,255,255,.85)}
+.hero .card{color:var(--ink)}
+
+/* 📒 手帳：方格紙底、紙膠帶、卡片微歪 */
+[data-theme="scrapbook"] body{background-image:linear-gradient(rgba(156,195,213,.18) 1px,transparent 1px),linear-gradient(90deg,rgba(156,195,213,.18) 1px,transparent 1px);background-size:22px 22px}
+[data-theme="scrapbook"] .card{position:relative}
+[data-theme="scrapbook"] .card::before{content:"";position:absolute;top:-10px;left:50%;width:84px;height:20px;margin-left:-42px;background:color-mix(in srgb,var(--c2) 70%,transparent);transform:rotate(-3deg);opacity:.85}
+[data-theme="scrapbook"] .card:nth-of-type(3n+2)::before{background:color-mix(in srgb,var(--c3) 70%,transparent);transform:rotate(2deg);left:22%}
+[data-theme="scrapbook"] .card:nth-of-type(3n)::before{background:color-mix(in srgb,var(--c1) 60%,transparent);transform:rotate(-1deg);left:74%}
+[data-theme="scrapbook"] .card:nth-of-type(odd){transform:rotate(-.4deg)}
+[data-theme="scrapbook"] .card:nth-of-type(even){transform:rotate(.35deg)}
+[data-theme="scrapbook"] .hero-art{background:var(--paper);padding:10px 10px 34px;box-shadow:var(--shadow-lift);transform:rotate(-1.5deg);border-radius:3px}
+
+/* 🎫 登機證：深藍頁首、打孔線、等寬字 */
+[data-theme="boarding"] .hero{color:#FFFBF2}
+[data-theme="boarding"] .hero .sub,[data-theme="boarding"] .hero .stat span{color:#E9DFC9}
+[data-theme="boarding"] .hero .stat b{color:var(--c2);font-family:var(--font-mono)}
+[data-theme="boarding"] .hero .kicker{color:var(--c2);font-family:var(--font-mono)}
+[data-theme="boarding"] .hero-art{background:#FFFBF2;border-radius:10px;padding:8px;position:relative}
+[data-theme="boarding"] .card{position:relative}
+[data-theme="boarding"] .card.ticket{border-style:solid;background:radial-gradient(circle at 0 50%,transparent 11px,var(--paper) 12px) left/51% 100% no-repeat,radial-gradient(circle at 100% 50%,transparent 11px,var(--paper) 12px) right/51% 100% no-repeat;border:0;box-shadow:0 0 0 1.5px var(--bc) inset}
+[data-theme="boarding"] .perf{border-top:2px dashed var(--line);margin:12px -16px}
+[data-theme="boarding"] .day-chip b,[data-theme="boarding"] .t{font-family:var(--font-mono)}
+[data-theme="boarding"] .stamp{display:inline-block;border:2px solid var(--c1);color:var(--c1);border-radius:8px;padding:2px 10px;transform:rotate(-6deg);font-family:var(--font-mono);font-weight:700;letter-spacing:1px}
+
+/* 🫧 玻璃：背景照片／漸層＋毛玻璃 */
+[data-theme="glass"] body{background:var(--photo,radial-gradient(1200px 600px at 10% -10%,#FFD9A8 0,transparent 60%),radial-gradient(900px 700px at 110% 10%,#A9D8F5 0,transparent 55%),radial-gradient(900px 900px at 50% 110%,#BDE8C9 0,transparent 60%),#DCE7F2);background-attachment:fixed;background-size:cover}
+[data-theme="glass"] .card,[data-theme="glass"] .topbar,[data-theme="glass"] .day-chip,[data-theme="glass"] nav.tabs{-webkit-backdrop-filter:blur(18px) saturate(1.6);backdrop-filter:blur(18px) saturate(1.6)}
+[data-theme="glass"] .topbar,[data-theme="glass"] nav.tabs{background:rgba(255,255,255,.55) !important}
+[data-theme="glass"] .day-chip{background:rgba(255,255,255,.45) !important;border:1px solid rgba(255,255,255,.7) !important}
+[data-theme="glass"] .hero-art{border-radius:26px;overflow:hidden;background:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.7)}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  [data-theme="glass"]{--paper:rgba(255,255,255,.92)}
+}
+
+/* 📰 雜誌：大標、細線分隔、沒有圓角 */
+[data-theme="magazine"] .card{border-width:0;border-top:1px solid var(--bc);background:transparent;padding-left:0;padding-right:0}
+[data-theme="magazine"] .hero h1{font-size:40px;line-height:1.15;font-weight:900;letter-spacing:-.5px}
+[data-theme="magazine"] .hero .kicker{letter-spacing:3px;text-transform:uppercase;color:var(--c1)}
+[data-theme="magazine"] h2{font-size:26px;font-weight:900;border-bottom:3px solid var(--ink);padding-bottom:6px}
+[data-theme="magazine"] .day-chip{border:0;border-bottom:2px solid transparent;border-radius:0;background:transparent}
+[data-theme="magazine"] .day-chip.on{border-bottom-color:var(--c1);background:transparent;color:var(--ink)}
+[data-theme="magazine"] .btn{border:1px solid var(--ink)}

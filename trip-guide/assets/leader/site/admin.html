@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" data-theme="picturebook">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="領隊後台">
+<title>領隊後台</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧭</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link id="font-link" rel="stylesheet" href="">
+<script>
+// ✏️ 後台風格：建議跟前台 index.html 的 THEME 一樣
+const THEME = "picturebook";
+(function(){
+  const F = { picturebook:"Huninn", tropical:"Chiron+GoRound+TC:wght@400;700;800", scrapbook:"LXGW+WenKai+TC:wght@400;700",
+    boarding:"Noto+Sans+TC:wght@400;700&family=Noto+Serif+TC:wght@700;900&family=Space+Mono:wght@700",
+    glass:"Noto+Sans+TC:wght@400;700;800", magazine:"Noto+Sans+TC:wght@400;700&family=Noto+Serif+TC:wght@700;900" };
+  const q = new URLSearchParams(location.search).get("theme"), t = F[q] ? q : F[THEME] ? THEME : "picturebook";
+  document.documentElement.dataset.theme = t;
+  document.getElementById("font-link").href = "https://fonts.googleapis.com/css2?family=" + F[t] + "&display=swap";
+})();
+</script>
+<style>
+/* ===== THEMES START（由 tools/sync-themes.mjs 從 assets/themes/themes.css 同步，不要直接改這段） ===== */
+/* =========================================================
+   trip-guide 風格系統（6 種）
+   用法：<html data-theme="picturebook">，換風格只要改這個值
+   picturebook 日系繪本｜tropical 熱帶活潑｜scrapbook 手帳剪貼簿
+   boarding 復古登機證｜glass 液態玻璃｜magazine 雜誌編輯
+   這份是母版：改完執行 node tools/sync-themes.mjs，
+   會把內容同步進各版本 index.html 的 THEMES 區塊
+   ========================================================= */
+
+/* ---------- 共用變數（每種風格覆寫） ---------- */
+:root{
+  --bg:#FFFCF6; --paper:#FFFFFF; --ink:#3E3A39; --muted:#6B6563; --line:#E8DCCB;
+  --c1:#F2A497; --c2:#F6D27A; --c3:#A8D3E6; --c4:#B9DAA5;
+  --c1-ink:#9A3E2E; --c3-ink:#2F6F8C; --c4-ink:#3F6E2C;
+  --on-c1:#3E3A39; --alert:#C8553D;
+  --bw:3px; --bc:#3E3A39; --radius:22px; --radius-s:14px;
+  --shadow:none; --shadow-lift:none;
+  --font-body:"Huninn",-apple-system,"PingFang TC","Noto Sans TC",sans-serif;
+  --font-head:var(--font-body);
+  --font-mono:ui-monospace,"SF Mono",Menlo,monospace;
+  --hero-bg:var(--bg);
+}
+
+/* 🎨 日系繪本：和紙白、墨灰粗框、大圓角、平塗 */
+[data-theme="picturebook"]{
+  --alert:#C8553D;
+  --bg:#FFFCF6; --paper:#FFFFFF; --ink:#3E3A39; --muted:#6B6563; --line:#E8DCCB;
+  --c1:#F2A497; --c2:#F6D27A; --c3:#A8D3E6; --c4:#B9DAA5;
+  --c1-ink:#9A3E2E; --c3-ink:#2F6F8C; --c4-ink:#3F6E2C; --on-c1:#3E3A39;
+  --bw:3px; --bc:#3E3A39; --radius:22px; --radius-s:14px;
+  --shadow:4px 4px 0 #3E3A39; --shadow-lift:6px 6px 0 #3E3A39;
+  --font-body:"Huninn",-apple-system,"PingFang TC",sans-serif;
+  --hero-bg:#FFF3D6;
+}
+
+/* 🌴 熱帶活潑：芒果橘、廟綠、辣椒紅（曼谷團原版） */
+[data-theme="tropical"]{
+  --alert:#E0452B;
+  --bg:#FFF8EC; --paper:#FFFFFF; --ink:#2B1B0E; --muted:#7A6450; --line:#F1E3CC;
+  --c1:#FF8A1F; --c2:#F5B700; --c3:#2F7DD1; --c4:#1F7A5C;
+  --c1-ink:#A4520A; --c3-ink:#2F7DD1; --c4-ink:#1F7A5C; --on-c1:#FFFFFF;
+  --bw:0px; --bc:transparent; --radius:18px; --radius-s:12px;
+  --shadow:0 4px 14px rgba(120,70,10,.08); --shadow-lift:0 8px 22px rgba(120,70,10,.14);
+  --font-body:"Chiron GoRound TC",-apple-system,"PingFang TC",sans-serif;
+  --hero-bg:linear-gradient(135deg,#FF8A1F,#F5B700);
+}
+
+/* 📒 手帳剪貼簿：方格紙、紙膠帶、微歪的卡片 */
+[data-theme="scrapbook"]{
+  --alert:#B9503F;
+  --bg:#F7F1E6; --paper:#FFFEFA; --ink:#4A3F35; --muted:#7D6E60; --line:#E6DACB;
+  --c1:#E89A8B; --c2:#EBC868; --c3:#9CC3D5; --c4:#A9C79A;
+  --c1-ink:#9C4A3B; --c3-ink:#3D6E85; --c4-ink:#4C6E3D; --on-c1:#4A3F35;
+  --bw:1.5px; --bc:#CDBFAE; --radius:6px; --radius-s:6px;
+  --shadow:0 2px 0 rgba(74,63,53,.08),0 6px 14px rgba(74,63,53,.10); --shadow-lift:0 10px 22px rgba(74,63,53,.16);
+  --font-body:"LXGW WenKai TC",-apple-system,"PingFang TC",serif;
+  --hero-bg:#F7F1E6;
+}
+
+/* 🎫 復古登機證：奶油紙、海軍藍、票根與打孔線 */
+[data-theme="boarding"]{
+  --alert:#C8553D;
+  --bg:#F3EBDD; --paper:#FFFBF2; --ink:#1F2A44; --muted:#5E6577; --line:#D9CDB8;
+  --c1:#C8553D; --c2:#E9B44C; --c3:#1F2A44; --c4:#4F7C6B;
+  --c1-ink:#A23F2A; --c3-ink:#1F2A44; --c4-ink:#35594B; --on-c1:#FFFBF2;
+  --bw:1.5px; --bc:#1F2A44; --radius:10px; --radius-s:8px;
+  --shadow:0 1px 0 rgba(31,42,68,.12); --shadow-lift:0 6px 16px rgba(31,42,68,.14);
+  --font-body:"Noto Sans TC",-apple-system,"PingFang TC",sans-serif;
+  --font-head:"Noto Serif TC","Songti TC",serif;
+  --font-mono:"Space Mono",ui-monospace,Menlo,monospace;
+  --hero-bg:#1F2A44;
+}
+
+/* 🫧 液態玻璃：半透明毛玻璃卡片，底下是風景照或漸層 */
+[data-theme="glass"]{
+  --alert:#D94A3A;
+  --bg:#DCE7F2; --paper:rgba(255,255,255,.55); --ink:#14202E; --muted:#3E4E60; --line:rgba(20,32,46,.12);
+  --c1:#3A7BD5; --c2:#F2B84B; --c3:#59B6C7; --c4:#6BBF8A;
+  --c1-ink:#1E5BAE; --c3-ink:#1F6E7C; --c4-ink:#2D7A4C; --on-c1:#FFFFFF;
+  --bw:1px; --bc:rgba(255,255,255,.7); --radius:26px; --radius-s:16px;
+  --shadow:0 8px 30px rgba(20,32,46,.12),inset 0 1px 0 rgba(255,255,255,.8); --shadow-lift:0 14px 40px rgba(20,32,46,.18),inset 0 1px 0 rgba(255,255,255,.9);
+  --font-body:"Noto Sans TC",-apple-system,"PingFang TC",sans-serif;
+  --hero-bg:transparent;
+}
+
+/* 📰 雜誌編輯：大字標題、細線、留白、黑白加一個重點色 */
+[data-theme="magazine"]{
+  --alert:#B5452E;
+  --bg:#FAF8F4; --paper:#FFFFFF; --ink:#151515; --muted:#6A6A6A; --line:#DEDAD2;
+  --c1:#B5452E; --c2:#C9A227; --c3:#2E5E7E; --c4:#5B7A4A;
+  --c1-ink:#B5452E; --c3-ink:#2E5E7E; --c4-ink:#4C6A3C; --on-c1:#FFFFFF;
+  --bw:1px; --bc:#151515; --radius:0px; --radius-s:0px;
+  --shadow:none; --shadow-lift:none;
+  --font-body:"Noto Sans TC",-apple-system,"PingFang TC",sans-serif;
+  --font-head:"Noto Serif TC","Songti TC",serif;
+  --hero-bg:#FAF8F4;
+}
+
+/* ---------- 共用元件（所有風格共用的骨架） ---------- */
+html{background:var(--bg)}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body)}
+h1,h2,h3,.head-font{font-family:var(--font-head)}
+.card{background:var(--paper);border:var(--bw) solid var(--bc);border-radius:var(--radius);box-shadow:var(--shadow)}
+.btn{border-radius:var(--radius-s)}
+.pill{border-radius:99px}
+.mono{font-family:var(--font-mono)}
+.tag{display:inline-block;font-size:12px;font-weight:700;padding:2px 9px;border-radius:99px;border:1.5px solid currentColor;line-height:1.5;vertical-align:2px}
+.tag.walk{color:var(--c4-ink);background:color-mix(in srgb,var(--c4) 28%,var(--paper))}
+.tag.train{color:var(--c3-ink);background:color-mix(in srgb,var(--c3) 28%,var(--paper))}
+.tag.bus{color:#7A5A00;background:color-mix(in srgb,var(--c2) 35%,var(--paper))}
+.tag.car{color:var(--c1-ink);background:color-mix(in srgb,var(--c1) 28%,var(--paper))}
+.tag.flight{color:var(--ink);background:color-mix(in srgb,var(--line) 60%,var(--paper))}
+.tag.must{color:var(--on-c1);background:var(--c1);border-color:var(--c1)}
+
+/* 插圖：線條吃 --ink，填色吃 --c1～--c4，各風格自動變色 */
+.ill .k{stroke:var(--ink);stroke-width:calc(var(--bw) + 1px);stroke-linejoin:round;stroke-linecap:round;fill:none}
+.ill .f1{fill:var(--c1)} .ill .f2{fill:var(--c2)} .ill .f3{fill:var(--c3)} .ill .f4{fill:var(--c4)}
+.ill .fp{fill:var(--paper)} .ill .fi{fill:var(--ink)}
+[data-theme="tropical"] .ill .k,[data-theme="glass"] .ill .k{stroke-width:0}
+[data-theme="magazine"] .ill .k{stroke-width:1.2px}
+[data-theme="magazine"] .ill .f1,[data-theme="magazine"] .ill .f2,[data-theme="magazine"] .ill .f3,[data-theme="magazine"] .ill .f4{fill:none}
+[data-theme="magazine"] .ill .sun{fill:var(--c1)}
+
+/* 動畫：插圖輕輕動、切換日期彈一下 */
+@keyframes bob{50%{transform:translateY(-4px)}}
+@keyframes drift{50%{transform:translateX(10px)}}
+@keyframes ride{0%{transform:translateX(-30px)}100%{transform:translateX(30px)}}
+@keyframes twinkle{50%{opacity:.35}}
+@keyframes boing{0%{transform:scale(.96) translateY(6px);opacity:.2}60%{transform:scale(1.02) translateY(-2px);opacity:1}100%{transform:none}}
+.ill .bob{animation:bob 3.2s ease-in-out infinite}
+.ill .drift{animation:drift 7s ease-in-out infinite}
+.ill .ride{animation:ride 6s ease-in-out infinite alternate}
+.ill .twinkle{animation:twinkle 2.4s ease-in-out infinite}
+.boing{animation:boing .45s cubic-bezier(.3,1.4,.5,1)}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none !important;transition:none !important;scroll-behavior:auto !important}
+}
+
+/* ---------- 各風格的裝飾 ---------- */
+
+/* 🎨 繪本：硬陰影、粗框按鈕 */
+[data-theme="picturebook"] .btn,[data-theme="picturebook"] .day-chip{border:var(--bw) solid var(--bc)}
+[data-theme="picturebook"] .day-chip.on{box-shadow:3px 3px 0 var(--bc)}
+[data-theme="picturebook"] .hero{border-bottom:var(--bw) solid var(--bc)}
+
+/* 🌴 熱帶：漸層頁首、白字 */
+[data-theme="tropical"] .hero{color:#fff;border-radius:0 0 28px 28px}
+[data-theme="tropical"] .hero .sub,[data-theme="tropical"] .hero .stat span{color:rgba(255,255,255,.92)}
+[data-theme="tropical"] .hero .stat b{color:#fff}
+[data-theme="tropical"] .hero .kicker{color:rgba(255,255,255,.85)}
+.hero .card{color:var(--ink)}
+
+/* 📒 手帳：方格紙底、紙膠帶、卡片微歪 */
+[data-theme="scrapbook"] body{background-image:linear-gradient(rgba(156,195,213,.18) 1px,transparent 1px),linear-gradient(90deg,rgba(156,195,213,.18) 1px,transparent 1px);background-size:22px 22px}
+[data-theme="scrapbook"] .card{position:relative}
+[data-theme="scrapbook"] .card::before{content:"";position:absolute;top:-10px;left:50%;width:84px;height:20px;margin-left:-42px;background:color-mix(in srgb,var(--c2) 70%,transparent);transform:rotate(-3deg);opacity:.85}
+[data-theme="scrapbook"] .card:nth-of-type(3n+2)::before{background:color-mix(in srgb,var(--c3) 70%,transparent);transform:rotate(2deg);left:22%}
+[data-theme="scrapbook"] .card:nth-of-type(3n)::before{background:color-mix(in srgb,var(--c1) 60%,transparent);transform:rotate(-1deg);left:74%}
+[data-theme="scrapbook"] .card:nth-of-type(odd){transform:rotate(-.4deg)}
+[data-theme="scrapbook"] .card:nth-of-type(even){transform:rotate(.35deg)}
+[data-theme="scrapbook"] .hero-art{background:var(--paper);padding:10px 10px 34px;box-shadow:var(--shadow-lift);transform:rotate(-1.5deg);border-radius:3px}
+
+/* 🎫 登機證：深藍頁首、打孔線、等寬字 */
+[data-theme="boarding"] .hero{color:#FFFBF2}
+[data-theme="boarding"] .hero .sub,[data-theme="boarding"] .hero .stat span{color:#E9DFC9}
+[data-theme="boarding"] .hero .stat b{color:var(--c2);font-family:var(--font-mono)}
+[data-theme="boarding"] .hero .kicker{color:var(--c2);font-family:var(--font-mono)}
+[data-theme="boarding"] .hero-art{background:#FFFBF2;border-radius:10px;padding:8px;position:relative}
+[data-theme="boarding"] .card{position:relative}
+[data-theme="boarding"] .card.ticket{border-style:solid;background:radial-gradient(circle at 0 50%,transparent 11px,var(--paper) 12px) left/51% 100% no-repeat,radial-gradient(circle at 100% 50%,transparent 11px,var(--paper) 12px) right/51% 100% no-repeat;border:0;box-shadow:0 0 0 1.5px var(--bc) inset}
+[data-theme="boarding"] .perf{border-top:2px dashed var(--line);margin:12px -16px}
+[data-theme="boarding"] .day-chip b,[data-theme="boarding"] .t{font-family:var(--font-mono)}
+[data-theme="boarding"] .stamp{display:inline-block;border:2px solid var(--c1);color:var(--c1);border-radius:8px;padding:2px 10px;transform:rotate(-6deg);font-family:var(--font-mono);font-weight:700;letter-spacing:1px}
+
+/* 🫧 玻璃：背景照片／漸層＋毛玻璃 */
+[data-theme="glass"] body{background:var(--photo,radial-gradient(1200px 600px at 10% -10%,#FFD9A8 0,transparent 60%),radial-gradient(900px 700px at 110% 10%,#A9D8F5 0,transparent 55%),radial-gradient(900px 900px at 50% 110%,#BDE8C9 0,transparent 60%),#DCE7F2);background-attachment:fixed;background-size:cover}
+[data-theme="glass"] .card,[data-theme="glass"] .topbar,[data-theme="glass"] .day-chip,[data-theme="glass"] nav.tabs{-webkit-backdrop-filter:blur(18px) saturate(1.6);backdrop-filter:blur(18px) saturate(1.6)}
+[data-theme="glass"] .topbar,[data-theme="glass"] nav.tabs{background:rgba(255,255,255,.55) !important}
+[data-theme="glass"] .day-chip{background:rgba(255,255,255,.45) !important;border:1px solid rgba(255,255,255,.7) !important}
+[data-theme="glass"] .hero-art{border-radius:26px;overflow:hidden;background:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.7)}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  [data-theme="glass"]{--paper:rgba(255,255,255,.92)}
+}
+
+/* 📰 雜誌：大標、細線分隔、沒有圓角 */
+[data-theme="magazine"] .card{border-width:0;border-top:1px solid var(--bc);background:transparent;padding-left:0;padding-right:0}
+[data-theme="magazine"] .hero h1{font-size:40px;line-height:1.15;font-weight:900;letter-spacing:-.5px}
+[data-theme="magazine"] .hero .kicker{letter-spacing:3px;text-transform:uppercase;color:var(--c1)}
+[data-theme="magazine"] h2{font-size:26px;font-weight:900;border-bottom:3px solid var(--ink);padding-bottom:6px}
+[data-theme="magazine"] .day-chip{border:0;border-bottom:2px solid transparent;border-radius:0;background:transparent}
+[data-theme="magazine"] .day-chip.on{border-bottom-color:var(--c1);background:transparent;color:var(--ink)}
+[data-theme="magazine"] .btn{border:1px solid var(--ink)}
+/* ===== THEMES END ===== */
+/* 後台沿用前台的風格變數；這裡只把舊的顏色名稱接到風格變數上 */
+html{
+  --card:var(--paper); --mango:var(--c1-ink); --gold:var(--c2); --temple:var(--c4-ink);
+  --temple-soft:color-mix(in srgb,var(--c4) 22%,var(--paper)); --chili:var(--alert); --sky:var(--c3-ink);
+  --sky-soft:color-mix(in srgb,var(--c3) 22%,var(--paper)); --mango-soft:color-mix(in srgb,var(--c2) 25%,var(--paper));
+  --navy:var(--c3-ink); --yellow:#FFF27A;
+}
+[data-theme="tropical"]{--navy:#1F3A64}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+[hidden]{display:none !important}
+html,body{margin:0}
+body{font-size:16px;line-height:1.55;padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px}
+.hero{background:var(--navy);color:#fff;padding:calc(16px + env(safe-area-inset-top)) 0 22px;border-radius:0 0 26px 26px}
+.hero .row{display:flex;align-items:center;gap:10px}
+.hero h1{margin:0;font-size:22px;flex:1}
+.hero p{margin:2px 0 0;opacity:.9;font-size:14px}
+h2{font-size:19px;margin:22px 0 8px}
+h3{font-size:16px;margin:0 0 6px}
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;margin:12px 0}
+.muted{color:var(--muted);font-size:14px}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:0;border-radius:12px;padding:10px 14px;font-size:15px;font-weight:700;cursor:pointer;background:var(--temple-soft);color:var(--temple);min-height:44px;text-decoration:none;font-family:inherit}
+.btn.main{background:var(--temple);color:#fff}
+.btn.orange{background:var(--mango);color:#fff}
+.btn.navy{background:var(--paper);color:var(--navy)}
+.btn.red{background:#FDE8E4;color:var(--chili)}
+.btn.ghost{background:transparent;color:var(--muted);border:1px solid var(--line)}
+.btn.wide{width:100%}
+.btn:disabled{opacity:.5;cursor:default}
+.pill{display:inline-block;font-size:12px;font-weight:700;padding:2px 8px;border-radius:99px;white-space:nowrap}
+.p-guide{background:#F3E8FB;color:#7A3BA8}
+.p-leader{background:var(--sky-soft);color:var(--sky)}
+.p-draft{background:var(--chili);color:#fff}
+.p-manual{background:var(--mango-soft);color:#A4520A}
+
+/* 底部分頁 */
+nav.tabs{position:fixed;left:0;right:0;bottom:0;background:var(--paper);border-top:1px solid var(--line);display:flex;justify-content:center;padding-bottom:env(safe-area-inset-bottom);z-index:20}
+nav.tabs button{flex:1;max-width:140px;border:0;background:none;padding:8px 0 6px;font-size:12px;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;position:relative;font-family:inherit}
+nav.tabs button span{font-size:22px}
+nav.tabs button.on{color:var(--navy);font-weight:800}
+nav.tabs .dot{position:absolute;top:4px;left:calc(50% + 8px);background:var(--chili);color:#fff;border-radius:99px;font-size:11px;padding:0 6px;font-weight:800}
+
+/* 結算總覽 */
+.sum{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sum div{background:var(--bg);border-radius:14px;padding:10px 12px}
+.sum b{display:block;font-size:22px}
+.sum small{color:var(--muted);font-size:13px}
+.bal{border-radius:14px;padding:14px;margin-top:10px;font-weight:800;font-size:18px;text-align:center}
+.bal.neg{background:#FDE8E4;color:var(--chili)}
+.bal.pos{background:var(--temple-soft);color:var(--temple)}
+.bal b{font-size:30px;display:block}
+
+/* 篩選 */
+.filters{display:flex;gap:6px;overflow-x:auto;padding:2px 0 6px;scrollbar-width:none}
+.filters::-webkit-scrollbar{display:none}
+.chip{border:1px solid var(--line);background:var(--paper);border-radius:99px;padding:6px 12px;font-size:14px;white-space:nowrap;cursor:pointer;font-family:inherit;color:var(--ink);min-height:36px}
+.chip.on{background:var(--navy);border-color:var(--navy);color:#fff;font-weight:700}
+
+/* 明細 */
+.row{display:flex;gap:10px;align-items:flex-start;padding:12px 0;border-bottom:1px dashed var(--line);cursor:pointer}
+.row:last-child{border-bottom:0}
+.row .l{flex:1;min-width:0}
+.row .t{font-weight:700}
+.row .d{font-size:13.5px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row .r{text-align:right;white-space:nowrap}
+.row .r b{display:block;font-size:17px}
+.row .r small{color:var(--muted);font-size:12.5px}
+.row.draft{border:2px dashed var(--chili);border-radius:12px;padding:10px;margin:6px 0}
+.dayhd{font-size:13px;font-weight:800;color:var(--navy);margin:14px 0 0;padding:4px 10px;background:var(--sky-soft);border-radius:8px;display:flex;justify-content:space-between}
+
+/* 表單 */
+label.f{display:block;font-size:14px;font-weight:700;margin:12px 0 4px}
+input,select,textarea{width:100%;font:inherit;font-size:16px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink);min-height:44px}
+textarea{min-height:64px;resize:vertical}
+input:disabled{background:#F5F0E8;color:var(--muted)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.seg.three{grid-template-columns:1fr 1fr 1fr}
+.seg button{border:2px solid var(--line);background:var(--paper);border-radius:12px;padding:10px 6px;font-size:15px;font-weight:700;cursor:pointer;min-height:48px;font-family:inherit;color:var(--ink)}
+.seg button.on{border-color:var(--navy);background:var(--navy);color:#fff}
+.seg button:disabled{opacity:.35}
+.calc{background:var(--mango-soft);border-radius:12px;padding:10px 12px;margin-top:10px;font-weight:700;color:#A4520A}
+.calc b{font-size:22px;color:var(--ink)}
+.err{color:var(--chili);font-weight:700;margin-top:8px;min-height:1em}
+.warn{background:#FFF6D6;border-left:4px solid var(--gold);padding:8px 10px;border-radius:8px;font-size:14px;margin:8px 0}
+.hl{background:#FFF6D6 !important;border-color:var(--gold) !important}
+
+/* 彈出視窗 */
+.sheet{position:fixed;inset:0;background:rgba(30,20,10,.45);z-index:50;display:flex;align-items:flex-end;justify-content:center}
+.sheet .box{background:var(--bg);width:100%;max-width:720px;max-height:92vh;overflow:auto;border-radius:22px 22px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom))}
+.sheet .hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+.sheet .x{border:0;background:var(--paper);border-radius:99px;width:40px;height:40px;font-size:18px;cursor:pointer}
+@media(min-width:760px){.sheet{align-items:center}.sheet .box{border-radius:22px}}
+
+/* 收據 */
+.drop{border:2px dashed var(--line);border-radius:16px;padding:18px;text-align:center;background:var(--paper)}
+.thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px;margin-top:10px}
+.thumb{position:relative;aspect-ratio:3/4;border-radius:12px;overflow:hidden;background:#eee;cursor:pointer}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.thumb .tag{position:absolute;left:4px;bottom:4px;font-size:11px;font-weight:700;background:rgba(0,0,0,.6);color:#fff;border-radius:6px;padding:1px 6px}
+.review{display:grid;grid-template-columns:1fr;gap:14px}
+.review .img{background:#222;border-radius:14px;overflow:hidden;max-height:420px;display:flex;align-items:center;justify-content:center}
+.review .img img{max-width:100%;max-height:420px;object-fit:contain;cursor:zoom-in}
+@media(min-width:700px){.review{grid-template-columns:280px 1fr}.review .img{max-height:none;align-self:start;position:sticky;top:0}}
+.prog{height:10px;background:var(--line);border-radius:99px;overflow:hidden;margin-top:8px}
+.prog i{display:block;height:100%;background:var(--temple);width:0;transition:width .3s}
+.viewer{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:80;display:flex;align-items:center;justify-content:center;cursor:zoom-out}
+.viewer img{max-width:100%;max-height:100%}
+
+/* 結算表 */
+table.st{width:100%;border-collapse:collapse;font-size:14px}
+table.st th{background:var(--navy);color:#fff;padding:7px 6px;font-weight:700}
+table.st td{padding:6px;border-bottom:1px solid var(--line);vertical-align:top}
+table.st td.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+table.st tr.sub td{font-weight:800;background:color-mix(in srgb,var(--c2) 18%,var(--paper))}
+table.st tr.tot td{font-weight:800;border-top:2px solid var(--ink)}
+table.st tr.bal td.n{background:var(--yellow);font-weight:800}
+.tblwrap{overflow-x:auto}
+
+/* 登入 */
+.login{max-width:380px;margin:40px auto}
+.toast{position:fixed;left:50%;bottom:calc(96px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 16px;border-radius:99px;font-weight:700;z-index:90;font-size:15px;max-width:90vw}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+  <div class="row"><h1 id="h-title">🧭 領隊後台</h1><button class="btn navy" id="b-export" hidden>⬇️ 匯出 Excel</button></div>
+  <p id="h-sub">只有領隊看得到，團員頁面不會出現</p>
+</div></header>
+<main class="wrap" id="app"></main>
+<nav class="tabs" id="tabs" hidden>
+  <button data-tab="ledger" class="on"><span>🧾</span>帳本</button>
+  <button data-tab="receipts"><span>📷</span>收據<i class="dot" id="dot" hidden></i></button>
+  <button data-tab="settle"><span>📊</span>結算</button>
+  <button data-tab="settings"><span>⚙️</span>設定</button>
+</nav>
+
+<script src="/leader-lib.js"></script>
+<script>
+/* ========== 小工具 ========== */
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c]);
+const store = {
+  get(k, d){ try { const v = localStorage.getItem("lead:" + k); return v == null ? d : JSON.parse(v); } catch { return d; } },
+  set(k, v){ try { localStorage.setItem("lead:" + k, JSON.stringify(v)); } catch {} }
+};
+const L = window.LeaderLib;
+const { fmt, fmtLocal, round, PAYER, METHOD } = L;
+function toast(msg){ const t = document.createElement("div"); t.className = "toast"; t.textContent = msg; document.body.appendChild(t); setTimeout(() => t.remove(), 2200); }
+
+async function api(path, opt = {}){
+  const o = { credentials: "same-origin", ...opt };
+  if (o.body && !(o.body instanceof FormData)) { o.headers = { "Content-Type": "application/json", ...(o.headers || {}) }; o.body = JSON.stringify(o.body); }
+  const r = await fetch("/api/admin/" + path, o);
+  if (r.status === 401) { S.authed = false; render(); throw new Error("請重新登入"); }
+  const data = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(data.error || "發生錯誤（" + r.status + "）");
+  return data;
+}
+
+/* ========== 狀態 ========== */
+const S = { authed: false, tab: store.get("tab", "ledger"), set: null, days: [], ledger: [], receipts: [], fDay: "all", fPayer: "all" };
+const METHODS_OF = { guide: ["guide_rate", "cash"], leader: ["card", "cash"] };
+
+// 匯率：資料庫一律存「1 台幣 = ? 當地幣」，畫面依設定的方向顯示
+const ctx = () => ({ set: S.set, ledger: S.ledger, receipts: S.receipts, days: S.days });
+const rateToShow = r => L.rateToShow(S.set, r);
+const rateFromShow = v => S.set.rate_dir === "twd_per_local" ? 1 / Number(v) : Number(v);
+const rateLabel = () => S.set.rate_dir === "twd_per_local" ? `1 ${S.set.currency_name} = ? 台幣` : `1 台幣 = ? ${S.set.currency_name}`;
+const rateText = r => L.rateText(S.set, r);
+
+const dayOf = d => L.dayOf(ctx(), d);
+const itemOf = (d, k) => L.itemOf(ctx(), d, k);
+const shortDate = s => s ? s.slice(5).replace("-", "/") : "";
+
+/* ========== 結算計算（共用 leader-lib.js） ========== */
+const settle = () => L.settle(ctx());
+const balanceText = b => L.balanceText(ctx(), b);
+
+/* ========== 載入 ========== */
+async function loadAll(){
+  const [set, ledger, receipts, ai] = await Promise.all([api("settings"), api("ledger"), api("receipts"), api("parse").catch(() => null)]);
+  S.set = set; S.ledger = ledger; S.receipts = receipts; S.ai = ai;
+  if (!S.days.length) S.days = await fetch("/days.json").then(r => r.json()).catch(() => []);
+  $("#h-title").textContent = "🧭 " + set.trip_name;
+  $("#h-sub").textContent = `領隊後台・${set.currency_name} ${set.currency}・導遊匯率 ${rateText(set.guide_rate)}`;
+}
+
+async function boot(){
+  try { S.authed = (await fetch("/api/admin/login").then(r => r.json())).authed; } catch { S.authed = false; }
+  if (S.authed) { try { await loadAll(); } catch (e) { toast(e.message); } }
+  render();
+}
+
+/* ========== 畫面 ========== */
+function render(){
+  $("#tabs").hidden = !S.authed; $("#b-export").hidden = !S.authed;
+  if (!S.authed) return renderLogin();
+  document.querySelectorAll("nav.tabs button").forEach(b => b.classList.toggle("on", b.dataset.tab === S.tab));
+  const drafts = S.ledger.filter(r => r.status === "draft").length;
+  $("#dot").hidden = !drafts; $("#dot").textContent = drafts;
+  ({ ledger: renderLedger, receipts: renderReceipts, settle: renderSettle, settings: renderSettings })[S.tab]();
+}
+
+function renderLogin(){
+  $("#app").innerHTML = `<div class="card login">
+    <h3>🔐 領隊登入</h3>
+    <p class="muted">這裡是領隊記帳、收據、結算的後台。請輸入管理密碼。</p>
+    <form id="f-login"><input type="password" id="pw" autocomplete="current-password" placeholder="管理密碼" required>
+    <div class="err" id="login-err"></div>
+    <button class="btn main wide">登入</button></form>
+    <p class="muted" style="margin-top:14px"><a href="/">← 回旅遊手冊</a></p></div>`;
+  $("#f-login").onsubmit = async e => {
+    e.preventDefault();
+    const r = await fetch("/api/admin/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ password: $("#pw").value }) });
+    const d = await r.json().catch(() => ({}));
+    if (!r.ok) { $("#login-err").textContent = d.error || "登入失敗"; return; }
+    S.authed = true; await loadAll(); render();
+  };
+}
+
+/* ---------- 🧾 帳本 ---------- */
+function summaryCard(){
+  const s = settle();
+  return `<div class="card"><h3>💼 結算總覽</h3>
+    <div class="sum">
+      <div><small>總支出</small><b>${fmt(s.total)}</b><small>台幣</small></div>
+      <div><small>可用資金（領款＋零用金）</small><b>${fmt(s.available)}</b><small>${fmt(s.advance)} ＋ ${fmt(s.petty)}</small></div>
+      <div><small>🧑‍🦱 導遊代付</small><b>${fmt(s.guideTwd)}</b><small>${fmtLocal(s.localSub)} ${esc(S.set.currency)} 以 ${rateText(s.gr)} 結</small></div>
+      <div><small>🧑‍✈️ 領隊刷卡＋現金</small><b>${fmt(s.leaderTwd)}</b><small>${s.leader.length} 筆</small></div>
+    </div>
+    <div class="bal ${s.balance < 0 ? "neg" : "pos"}">結餘<b>${s.balance < 0 ? "−" : ""}${fmt(Math.abs(s.balance))}</b>${esc(balanceText(s.balance))}</div>
+  </div>`;
+}
+
+function rowHTML(r){
+  const it = itemOf(r.day, r.item);
+  const local = r.currency === "TWD" ? "" : `<small>${fmtLocal(r.amount_local)} ${esc(r.currency)}</small>`;
+  return `<div class="row ${r.status === "draft" ? "draft" : ""}" data-edit="${r.id}">
+    <div class="l">
+      <div class="t">${r.status === "draft" ? `<span class="pill p-draft">待確認</span> ` : ""}${esc(r.vendor || "（店家未填）")}</div>
+      <div class="d">${esc([r.content, it ? it.title : ""].filter(Boolean).join("・") || r.category)}</div>
+      <div style="margin-top:4px;display:flex;gap:4px;flex-wrap:wrap">
+        ${r.payer ? `<span class="pill p-${r.payer}">${PAYER[r.payer].split(" ")[1]}・${METHOD[r.method] || ""}</span>` : ""}
+        <span class="pill" style="background:#F1EADF">${esc(r.category)}</span>
+        ${r.twd_manual ? `<span class="pill p-manual">✏️ 台幣手改</span>` : ""}
+        ${r.receipts ? `<span class="pill" style="background:#F1EADF">📎 ${r.receipts}</span>` : ""}
+      </div>
+    </div>
+    <div class="r"><b>${fmt(r.amount_twd)}</b><small>TWD</small>${local ? "<br>" + local : ""}</div>
+  </div>`;
+}
+
+function renderLedger(){
+  const days = S.days.map(d => `<button class="chip ${S.fDay == d.day ? "on" : ""}" data-fday="${d.day}">Day ${d.day}</button>`).join("");
+  let rows = S.ledger;
+  if (S.fDay !== "all") rows = rows.filter(r => String(r.day) === String(S.fDay));
+  if (S.fPayer !== "all") rows = rows.filter(r => r.payer === S.fPayer);
+  // 依天分組
+  const groups = {};
+  for (const r of rows) (groups[r.day || 0] ||= []).push(r);
+  const list = Object.keys(groups).sort((a, b) => (a == 0) - (b == 0) || a - b).map(d => {
+    const dd = dayOf(d), sum = groups[d].filter(r => r.status === "confirmed").reduce((a, r) => a + r.amount_twd, 0);
+    return `<div class="dayhd"><span>${dd ? `Day ${dd.day}・${shortDate(dd.date)}（${esc(dd.title.split("➔")[0].trim())}）` : "未指定日期"}</span><span>${fmt(sum)} 元</span></div>` + groups[d].map(rowHTML).join("");
+  }).join("");
+  $("#app").innerHTML = summaryCard() + `
+    <div class="btns" style="margin-top:0"><button class="btn main" data-new>＋ 記一筆</button><button class="btn" data-goto="receipts">📷 拍收據自動記帳</button></div>
+    <h2>支出明細</h2>
+    <div class="filters"><button class="chip ${S.fDay === "all" ? "on" : ""}" data-fday="all">全部天數</button>${days}</div>
+    <div class="filters">
+      ${["all", "guide", "leader"].map(p => `<button class="chip ${S.fPayer === p ? "on" : ""}" data-fpayer="${p}">${p === "all" ? "全部付款人" : PAYER[p]}</button>`).join("")}
+    </div>
+    <div class="card">${list || `<p class="muted">還沒有支出，按「＋ 記一筆」開始吧！</p>`}</div>`;
+}
+
+/* ---------- 記帳表單 ---------- */
+function dayOptions(sel){
+  return `<option value="">不屬於特定行程</option>` + S.days.map(d => `<option value="${d.day}" ${Number(sel) === d.day ? "selected" : ""}>Day ${d.day}・${shortDate(d.date)}</option>`).join("");
+}
+function itemOptions(day, sel){
+  const d = dayOf(day);
+  if (!d) return `<option value="">—</option>`;
+  return `<option value="">（不指定行程）</option>` + d.items.map(i => `<option value="${i.k}" ${Number(sel) === i.k && sel !== null && sel !== "" ? "selected" : ""}>${esc(i.t)} ${esc(i.title)}</option>`).join("");
+}
+
+// 把一筆帳畫成表單；容器內所有欄位用 name 屬性
+function formHTML(r){
+  const cats = S.set.categories.split(",").map(s => s.trim()).filter(Boolean);
+  const cur = r.currency || S.set.currency;
+  return `
+    <label class="f">付款人</label>
+    <div class="seg" data-seg="payer">${["guide", "leader"].map(p => `<button type="button" data-v="${p}" class="${r.payer === p ? "on" : ""}">${PAYER[p]}</button>`).join("")}</div>
+    <label class="f">付款方式</label>
+    <div class="seg three" data-seg="method">${Object.keys(METHOD).map(m => `<button type="button" data-v="${m}" class="${r.method === m ? "on" : ""}">${m === "guide_rate" ? "導遊匯率<br>結台幣" : m === "card" ? "💳 刷卡" : "💵 現金"}</button>`).join("")}</div>
+    <div class="two">
+      <div><label class="f">Day</label><select name="day">${dayOptions(r.day)}</select></div>
+      <div><label class="f">類別</label><select name="category">${cats.map(c => `<option ${c === r.category ? "selected" : ""}>${esc(c)}</option>`).join("")}${cats.includes(r.category) || !r.category ? "" : `<option selected>${esc(r.category)}</option>`}</select></div>
+    </div>
+    <label class="f">行程</label><select name="item">${itemOptions(r.day, r.item)}</select>
+    <label class="f">店家</label><input name="vendor" value="${esc(r.vendor)}" maxlength="80" placeholder="例：店名（照收據上的寫）">
+    <div class="two">
+      <div><label class="f">地點</label><input name="place" value="${esc(r.place)}" maxlength="120" placeholder="例：百貨 3 樓、市場"></div>
+      <div><label class="f">消費日期</label><input name="spent_on" type="date" value="${esc(r.spent_on || "")}"></div>
+    </div>
+    <label class="f">內容</label><input name="content" value="${esc(r.content)}" maxlength="300" placeholder="例：全團晚餐＋飲料加點">
+    <div class="two">
+      <div><label class="f">金額</label><input name="amount_local" type="number" inputmode="decimal" step="any" min="0" value="${r.amount_local ?? ""}" placeholder="0"></div>
+      <div><label class="f">幣別</label><select name="currency">${[S.set.currency, "TWD"].map(c => `<option value="${c}" ${c === cur ? "selected" : ""}>${c === "TWD" ? "台幣 TWD" : esc(S.set.currency_name) + " " + c}</option>`).join("")}</select></div>
+    </div>
+    <div data-ratebox><label class="f">匯率（${esc(rateLabel())}）</label><input name="rate" type="number" inputmode="decimal" step="any" min="0"></div>
+    <div class="calc">台幣 <b data-twd>0</b> 元 <span data-twdnote class="muted" style="font-weight:400"></span></div>
+    <label style="display:flex;gap:8px;align-items:center;margin-top:8px;font-size:14px"><input type="checkbox" name="twd_manual" style="width:auto;min-height:auto" ${r.twd_manual ? "checked" : ""}> 手動改台幣（例如刷卡帳單出來的實際金額）</label>
+    <input name="amount_twd" type="number" inputmode="decimal" step="any" value="${r.twd_manual ? r.amount_twd : ""}" placeholder="實際台幣" ${r.twd_manual ? "" : "hidden"}>
+    <label class="f">備註</label><textarea name="note" maxlength="300">${esc(r.note)}</textarea>`;
+}
+
+// 表單互動：付款人 → 付款方式 → 匯率 → 台幣即時計算
+function wireForm(box, r){
+  const st = { payer: r.payer || "", method: r.method || "" };
+  const q = n => box.querySelector(`[name="${n}"]`);
+  const segs = n => box.querySelectorAll(`[data-seg="${n}"] button`);
+  let rateTouched = false;
+  function sync(){
+    segs("payer").forEach(b => b.classList.toggle("on", b.dataset.v === st.payer));
+    segs("method").forEach(b => {
+      b.disabled = !!st.payer && !METHODS_OF[st.payer].includes(b.dataset.v);
+      b.classList.toggle("on", b.dataset.v === st.method);
+    });
+    const twdCur = q("currency").value === "TWD";
+    box.querySelector("[data-ratebox]").hidden = twdCur;
+    const rateIn = q("rate");
+    if (st.method === "guide_rate") { rateIn.value = rateToShow(S.set.guide_rate); rateIn.disabled = true; }
+    else { rateIn.disabled = false; if (!rateTouched && !rateIn.value) rateIn.value = rateToShow(r.rate && r.method !== "guide_rate" ? r.rate : S.set.cash_rate); }
+    const amt = Number(q("amount_local").value) || 0;
+    const rate = twdCur ? 1 : rateFromShow(rateIn.value);
+    const manual = q("twd_manual").checked;
+    q("amount_twd").hidden = !manual;
+    const twd = manual ? Number(q("amount_twd").value) || 0 : (rate > 0 ? amt / rate : 0);
+    box.querySelector("[data-twd]").textContent = fmt(twd, 1);
+    box.querySelector("[data-twdnote]").textContent = manual ? "（手動）" : st.method === "guide_rate" ? "（導遊匯率，結算時小計才四捨五入）" : st.method === "card" ? "（先用估計匯率，帳單出來可手改）" : "";
+  }
+  segs("payer").forEach(b => b.onclick = () => {
+    st.payer = b.dataset.v;
+    if (!METHODS_OF[st.payer].includes(st.method)) st.method = st.payer === "guide" ? "guide_rate" : "card";
+    if (st.method !== "guide_rate") { q("rate").value = ""; rateTouched = false; }
+    sync();
+  });
+  segs("method").forEach(b => b.onclick = () => { if (b.disabled) return; const was = st.method; st.method = b.dataset.v; if (was === "guide_rate") { q("rate").value = ""; rateTouched = false; } sync(); });
+  q("rate").oninput = () => { rateTouched = true; sync(); };
+  ["amount_local", "amount_twd"].forEach(n => q(n).oninput = sync);
+  q("currency").onchange = sync;
+  q("twd_manual").onchange = () => {
+    if (q("twd_manual").checked && !q("amount_twd").value) q("amount_twd").value = (box.querySelector("[data-twd]").textContent || "").replace(/,/g, "");
+    sync();
+  };
+  q("day").onchange = () => { q("item").innerHTML = itemOptions(q("day").value, null); };
+  q("item").onchange = () => {
+    const it = itemOf(q("day").value, q("item").value);
+    if (it && !q("place").value && it.place && !/^-?\d+\.\d+,/.test(it.place)) q("place").value = it.place;
+    if (it && !q("spent_on").value) q("spent_on").value = dayOf(q("day").value).date;
+  };
+  q("day").addEventListener("change", () => { const d = dayOf(q("day").value); if (d && !q("spent_on").value) q("spent_on").value = d.date; });
+  sync();
+  // 讀出表單內容
+  return () => {
+    const twdCur = q("currency").value === "TWD";
+    const rate = twdCur ? 1 : st.method === "guide_rate" ? Number(S.set.guide_rate) : rateFromShow(q("rate").value);
+    const manual = q("twd_manual").checked;
+    const amt = Number(q("amount_local").value);
+    return {
+      payer: st.payer, method: st.method,
+      day: q("day").value, item: q("item").value, category: q("category").value,
+      vendor: q("vendor").value, place: q("place").value, spent_on: q("spent_on").value, content: q("content").value,
+      amount_local: amt, currency: q("currency").value, rate,
+      twd_manual: manual, amount_twd: manual ? Number(q("amount_twd").value) : amt / rate,
+      note: q("note").value
+    };
+  };
+}
+
+function openSheet(html){
+  const el = document.createElement("div");
+  el.className = "sheet";
+  el.innerHTML = `<div class="box">${html}</div>`;
+  el.addEventListener("click", e => { if (e.target === el || e.target.closest(".x")) el.remove(); });
+  document.body.appendChild(el);
+  return el;
+}
+
+function openEditor(id){
+  const r = id ? S.ledger.find(x => x.id === id) : { payer: "", method: "", currency: S.set.currency, category: "餐飲", day: S.fDay !== "all" ? Number(S.fDay) : null, item: null };
+  const rids = (r.receipt_ids || "").split(",").filter(Boolean);
+  const el = openSheet(`<div class="hd"><h3>${id ? "✏️ 編輯支出" : "＋ 記一筆"}</h3><button class="x">✕</button></div>
+    ${r.status === "draft" ? `<div class="warn">🤖 這筆是 AI 從收據讀出來的草稿，核對後按「確認入帳」才會算進結算。</div>` : ""}
+    ${rids.length ? `<div class="thumbs" style="margin-bottom:6px">${rids.map(x => `<div class="thumb" data-view="${x}"><img src="/api/admin/receipts?id=${x}" loading="lazy" alt="收據"></div>`).join("")}</div>` : ""}
+    <div data-form>${formHTML(r)}</div>
+    <label class="f">📎 附收據照片</label><input type="file" accept="image/*" multiple data-files>
+    <div class="err" data-err></div>
+    <div class="btns"><button class="btn main" data-save style="flex:1">${r.status === "draft" ? "✅ 確認入帳" : "💾 儲存"}</button>
+    ${id ? `<button class="btn red" data-del>🗑 刪除</button>` : ""}</div>`);
+  const read = wireForm(el.querySelector("[data-form]"), r);
+  el.querySelector("[data-save]").onclick = async () => {
+    const btn = el.querySelector("[data-save]"); btn.disabled = true;
+    try {
+      const body = { ...read(), status: "confirmed" };
+      let lid = id;
+      if (id) await api("ledger", { method: "PUT", body: { ...body, id } });
+      else lid = (await api("ledger", { method: "POST", body })).id;
+      const files = el.querySelector("[data-files]").files;
+      for (const f of files) await uploadReceipt(f, { ledger_id: lid, manual: true });
+      el.remove(); toast("已儲存 ✅"); await loadAll(); render();
+    } catch (e) { el.querySelector("[data-err]").textContent = e.message; btn.disabled = false; }
+  };
+  const del = el.querySelector("[data-del]");
+  if (del) del.onclick = async () => {
+    if (!confirm("確定刪除這筆支出？（收據照片會保留在收據牆）")) return;
+    await api("ledger?id=" + id, { method: "DELETE" });
+    el.remove(); toast("已刪除"); await loadAll(); render();
+  };
+}
+
+/* ---------- 📷 收據 ---------- */
+// 前端壓縮：長邊 1600px、JPEG，超過 1MB 再降畫質
+async function compress(file){
+  const bmp = await createImageBitmap(file);
+  const scale = Math.min(1, 1600 / Math.max(bmp.width, bmp.height));
+  const c = document.createElement("canvas");
+  c.width = Math.round(bmp.width * scale); c.height = Math.round(bmp.height * scale);
+  c.getContext("2d").drawImage(bmp, 0, 0, c.width, c.height);
+  for (const q of [0.8, 0.65, 0.5, 0.4]) {
+    const b = await new Promise(res => c.toBlob(res, "image/jpeg", q));
+    if (b.size <= 1000 * 1024) return b;
+  }
+  throw new Error("照片壓縮後還是太大");
+}
+async function uploadReceipt(file, { ledger_id = "", manual = false } = {}){
+  const fd = new FormData();
+  fd.append("file", await compress(file), "receipt.jpg");
+  if (ledger_id) fd.append("ledger_id", ledger_id);
+  if (manual) fd.append("manual", "1");
+  return api("receipts", { method: "POST", body: fd });
+}
+
+function renderReceipts(){
+  const drafts = S.ledger.filter(r => r.status === "draft");
+  const loose = S.receipts.filter(r => !r.ledger_id);
+  $("#app").innerHTML = `
+    <div class="card"><h3>📷 上傳收據</h3>
+      <div class="drop">
+        <div class="btns" style="justify-content:center;margin:0">
+          <label class="btn main">📸 拍收據<input type="file" accept="image/*" capture="environment" hidden data-up></label>
+          <label class="btn">🖼️ 從相簿選（可多張）<input type="file" accept="image/*" multiple hidden data-up></label>
+        </div>
+        <label style="display:flex;gap:8px;align-items:center;justify-content:center;margin-top:10px;font-size:14px"><input type="checkbox" id="auto-ai" style="width:auto;min-height:auto" ${store.get("autoAI", true) ? "checked" : ""}> 🤖 上傳後自動判讀</label>
+        <p class="muted" style="margin:6px 0 0">🙈 拍照時請用手指遮住信用卡號。照片會自動壓縮。</p>
+        ${S.ai ? `<p class="muted" style="margin:6px 0 0">🆓 今天已判讀 ${S.ai.calls}／${S.ai.call_cap} 張（免費額度用了約 ${Math.round(S.ai.neurons / S.ai.free * 100)}%，台灣時間早上 8 點重置，用完會自動停，不會收費）</p>` : ""}
+        <div id="up-status"></div>
+      </div>
+    </div>
+    <h2>✅ 待確認（${drafts.length}）</h2>
+    ${drafts.length ? `<p class="muted">AI 讀出來的草稿，核對、補上付款人和行程後按「確認入帳」，下一張會自動接上。</p><div class="btns" style="margin-top:0"><button class="btn orange" data-review>🔍 開始逐張確認</button></div><div class="card">${drafts.map(rowHTML).join("")}</div>` : `<div class="card muted">沒有待確認的收據 🎉</div>`}
+    ${loose.length ? `<h2>⚠️ 還沒對到帳的收據（${loose.length}）</h2><p class="muted">AI 沒讀出來或選了自己填的，點一下手動記帳。</p><div class="thumbs">${loose.map(r => thumbHTML(r)).join("")}</div>` : ""}
+    <h2>🗂️ 全部收據（${S.receipts.length}）</h2>
+    <div class="thumbs">${S.receipts.map(r => thumbHTML(r)).join("") || `<p class="muted">還沒有收據</p>`}</div>`;
+}
+function thumbHTML(r){
+  const tag = r.ledger_id ? (S.ledger.find(l => l.id === r.ledger_id)?.status === "draft" ? "待確認" : "已入帳") : r.ai_status === "failed" ? "讀不出來" : r.ai_status === "pending" ? "未判讀" : "未入帳";
+  return `<div class="thumb" data-rec="${r.id}"><img src="/api/admin/receipts?id=${r.id}" loading="lazy" alt="收據 ${r.id}"><span class="tag">#${r.id} ${tag}</span></div>`;
+}
+
+async function handleUpload(files){
+  const auto = $("#auto-ai").checked; store.set("autoAI", auto);
+  const box = $("#up-status"), list = [...files];
+  box.innerHTML = `<p style="margin:10px 0 0;font-weight:700" id="up-txt"></p><div class="prog"><i id="up-bar"></i></div>`;
+  let ok = 0, fail = 0, quota = false;
+  for (let i = 0; i < list.length; i++) {
+    $("#up-txt").textContent = `第 ${i + 1}／${list.length} 張：上傳中…`;
+    try {
+      const { id } = await uploadReceipt(list[i], { manual: !auto || quota });
+      if (auto && !quota) {
+        $("#up-txt").textContent = `第 ${i + 1}／${list.length} 張：🤖 AI 判讀中（約 5–15 秒）…`;
+        const r = await api("parse", { method: "POST", body: { receipt_id: id } });
+        if (r.quota) { quota = true; toast(r.error); }
+        r.ok ? ok++ : fail++;
+      } else ok++;
+    } catch (e) { fail++; toast(e.message); }
+    $("#up-bar").style.width = ((i + 1) / list.length * 100) + "%";
+  }
+  await loadAll();
+  render();
+  toast(auto ? `完成！讀出 ${ok} 張${fail ? `，${fail} 張要手動填` : ""}` : `已上傳 ${ok} 張`);
+}
+
+// 逐張確認：左收據、右表單，確認後自動跳下一張
+function openReview(){
+  const drafts = S.ledger.filter(r => r.status === "draft");
+  if (!drafts.length) { toast("沒有待確認的了 🎉"); return; }
+  const r = drafts[0];
+  const rids = (r.receipt_ids || "").split(",").filter(Boolean);
+  const rec = S.receipts.find(x => String(x.id) === rids[0]);
+  let ai = null; try { ai = JSON.parse(rec?.ai_json || "null"); } catch {}
+  const el = openSheet(`<div class="hd"><h3>🔍 確認收據（還有 ${drafts.length} 張）</h3><button class="x">✕</button></div>
+    <div class="review">
+      <div class="img">${rids[0] ? `<img src="/api/admin/receipts?id=${rids[0]}" data-view="${rids[0]}" alt="收據">` : `<p class="muted">沒有圖片</p>`}</div>
+      <div>
+        ${ai?.confidence === "low" ? `<div class="warn">⚠️ AI 不太確定這張的內容，請特別仔細核對金額。</div>` : `<div class="warn">🤖 AI 已填好店家、日期、金額、品項；請<b>選付款人與行程</b>並核對金額。</div>`}
+        ${ai?.items?.length ? `<details style="margin:6px 0"><summary class="muted">AI 讀到的品項（${ai.items.length}）</summary><ul style="margin:6px 0;padding-left:20px;font-size:14px">${ai.items.map(i => `<li>${esc(i.name)}${i.qty > 1 ? " ×" + i.qty : ""}${i.amount ? "：" + fmtLocal(i.amount) : ""}</li>`).join("")}</ul></details>` : ""}
+        <div data-form>${formHTML(r)}</div>
+        <div class="err" data-err></div>
+        <div class="btns"><button class="btn main" data-ok style="flex:1">✅ 確認入帳，下一張</button><button class="btn red" data-drop>🗑 不是支出</button></div>
+      </div>
+    </div>`);
+  const form = el.querySelector("[data-form]");
+  // AI 填的欄位標黃，提醒核對
+  ["vendor", "amount_local", "spent_on"].forEach(n => form.querySelector(`[name="${n}"]`)?.classList.add("hl"));
+  if (!r.payer) form.querySelector('[data-seg="payer"]').classList.add("hl");
+  const read = wireForm(form, r);
+  el.querySelector("[data-ok]").onclick = async () => {
+    try {
+      await api("ledger", { method: "PUT", body: { ...read(), id: r.id, status: "confirmed" } });
+      el.remove(); await loadAll(); render(); toast("已入帳 ✅"); openReview();
+    } catch (e) { el.querySelector("[data-err]").textContent = e.message; }
+  };
+  el.querySelector("[data-drop]").onclick = async () => {
+    if (!confirm("刪除這筆草稿？（收據照片會保留）")) return;
+    await api("ledger?id=" + r.id, { method: "DELETE" });
+    el.remove(); await loadAll(); render(); openReview();
+  };
+}
+
+function openReceipt(id){
+  const r = S.receipts.find(x => x.id === id);
+  if (r?.ledger_id) return openEditor(r.ledger_id);
+  // 沒對到帳：手動記一筆並掛上這張
+  const el = openSheet(`<div class="hd"><h3>🧾 收據 #${id}</h3><button class="x">✕</button></div>
+    <div class="review"><div class="img"><img src="/api/admin/receipts?id=${id}" data-view="${id}" alt="收據"></div>
+    <div>${r?.ai_status === "failed" ? `<div class="warn">🤖 AI 沒讀出金額，請看圖手動填。</div>` : ""}
+      <div data-form>${formHTML({ currency: S.set.currency, category: "餐飲" })}</div>
+      <div class="err" data-err></div>
+      <div class="btns"><button class="btn main" data-ok style="flex:1">💾 記帳並附上這張</button>
+      ${r?.ai_status !== "done" ? `<button class="btn" data-ai>🤖 再判讀一次</button>` : ""}
+      <button class="btn red" data-del>🗑 刪除照片</button></div></div></div>`);
+  const read = wireForm(el.querySelector("[data-form]"), { currency: S.set.currency });
+  el.querySelector("[data-ok]").onclick = async () => {
+    try {
+      await api("ledger", { method: "POST", body: { ...read(), status: "confirmed", receipt_ids: [id] } });
+      el.remove(); await loadAll(); render(); toast("已記帳 ✅");
+    } catch (e) { el.querySelector("[data-err]").textContent = e.message; }
+  };
+  const ai = el.querySelector("[data-ai]");
+  if (ai) ai.onclick = async () => {
+    ai.disabled = true; ai.textContent = "🤖 判讀中…";
+    const res = await api("parse", { method: "POST", body: { receipt_id: id } }).catch(e => ({ ok: false, error: e.message }));
+    el.remove(); await loadAll(); render();
+    if (res.ok) { toast("讀出來了，請確認"); openReview(); } else toast(res.error || "還是讀不出來，請手動填");
+  };
+  el.querySelector("[data-del]").onclick = async () => {
+    if (!confirm("刪除這張收據照片？")) return;
+    await api("receipts?id=" + id, { method: "DELETE" });
+    el.remove(); await loadAll(); render();
+  };
+}
+
+/* ---------- 📊 結算 ---------- */
+const statementRows = () => L.statementRows(ctx());
+
+function renderSettle(){
+  const s = settle(), rows = statementRows();
+  const drafts = S.ledger.filter(r => r.status === "draft").length;
+  $("#app").innerHTML = `
+    ${drafts ? `<div class="warn">還有 <b>${drafts}</b> 筆收據草稿待確認，不會算進結算。<a href="#" data-goto="receipts">去確認 →</a></div>` : ""}
+    <div class="card"><h3>📊 結算總表</h3>
+      <p class="muted">${esc(S.set.trip_name)}・領隊 ${esc(S.set.leader || "—")}・導遊 ${esc(S.set.guide || "—")}</p>
+      <div class="tblwrap"><table class="st">
+        <tr><th>No.</th><th style="text-align:left">項目</th><th>${esc(S.set.currency)}</th><th>TWD</th></tr>
+        ${rows.map(x => `<tr class="${x.type}"><td class="n">${x.no ?? ""}</td><td>${esc(x.desc)}</td>
+          <td class="n">${x.local != null && x.local !== 0 ? fmtLocal(x.local) + (x.type === "item" && x.cur !== S.set.currency ? " " + x.cur : "") : ""}</td>
+          <td class="n">${x.twd != null ? (x.twd < 0 ? "-" : "") + fmt(Math.abs(x.twd)) : ""}</td></tr>`).join("")}
+      </table></div>
+      <div class="bal ${s.balance < 0 ? "neg" : "pos"}">${esc(balanceText(s.balance))}</div>
+      <p class="muted" style="margin-top:10px">💡 導遊代付是「${esc(S.set.currency_name)}小計 ÷ 匯率」後才四捨五入；總計只加明細、不含小計列。</p>
+      <div class="btns"><button class="btn main" data-export>⬇️ 匯出 Excel</button></div>
+    </div>`;
+}
+
+/* ---------- ⚙️ 設定 ---------- */
+function renderSettings(){
+  const s = S.set;
+  $("#app").innerHTML = `<div class="card"><h3>⚙️ 結算設定</h3>
+    <form id="f-set">
+      <label class="f">旅程名稱</label><input name="trip_name" value="${esc(s.trip_name)}">
+      <label class="f">撥款單位（Excel 上顯示）</label><input name="company" value="${esc(s.company)}" placeholder="例：○○旅行社">
+      <div class="two"><div><label class="f">領隊</label><input name="leader" value="${esc(s.leader)}"></div><div><label class="f">當地導遊</label><input name="guide" value="${esc(s.guide)}"></div></div>
+      <div class="two"><div><label class="f">💰 領隊領款（台幣）</label><input name="advance" type="number" inputmode="decimal" min="0" value="${esc(s.advance)}"></div>
+      <div><label class="f">🪙 零用金（台幣）</label><input name="petty_cash" type="number" inputmode="decimal" min="0" value="${esc(s.petty_cash)}"></div></div>
+      <div class="two"><div><label class="f">當地幣代碼</label><input name="currency" value="${esc(s.currency)}" maxlength="3"></div><div><label class="f">當地幣名稱</label><input name="currency_name" value="${esc(s.currency_name)}"></div></div>
+      <label class="f">匯率怎麼講比較順？</label>
+      <select name="rate_dir"><option value="twd_per_local" ${s.rate_dir === "twd_per_local" ? "selected" : ""}>1 ${esc(s.currency_name)} = ? 台幣（日幣、泰銖、美金、歐元）</option><option value="local_per_twd" ${s.rate_dir === "local_per_twd" ? "selected" : ""}>1 台幣 = ? ${esc(s.currency_name)}（印尼盾、越南盾、韓元、日圓）</option></select>
+      <div class="two"><div><label class="f">🧑‍🦱 導遊結算匯率</label><input name="guide_rate" type="number" step="any" inputmode="decimal" value="${rateToShow(s.guide_rate)}"></div>
+      <div><label class="f">💵 預設現金匯率</label><input name="cash_rate" type="number" step="any" inputmode="decimal" value="${rateToShow(s.cash_rate)}"></div></div>
+      <p class="muted" style="margin:4px 0 0">改導遊匯率後，所有「導遊匯率結台幣」的帳會自動重算。</p>
+      <label class="f">支出類別（逗號分隔）</label><input name="categories" value="${esc(s.categories)}">
+      <div class="err" id="set-err"></div>
+      <button class="btn main wide">💾 儲存設定</button>
+    </form></div>
+    <div class="card"><h3>🔐 帳號</h3><p class="muted">登入會維持 7 天。用別人的手機登入過，記得登出。</p>
+      <div class="btns"><button class="btn red" id="b-logout">登出</button><a class="btn ghost" href="/">← 回旅遊手冊</a></div></div>`;
+  $("#f-set").onsubmit = async e => {
+    e.preventDefault();
+    const fd = Object.fromEntries(new FormData(e.target));
+    const oldDir = S.set.rate_dir;
+    // 匯率欄位是用「舊的方向」顯示的，先換回存檔格式
+    const conv = v => oldDir === "twd_per_local" ? 1 / Number(v) : Number(v);
+    fd.guide_rate = conv(fd.guide_rate); fd.cash_rate = conv(fd.cash_rate);
+    fd.currency = fd.currency.toUpperCase();
+    try { await api("settings", { method: "PUT", body: fd }); await loadAll(); render(); toast("設定已儲存 ✅"); }
+    catch (err) { $("#set-err").textContent = err.message; }
+  };
+  $("#b-logout").onclick = async () => { await fetch("/api/admin/login", { method: "DELETE" }); S.authed = false; render(); };
+}
+
+/* ========== ⬇️ 匯出 Excel ========== */
+function loadScript(src){ return new Promise((res, rej) => { const s = document.createElement("script"); s.src = src; s.onload = res; s.onerror = () => rej(new Error("Excel 工具載入失敗，請檢查網路")); document.head.appendChild(s); }); }
+
+async function thumbB64(id, w = 240){
+  const blob = await fetch("/api/admin/receipts?id=" + id).then(r => r.blob());
+  const bmp = await createImageBitmap(blob);
+  const c = document.createElement("canvas");
+  c.width = w; c.height = Math.round(bmp.height * w / bmp.width);
+  c.getContext("2d").drawImage(bmp, 0, 0, c.width, c.height);
+  return { b64: c.toDataURL("image/jpeg", 0.75), h: c.height };
+}
+
+async function exportExcel(){
+  const drafts = S.ledger.filter(r => r.status === "draft").length;
+  if (drafts && !confirm(`還有 ${drafts} 筆待確認的草稿，不會列入 Excel。\n要先繼續匯出嗎？`)) return;
+  toast("Excel 製作中…");
+  if (!window.ExcelJS) await loadScript("https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js");
+  const wb = await L.buildWorkbook(ExcelJS, ctx(), {
+    thumb: async rc => { const t = await thumbB64(rc.id); return { base64: t.b64, extension: "jpeg", width: 240, height: t.h }; }
+  });
+  const buf = await wb.xlsx.writeBuffer();
+  const ymd = new Date().toLocaleDateString("sv-SE", { timeZone: "Asia/Taipei" }).replace(/-/g, "");
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([buf], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" }));
+  a.download = `${S.set.trip_name}_領隊結算_${ymd}.xlsx`;
+  document.body.appendChild(a); a.click(); a.remove();
+  toast("Excel 已下載 ✅");
+}
+
+/* ========== 事件 ========== */
+document.addEventListener("click", e => {
+  const t = e.target.closest("[data-tab],[data-goto],[data-new],[data-edit],[data-fday],[data-fpayer],[data-review],[data-rec],[data-view],[data-export],#b-export");
+  if (!t) return;
+  if (t.dataset.view) { e.stopPropagation(); const v = document.createElement("div"); v.className = "viewer"; v.innerHTML = `<img src="/api/admin/receipts?id=${encodeURIComponent(t.dataset.view)}" alt="收據">`; v.onclick = () => v.remove(); document.body.appendChild(v); return; }
+  if (t.dataset.tab || t.dataset.goto) { e.preventDefault(); S.tab = t.dataset.tab || t.dataset.goto; store.set("tab", S.tab); render(); scrollTo(0, 0); return; }
+  if ("new" in t.dataset) return openEditor(null);
+  if (t.dataset.edit) { const r = S.ledger.find(x => x.id === Number(t.dataset.edit)); return r.status === "draft" ? openReviewOne(r.id) : openEditor(r.id); }
+  if (t.dataset.fday) { S.fDay = t.dataset.fday; return render(); }
+  if (t.dataset.fpayer) { S.fPayer = t.dataset.fpayer; return render(); }
+  if ("review" in t.dataset) return openReview();
+  if (t.dataset.rec) return openReceipt(Number(t.dataset.rec));
+  if ("export" in t.dataset || t.id === "b-export") return exportExcel().catch(err => toast(err.message));
+});
+// 點某一筆草稿：把它排到第一張再進入逐張確認
+function openReviewOne(id){
+  const i = S.ledger.findIndex(x => x.id === id);
+  if (i > 0) S.ledger.unshift(...S.ledger.splice(i, 1));
+  openReview();
+}
+document.addEventListener("change", e => { if (e.target.matches("[data-up]") && e.target.files.length) handleUpload(e.target.files); });
+
+boot();
+</script>
+</body>
+</html>

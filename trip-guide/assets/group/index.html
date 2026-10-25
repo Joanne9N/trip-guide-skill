@@ -1,0 +1,1698 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" data-theme="picturebook">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>北海道夏日家族旅行</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗻</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link id="font-link" rel="stylesheet" href="">
+<style>
+/* ===== THEMES START（由 tools/sync-themes.mjs 從 assets/themes/themes.css 同步，不要直接改這段） ===== */
+/* =========================================================
+   trip-guide 風格系統（6 種）
+   用法：<html data-theme="picturebook">，換風格只要改這個值
+   picturebook 日系繪本｜tropical 熱帶活潑｜scrapbook 手帳剪貼簿
+   boarding 復古登機證｜glass 液態玻璃｜magazine 雜誌編輯
+   這份是母版：改完執行 node tools/sync-themes.mjs，
+   會把內容同步進各版本 index.html 的 THEMES 區塊
+   ========================================================= */
+
+/* ---------- 共用變數（每種風格覆寫） ---------- */
+:root{
+  --bg:#FFFCF6; --paper:#FFFFFF; --ink:#3E3A39; --muted:#6B6563; --line:#E8DCCB;
+  --c1:#F2A497; --c2:#F6D27A; --c3:#A8D3E6; --c4:#B9DAA5;
+  --c1-ink:#9A3E2E; --c3-ink:#2F6F8C; --c4-ink:#3F6E2C;
+  --on-c1:#3E3A39; --alert:#C8553D;
+  --bw:3px; --bc:#3E3A39; --radius:22px; --radius-s:14px;
+  --shadow:none; --shadow-lift:none;
+  --font-body:"Huninn",-apple-system,"PingFang TC","Noto Sans TC",sans-serif;
+  --font-head:var(--font-body);
+  --font-mono:ui-monospace,"SF Mono",Menlo,monospace;
+  --hero-bg:var(--bg);
+}
+
+/* 🎨 日系繪本：和紙白、墨灰粗框、大圓角、平塗 */
+[data-theme="picturebook"]{
+  --alert:#C8553D;
+  --bg:#FFFCF6; --paper:#FFFFFF; --ink:#3E3A39; --muted:#6B6563; --line:#E8DCCB;
+  --c1:#F2A497; --c2:#F6D27A; --c3:#A8D3E6; --c4:#B9DAA5;
+  --c1-ink:#9A3E2E; --c3-ink:#2F6F8C; --c4-ink:#3F6E2C; --on-c1:#3E3A39;
+  --bw:3px; --bc:#3E3A39; --radius:22px; --radius-s:14px;
+  --shadow:4px 4px 0 #3E3A39; --shadow-lift:6px 6px 0 #3E3A39;
+  --font-body:"Huninn",-apple-system,"PingFang TC",sans-serif;
+  --hero-bg:#FFF3D6;
+}
+
+/* 🌴 熱帶活潑：芒果橘、廟綠、辣椒紅（曼谷團原版） */
+[data-theme="tropical"]{
+  --alert:#E0452B;
+  --bg:#FFF8EC; --paper:#FFFFFF; --ink:#2B1B0E; --muted:#7A6450; --line:#F1E3CC;
+  --c1:#FF8A1F; --c2:#F5B700; --c3:#2F7DD1; --c4:#1F7A5C;
+  --c1-ink:#A4520A; --c3-ink:#2F7DD1; --c4-ink:#1F7A5C; --on-c1:#FFFFFF;
+  --bw:0px; --bc:transparent; --radius:18px; --radius-s:12px;
+  --shadow:0 4px 14px rgba(120,70,10,.08); --shadow-lift:0 8px 22px rgba(120,70,10,.14);
+  --font-body:"Chiron GoRound TC",-apple-system,"PingFang TC",sans-serif;
+  --hero-bg:linear-gradient(135deg,#FF8A1F,#F5B700);
+}
+
+/* 📒 手帳剪貼簿：方格紙、紙膠帶、微歪的卡片 */
+[data-theme="scrapbook"]{
+  --alert:#B9503F;
+  --bg:#F7F1E6; --paper:#FFFEFA; --ink:#4A3F35; --muted:#7D6E60; --line:#E6DACB;
+  --c1:#E89A8B; --c2:#EBC868; --c3:#9CC3D5; --c4:#A9C79A;
+  --c1-ink:#9C4A3B; --c3-ink:#3D6E85; --c4-ink:#4C6E3D; --on-c1:#4A3F35;
+  --bw:1.5px; --bc:#CDBFAE; --radius:6px; --radius-s:6px;
+  --shadow:0 2px 0 rgba(74,63,53,.08),0 6px 14px rgba(74,63,53,.10); --shadow-lift:0 10px 22px rgba(74,63,53,.16);
+  --font-body:"LXGW WenKai TC",-apple-system,"PingFang TC",serif;
+  --hero-bg:#F7F1E6;
+}
+
+/* 🎫 復古登機證：奶油紙、海軍藍、票根與打孔線 */
+[data-theme="boarding"]{
+  --alert:#C8553D;
+  --bg:#F3EBDD; --paper:#FFFBF2; --ink:#1F2A44; --muted:#5E6577; --line:#D9CDB8;
+  --c1:#C8553D; --c2:#E9B44C; --c3:#1F2A44; --c4:#4F7C6B;
+  --c1-ink:#A23F2A; --c3-ink:#1F2A44; --c4-ink:#35594B; --on-c1:#FFFBF2;
+  --bw:1.5px; --bc:#1F2A44; --radius:10px; --radius-s:8px;
+  --shadow:0 1px 0 rgba(31,42,68,.12); --shadow-lift:0 6px 16px rgba(31,42,68,.14);
+  --font-body:"Noto Sans TC",-apple-system,"PingFang TC",sans-serif;
+  --font-head:"Noto Serif TC","Songti TC",serif;
+  --font-mono:"Space Mono",ui-monospace,Menlo,monospace;
+  --hero-bg:#1F2A44;
+}
+
+/* 🫧 液態玻璃：半透明毛玻璃卡片，底下是風景照或漸層 */
+[data-theme="glass"]{
+  --alert:#D94A3A;
+  --bg:#DCE7F2; --paper:rgba(255,255,255,.55); --ink:#14202E; --muted:#3E4E60; --line:rgba(20,32,46,.12);
+  --c1:#3A7BD5; --c2:#F2B84B; --c3:#59B6C7; --c4:#6BBF8A;
+  --c1-ink:#1E5BAE; --c3-ink:#1F6E7C; --c4-ink:#2D7A4C; --on-c1:#FFFFFF;
+  --bw:1px; --bc:rgba(255,255,255,.7); --radius:26px; --radius-s:16px;
+  --shadow:0 8px 30px rgba(20,32,46,.12),inset 0 1px 0 rgba(255,255,255,.8); --shadow-lift:0 14px 40px rgba(20,32,46,.18),inset 0 1px 0 rgba(255,255,255,.9);
+  --font-body:"Noto Sans TC",-apple-system,"PingFang TC",sans-serif;
+  --hero-bg:transparent;
+}
+
+/* 📰 雜誌編輯：大字標題、細線、留白、黑白加一個重點色 */
+[data-theme="magazine"]{
+  --alert:#B5452E;
+  --bg:#FAF8F4; --paper:#FFFFFF; --ink:#151515; --muted:#6A6A6A; --line:#DEDAD2;
+  --c1:#B5452E; --c2:#C9A227; --c3:#2E5E7E; --c4:#5B7A4A;
+  --c1-ink:#B5452E; --c3-ink:#2E5E7E; --c4-ink:#4C6A3C; --on-c1:#FFFFFF;
+  --bw:1px; --bc:#151515; --radius:0px; --radius-s:0px;
+  --shadow:none; --shadow-lift:none;
+  --font-body:"Noto Sans TC",-apple-system,"PingFang TC",sans-serif;
+  --font-head:"Noto Serif TC","Songti TC",serif;
+  --hero-bg:#FAF8F4;
+}
+
+/* ---------- 共用元件（所有風格共用的骨架） ---------- */
+html{background:var(--bg)}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body)}
+h1,h2,h3,.head-font{font-family:var(--font-head)}
+.card{background:var(--paper);border:var(--bw) solid var(--bc);border-radius:var(--radius);box-shadow:var(--shadow)}
+.btn{border-radius:var(--radius-s)}
+.pill{border-radius:99px}
+.mono{font-family:var(--font-mono)}
+.tag{display:inline-block;font-size:12px;font-weight:700;padding:2px 9px;border-radius:99px;border:1.5px solid currentColor;line-height:1.5;vertical-align:2px}
+.tag.walk{color:var(--c4-ink);background:color-mix(in srgb,var(--c4) 28%,var(--paper))}
+.tag.train{color:var(--c3-ink);background:color-mix(in srgb,var(--c3) 28%,var(--paper))}
+.tag.bus{color:#7A5A00;background:color-mix(in srgb,var(--c2) 35%,var(--paper))}
+.tag.car{color:var(--c1-ink);background:color-mix(in srgb,var(--c1) 28%,var(--paper))}
+.tag.flight{color:var(--ink);background:color-mix(in srgb,var(--line) 60%,var(--paper))}
+.tag.must{color:var(--on-c1);background:var(--c1);border-color:var(--c1)}
+
+/* 插圖：線條吃 --ink，填色吃 --c1～--c4，各風格自動變色 */
+.ill .k{stroke:var(--ink);stroke-width:calc(var(--bw) + 1px);stroke-linejoin:round;stroke-linecap:round;fill:none}
+.ill .f1{fill:var(--c1)} .ill .f2{fill:var(--c2)} .ill .f3{fill:var(--c3)} .ill .f4{fill:var(--c4)}
+.ill .fp{fill:var(--paper)} .ill .fi{fill:var(--ink)}
+[data-theme="tropical"] .ill .k,[data-theme="glass"] .ill .k{stroke-width:0}
+[data-theme="magazine"] .ill .k{stroke-width:1.2px}
+[data-theme="magazine"] .ill .f1,[data-theme="magazine"] .ill .f2,[data-theme="magazine"] .ill .f3,[data-theme="magazine"] .ill .f4{fill:none}
+[data-theme="magazine"] .ill .sun{fill:var(--c1)}
+
+/* 動畫：插圖輕輕動、切換日期彈一下 */
+@keyframes bob{50%{transform:translateY(-4px)}}
+@keyframes drift{50%{transform:translateX(10px)}}
+@keyframes ride{0%{transform:translateX(-30px)}100%{transform:translateX(30px)}}
+@keyframes twinkle{50%{opacity:.35}}
+@keyframes boing{0%{transform:scale(.96) translateY(6px);opacity:.2}60%{transform:scale(1.02) translateY(-2px);opacity:1}100%{transform:none}}
+.ill .bob{animation:bob 3.2s ease-in-out infinite}
+.ill .drift{animation:drift 7s ease-in-out infinite}
+.ill .ride{animation:ride 6s ease-in-out infinite alternate}
+.ill .twinkle{animation:twinkle 2.4s ease-in-out infinite}
+.boing{animation:boing .45s cubic-bezier(.3,1.4,.5,1)}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none !important;transition:none !important;scroll-behavior:auto !important}
+}
+
+/* ---------- 各風格的裝飾 ---------- */
+
+/* 🎨 繪本：硬陰影、粗框按鈕 */
+[data-theme="picturebook"] .btn,[data-theme="picturebook"] .day-chip{border:var(--bw) solid var(--bc)}
+[data-theme="picturebook"] .day-chip.on{box-shadow:3px 3px 0 var(--bc)}
+[data-theme="picturebook"] .hero{border-bottom:var(--bw) solid var(--bc)}
+
+/* 🌴 熱帶：漸層頁首、白字 */
+[data-theme="tropical"] .hero{color:#fff;border-radius:0 0 28px 28px}
+[data-theme="tropical"] .hero .sub,[data-theme="tropical"] .hero .stat span{color:rgba(255,255,255,.92)}
+[data-theme="tropical"] .hero .stat b{color:#fff}
+[data-theme="tropical"] .hero .kicker{color:rgba(255,255,255,.85)}
+.hero .card{color:var(--ink)}
+
+/* 📒 手帳：方格紙底、紙膠帶、卡片微歪 */
+[data-theme="scrapbook"] body{background-image:linear-gradient(rgba(156,195,213,.18) 1px,transparent 1px),linear-gradient(90deg,rgba(156,195,213,.18) 1px,transparent 1px);background-size:22px 22px}
+[data-theme="scrapbook"] .card{position:relative}
+[data-theme="scrapbook"] .card::before{content:"";position:absolute;top:-10px;left:50%;width:84px;height:20px;margin-left:-42px;background:color-mix(in srgb,var(--c2) 70%,transparent);transform:rotate(-3deg);opacity:.85}
+[data-theme="scrapbook"] .card:nth-of-type(3n+2)::before{background:color-mix(in srgb,var(--c3) 70%,transparent);transform:rotate(2deg);left:22%}
+[data-theme="scrapbook"] .card:nth-of-type(3n)::before{background:color-mix(in srgb,var(--c1) 60%,transparent);transform:rotate(-1deg);left:74%}
+[data-theme="scrapbook"] .card:nth-of-type(odd){transform:rotate(-.4deg)}
+[data-theme="scrapbook"] .card:nth-of-type(even){transform:rotate(.35deg)}
+[data-theme="scrapbook"] .hero-art{background:var(--paper);padding:10px 10px 34px;box-shadow:var(--shadow-lift);transform:rotate(-1.5deg);border-radius:3px}
+
+/* 🎫 登機證：深藍頁首、打孔線、等寬字 */
+[data-theme="boarding"] .hero{color:#FFFBF2}
+[data-theme="boarding"] .hero .sub,[data-theme="boarding"] .hero .stat span{color:#E9DFC9}
+[data-theme="boarding"] .hero .stat b{color:var(--c2);font-family:var(--font-mono)}
+[data-theme="boarding"] .hero .kicker{color:var(--c2);font-family:var(--font-mono)}
+[data-theme="boarding"] .hero-art{background:#FFFBF2;border-radius:10px;padding:8px;position:relative}
+[data-theme="boarding"] .card{position:relative}
+[data-theme="boarding"] .card.ticket{border-style:solid;background:radial-gradient(circle at 0 50%,transparent 11px,var(--paper) 12px) left/51% 100% no-repeat,radial-gradient(circle at 100% 50%,transparent 11px,var(--paper) 12px) right/51% 100% no-repeat;border:0;box-shadow:0 0 0 1.5px var(--bc) inset}
+[data-theme="boarding"] .perf{border-top:2px dashed var(--line);margin:12px -16px}
+[data-theme="boarding"] .day-chip b,[data-theme="boarding"] .t{font-family:var(--font-mono)}
+[data-theme="boarding"] .stamp{display:inline-block;border:2px solid var(--c1);color:var(--c1);border-radius:8px;padding:2px 10px;transform:rotate(-6deg);font-family:var(--font-mono);font-weight:700;letter-spacing:1px}
+
+/* 🫧 玻璃：背景照片／漸層＋毛玻璃 */
+[data-theme="glass"] body{background:var(--photo,radial-gradient(1200px 600px at 10% -10%,#FFD9A8 0,transparent 60%),radial-gradient(900px 700px at 110% 10%,#A9D8F5 0,transparent 55%),radial-gradient(900px 900px at 50% 110%,#BDE8C9 0,transparent 60%),#DCE7F2);background-attachment:fixed;background-size:cover}
+[data-theme="glass"] .card,[data-theme="glass"] .topbar,[data-theme="glass"] .day-chip,[data-theme="glass"] nav.tabs{-webkit-backdrop-filter:blur(18px) saturate(1.6);backdrop-filter:blur(18px) saturate(1.6)}
+[data-theme="glass"] .topbar,[data-theme="glass"] nav.tabs{background:rgba(255,255,255,.55) !important}
+[data-theme="glass"] .day-chip{background:rgba(255,255,255,.45) !important;border:1px solid rgba(255,255,255,.7) !important}
+[data-theme="glass"] .hero-art{border-radius:26px;overflow:hidden;background:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.7)}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  [data-theme="glass"]{--paper:rgba(255,255,255,.92)}
+}
+
+/* 📰 雜誌：大標、細線分隔、沒有圓角 */
+[data-theme="magazine"] .card{border-width:0;border-top:1px solid var(--bc);background:transparent;padding-left:0;padding-right:0}
+[data-theme="magazine"] .hero h1{font-size:40px;line-height:1.15;font-weight:900;letter-spacing:-.5px}
+[data-theme="magazine"] .hero .kicker{letter-spacing:3px;text-transform:uppercase;color:var(--c1)}
+[data-theme="magazine"] h2{font-size:26px;font-weight:900;border-bottom:3px solid var(--ink);padding-bottom:6px}
+[data-theme="magazine"] .day-chip{border:0;border-bottom:2px solid transparent;border-radius:0;background:transparent}
+[data-theme="magazine"] .day-chip.on{border-bottom-color:var(--c1);background:transparent;color:var(--ink)}
+[data-theme="magazine"] .btn{border:1px solid var(--ink)}
+/* ===== THEMES END ===== */
+
+/* ===== 團體版版面（顏色一律用風格變數，換風格不用改這裡） ===== */
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0}
+body{font-size:17px;line-height:1.6;padding-bottom:calc(84px + env(safe-area-inset-bottom));overflow-x:hidden}
+a{color:inherit}
+.wrap{max-width:560px;margin:0 auto;padding:0 16px}
+[hidden]{display:none !important}
+
+/* 頂端標題列 */
+.topbar{position:sticky;top:0;z-index:25;background:var(--paper);border-bottom:var(--bw) solid var(--bc);padding-top:env(safe-area-inset-top)}
+[data-theme="tropical"] .topbar,[data-theme="glass"] .topbar{border-bottom:1px solid var(--line)}
+.topbar .in{max-width:560px;margin:0 auto;padding:8px 16px;display:flex;align-items:center;gap:10px}
+.topbar b{font-family:var(--font-head);font-size:16px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar .tz{font-size:12.5px;color:var(--muted);white-space:nowrap}
+
+/* 首頁主視覺 */
+.hero{margin:14px 0 4px;padding:0;background:none}
+.hero-art svg{display:block;width:100%;height:auto}
+.hero-art{border-radius:var(--radius);overflow:hidden;border:var(--bw) solid var(--bc)}
+[data-theme="tropical"] .hero-art{border:0}
+.kicker{font-size:13px;font-weight:700;color:var(--muted);letter-spacing:1px;margin-top:12px}
+.hero h1{margin:2px 0 2px;font-size:28px;line-height:1.25}
+.hero .sub{margin:0;color:var(--muted);font-size:15px}
+[data-theme="tropical"] .hero,[data-theme="boarding"] .hero{color:var(--ink)}
+[data-theme="tropical"] .hero .kicker,[data-theme="boarding"] .hero .kicker{color:var(--c1-ink)}
+[data-theme="tropical"] .hero .stat b,[data-theme="boarding"] .hero .stat b{color:var(--c1-ink)}
+[data-theme="tropical"] .hero .stat span,[data-theme="boarding"] .hero .stat span,[data-theme="tropical"] .hero .sub,[data-theme="boarding"] .hero .sub{color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0 0}
+.stat{text-align:center}
+.stat b{display:block;font-size:24px;line-height:1.1;color:var(--c1-ink);font-family:var(--font-head)}
+.stat span{font-size:12.5px;color:var(--muted)}
+
+h2{font-size:20px;margin:26px 0 10px;line-height:1.35}
+h3{font-size:17px;margin:0 0 6px}
+.card{padding:16px;margin:12px 0}
+.muted{color:var(--muted);font-size:14px}
+.soft-bg{background:color-mix(in srgb,var(--c2) 22%,var(--paper))}
+.pill{display:inline-block;font-size:12px;font-weight:700;padding:2px 9px;vertical-align:2px}
+.pill.meet{background:var(--alert);color:#fff}
+.pill.now{background:var(--c4-ink);color:#fff}
+.pill.soft{background:color-mix(in srgb,var(--c2) 35%,var(--paper));color:var(--ink)}
+.pill.cost{background:color-mix(in srgb,var(--c4) 30%,var(--paper));color:var(--c4-ink)}
+.pill.cost-est{background:color-mix(in srgb,var(--c2) 35%,var(--paper));color:var(--ink)}
+.pill.grp{color:#fff}
+.pill.grp-back{background:color-mix(in srgb,var(--c3) 30%,var(--paper));color:var(--c3-ink)}
+
+/* 首頁狀態 */
+.big{font-size:40px;font-weight:800;line-height:1.1;color:var(--c1-ink);font-family:var(--font-head)}
+.next{border-color:var(--alert) !important;border-width:max(var(--bw),3px) !important;border-style:solid !important}
+.next .time{font-size:44px;font-weight:800;color:var(--alert);line-height:1;font-family:var(--font-head)}
+.next .left{font-weight:700;color:var(--alert);margin-top:6px}
+
+/* 按鈕 */
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.btn{display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--line);padding:10px 14px;font:inherit;font-size:15px;font-weight:700;text-decoration:none;cursor:pointer;background:var(--paper);color:var(--ink);min-height:44px}
+.btn.main{background:var(--c4-ink);border-color:var(--c4-ink);color:#fff}
+.btn.orange{background:var(--c1);border-color:var(--c1);color:var(--on-c1)}
+.btn.call{background:color-mix(in srgb,var(--c3) 25%,var(--paper));color:var(--c3-ink)}
+.btn.add{background:color-mix(in srgb,var(--c2) 30%,var(--paper))}
+.btn:disabled{opacity:.45;cursor:default}
+.big-btn{width:100%;justify-content:center;font-size:17px;min-height:52px}
+
+/* 航班 */
+.fl-h{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.fl-h b{font-size:17px}
+.fl-route{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;margin:12px 0 8px}
+.fl-code{font-size:26px;font-weight:800;letter-spacing:1px;font-family:var(--font-mono)}
+.fl-time{font-size:22px;font-weight:800;color:var(--c1-ink);line-height:1.1}
+.fl-sub{font-size:12.5px;color:var(--muted);line-height:1.4;margin-top:2px}
+.fl-mid{text-align:center;font-size:22px;color:var(--muted)}
+.fl-mid small{display:block;font-size:11.5px;white-space:nowrap}
+.fl-foot{font-size:14px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px}
+
+/* 日期切換＋時間軸 */
+.days{display:flex;gap:8px;overflow-x:auto;padding:12px 16px 6px;margin:0 -16px;scrollbar-width:none;position:sticky;top:calc(44px + env(safe-area-inset-top));background:var(--bg);z-index:5}
+[data-theme="glass"] .days{background:transparent}
+.days::-webkit-scrollbar{display:none}
+.day-chip{flex:0 0 auto;border:1.5px solid var(--line);background:var(--paper);border-radius:var(--radius-s);padding:6px 12px;text-align:center;cursor:pointer;font:inherit;color:var(--ink);min-width:74px}
+.day-chip b{display:block;font-size:16px}
+.day-chip span{font-size:12px;color:var(--muted)}
+.day-chip.on{background:var(--c2);color:var(--ink)}
+[data-theme="tropical"] .day-chip.on{background:var(--c1);border-color:var(--c1);color:#fff}
+[data-theme="tropical"] .day-chip.on span{color:#fff}
+[data-theme="boarding"] .day-chip.on{background:var(--c3);color:#FFFBF2}
+[data-theme="boarding"] .day-chip.on span{color:#E9DFC9}
+.day-chip.today{outline:2px dashed var(--c4-ink);outline-offset:2px}
+.day-title{font-size:20px;font-weight:800;margin:12px 0 2px;font-family:var(--font-head)}
+.day-meta{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:14px;color:var(--muted);margin:4px 0 6px}
+.filters{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 4px}
+.filters button{border:1.5px solid var(--line);background:var(--paper);border-radius:99px;padding:5px 12px;font:inherit;font-size:13.5px;cursor:pointer;color:var(--ink);min-height:36px}
+.filters button.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.tl{position:relative;margin:10px 0 0;padding-left:0;list-style:none}
+.item{display:grid;grid-template-columns:58px 1fr;gap:10px;margin-bottom:10px}
+.item.hide{display:none}
+.item .t{text-align:right;font-weight:800;font-size:15.5px;padding-top:14px;color:var(--c1-ink)}
+.item .t small{display:block;font-weight:500;font-size:12px;color:var(--muted)}
+.item details{background:var(--paper);border:var(--bw) solid var(--bc);border-radius:var(--radius-s);box-shadow:var(--shadow);border-left:6px solid var(--c2)}
+[data-theme="glass"] .item details{-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
+.item.meet details{border-left-color:var(--alert)}
+.item.nowon details{outline:3px solid var(--c4-ink)}
+.item.past{opacity:.55}
+.item summary{list-style:none;padding:12px 14px;cursor:pointer;font-weight:700;font-size:16.5px;display:flex;gap:8px;align-items:flex-start}
+.item summary::-webkit-details-marker{display:none}
+.item summary .arrow{margin-left:auto;color:var(--muted);transition:transform .2s;flex:0 0 auto}
+.item details[open] .arrow{transform:rotate(90deg)}
+.item .body{padding:0 14px 14px;font-size:15.5px}
+.item .body p{margin:6px 0}
+.item .tags{display:flex;flex-wrap:wrap;gap:5px;margin:4px 0}
+.route{background:color-mix(in srgb,var(--c4) 22%,var(--paper));border-radius:var(--radius-s);padding:10px 12px;margin:8px 0;font-size:15px}
+.route b{color:var(--c4-ink)}
+.tip{background:color-mix(in srgb,var(--c2) 24%,var(--paper));border-radius:var(--radius-s);padding:10px 12px;margin:8px 0;font-size:15px}
+.tipbox{background:color-mix(in srgb,var(--c2) 26%,var(--paper));border-radius:var(--radius-s);padding:12px 14px;margin:12px 0;font-size:15px;border:1.5px dashed color-mix(in srgb,var(--c2) 80%,var(--ink))}
+.daynav{display:flex;justify-content:space-between;gap:8px;margin:10px 0}
+.sec{margin:14px 0 4px}
+.sec-h{color:#fff;font-weight:800;font-size:16px;border-radius:var(--radius-s);padding:10px 14px;margin-bottom:10px}
+.sec-h small{display:block;font-weight:500;font-size:13px;opacity:.92;margin-top:2px}
+.sec-h.all{background:var(--c4-ink)}
+.sec .pill.grp{display:none}
+.grprow{display:flex;gap:8px;align-items:flex-start;padding:6px 0;font-size:15px}
+.dress-day{background:var(--paper);border-radius:var(--radius-s);padding:12px 14px;margin:10px 0;border:2px dashed color-mix(in srgb,var(--c1) 60%,var(--paper))}
+.dress-label{display:block;font-size:13px;font-weight:800;color:var(--c1-ink);margin-bottom:4px}
+.dress-groups{display:grid;gap:6px;margin-top:8px}
+.dg{display:flex;align-items:center;gap:8px;font-size:15px}
+.dg .dot{width:16px;height:16px;border-radius:50%;flex:0 0 auto}
+.dress + .dress{border-top:1px dashed var(--line);margin-top:12px;padding-top:12px}
+
+/* 天氣 */
+.wx{display:flex;gap:12px;align-items:flex-start;background:color-mix(in srgb,var(--c3) 24%,var(--paper));border-radius:var(--radius-s);padding:14px;margin:12px 0 4px}
+.wx-ico{font-size:44px;line-height:1}
+.wx-main{flex:1;min-width:0}
+.wx-place{font-size:13px;font-weight:800;color:var(--c3-ink)}
+.wx-txt{font-size:19px;font-weight:800}
+.wx-t{margin-left:10px;color:var(--c1-ink)}
+.wx-tip{font-size:14px;font-weight:700;margin-top:4px}
+.wx-upd{font-size:12px;color:var(--muted);margin-top:6px}
+.wx-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(52px,1fr));gap:4px;text-align:center}
+.wxs{display:flex;flex-direction:column;font-size:14px}
+.wxs-i{font-size:26px;line-height:1.3}
+
+/* 住宿／聯絡 */
+.local{font-size:22px;line-height:1.5;font-weight:700;background:color-mix(in srgb,var(--c2) 18%,var(--paper));border:2px dashed var(--c2);border-radius:var(--radius-s);padding:14px;margin:10px 0;word-break:break-word}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:16px}
+.kv dt{color:var(--muted)}
+.kv dd{margin:0;font-weight:700}
+.contact{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.contact:last-child{border-bottom:0}
+.contact .who{flex:1;min-width:0}
+.contact .who b{display:block}
+.van{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.van span{background:color-mix(in srgb,var(--c2) 30%,var(--paper));padding:4px 10px;border-radius:99px;font-size:15px}
+.van .empty{background:none;color:var(--muted);padding-left:0}
+ul.dots{margin:6px 0;padding-left:20px}
+ul.dots li{margin:4px 0}
+ul.plain{list-style:none;margin:0;padding:0}
+ul.plain li{padding:7px 0;border-bottom:1px solid var(--line)}
+ul.plain li:last-child{border-bottom:0}
+.tf{display:flex;justify-content:space-between;align-items:center;gap:8px;background:color-mix(in srgb,var(--c4) 14%,var(--paper));border:1px solid var(--line);border-radius:10px;padding:8px 10px}
+.tf span{display:block;font-size:12px;color:var(--muted)}
+.copy{border:0;background:var(--paper);border-radius:10px;width:44px;height:40px;font-size:18px;cursor:pointer;flex:0 0 auto;box-shadow:var(--shadow)}
+.warn-soft{background:color-mix(in srgb,var(--alert) 10%,var(--paper)) !important}
+.ok-soft{background:color-mix(in srgb,var(--c4) 20%,var(--paper)) !important;font-weight:700;color:var(--c4-ink)}
+.room-h{display:flex;justify-content:space-between;align-items:center}
+.room-h b{font-size:18px}
+.room-n{font-weight:800;color:var(--muted)}
+.room-n.good{color:var(--c4-ink)}
+.room-n.bad{color:var(--alert)}
+.room.over{border-color:var(--alert) !important}
+.chips button .elsewhere{font-size:11px;opacity:.75;margin-left:2px}
+
+/* 清單 */
+.check{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.check:last-child{border-bottom:0}
+.check input{width:24px;height:24px;accent-color:var(--c4-ink);flex:0 0 auto;margin-top:2px}
+.check.done span{text-decoration:line-through;color:var(--muted)}
+.progress{height:10px;background:var(--line);border-radius:99px;overflow:hidden;margin:8px 0 2px}
+.progress i{display:block;height:100%;background:var(--c4-ink);transition:width .3s}
+.booking{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.booking:last-child{border-bottom:0}
+.booking .ico{font-size:24px}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.step{display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:start}
+.step .no{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;background:var(--c3);color:var(--ink);border:var(--bw) solid var(--bc)}
+[data-theme="tropical"] .step .no,[data-theme="glass"] .step .no,[data-theme="boarding"] .step .no{color:#fff}
+.step p{margin:2px 0 0;font-size:14.5px;color:var(--muted)}
+.fees{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.fee{padding:12px;text-align:center;margin:0}
+.fee b{display:block;font-size:22px;color:var(--c1-ink);font-family:var(--font-head)}
+.fee span{font-size:13px;color:var(--muted)}
+.phrase{display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.phrase:last-child{border-bottom:0}
+.phrase b{display:block;font-size:15px}
+.phrase .lo{display:block;font-size:21px;font-weight:700;line-height:1.4}
+.phrase .say{display:block;color:var(--muted);font-size:14px}
+.play{flex:0 0 auto;width:48px;height:48px;border-radius:50%;border:0;background:color-mix(in srgb,var(--c2) 35%,var(--paper));font-size:22px;cursor:pointer}
+.play.on{background:var(--c2);animation:pulse .8s infinite}
+@keyframes pulse{50%{transform:scale(1.08)}}
+.conv{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center}
+.conv label{font-size:13px;color:var(--muted);display:block}
+.conv input{width:100%;font-size:22px;font-weight:700;padding:10px;border:2px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink)}
+.conv .eq{font-size:22px;padding-top:16px}
+.rate{margin-top:10px;font-size:14px;color:var(--muted);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.rate input{width:80px;font-size:15px;padding:6px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink)}
+
+/* 收合卡片 */
+.jj > summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:18px}
+.jj > summary::-webkit-details-marker{display:none}
+.jj-hint{display:block;font-size:13px;font-weight:400}
+.jj .arrow,.sub .arrow{color:var(--muted);transition:transform .2s}
+.jj[open] > summary > .arrow,.sub[open] > summary > .arrow{transform:rotate(90deg)}
+.sub{border-top:1px dashed var(--line);margin-top:10px}
+.sub > summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:16px;padding:12px 0 2px}
+.sub > summary::-webkit-details-marker{display:none}
+.sub-b{padding:6px 0 4px}
+
+/* 記帳 */
+.money{border-top:1px dashed var(--line);margin-top:12px;padding-top:10px}
+.est{font-size:15px;margin-bottom:6px}
+.exp{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line);font-size:15px}
+.exp .x{border:0;background:color-mix(in srgb,var(--alert) 14%,var(--paper));color:var(--alert);border-radius:50%;width:32px;height:32px;flex:0 0 auto;cursor:pointer}
+.daymoney{border-color:var(--c2) !important;border-width:2px !important}
+.dm-h{font-weight:800;margin-bottom:4px}
+.dm-row{display:flex;justify-content:space-between;gap:10px;font-size:16px;padding:2px 0}
+.dm-row b{color:var(--c1-ink)}
+.sheet{position:fixed;inset:0;background:rgba(30,25,20,.45);z-index:50;display:none;align-items:flex-end;justify-content:center}
+.sheet.on{display:flex}
+.sheet-in{background:var(--bg);width:100%;max-width:560px;max-height:88vh;overflow-y:auto;border-radius:22px 22px 0 0;padding:20px 16px calc(24px + env(safe-area-inset-bottom));position:relative}
+[data-theme="glass"] .sheet-in{background:#F2F6FA}
+.sheet-x{position:absolute;right:12px;top:12px;border:0;background:var(--paper);border-radius:50%;width:40px;height:40px;font-size:18px;cursor:pointer;box-shadow:var(--shadow)}
+.f-l{display:block;font-weight:800;font-size:15px;margin:14px 0 4px}
+.amt{display:flex;gap:8px;align-items:center}
+.amt .m-in{font-size:22px;font-weight:800;flex:1;min-width:0}
+.seg{display:flex;background:var(--paper);border:2px solid var(--line);border-radius:12px;overflow:hidden;flex:0 0 auto}
+.seg button{border:0;background:none;padding:10px 10px;font:inherit;font-size:14px;font-weight:700;cursor:pointer;color:var(--muted)}
+.seg button.on{background:var(--c1);color:var(--on-c1)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.chips button{border:2px solid var(--line);background:var(--paper);border-radius:99px;padding:8px 14px;font:inherit;font-size:15px;cursor:pointer;min-height:40px;color:var(--ink)}
+.chips button.on{background:var(--c4-ink);border-color:var(--c4-ink);color:#fff}
+.chips button.fund{border-color:var(--c2);background:color-mix(in srgb,var(--c2) 25%,var(--paper));font-weight:800}
+.chips button.fund.on{background:var(--c2);border-color:var(--c2);color:var(--ink)}
+.fundcard{border-color:var(--c2) !important;border-width:2px !important}
+.fund-bar{height:12px;margin:8px 0 6px}
+.fund-list{margin-top:10px;border-top:1px dashed var(--line)}
+.person{display:grid;grid-template-columns:1.1fr 1fr 1fr .9fr;gap:4px;padding:7px 0;border-bottom:1px solid var(--line);font-size:14px;text-align:right}
+.person > :first-child{text-align:left}
+.person.head{color:var(--muted);font-size:12px}
+.person .pos{color:var(--c4-ink);font-weight:800}
+.person .neg{color:var(--alert);font-weight:800}
+.mv{border-bottom:1px solid var(--line)}
+.mv > summary{list-style:none;cursor:pointer;display:flex;gap:6px;align-items:center;padding:8px 0;font-size:16px}
+.mv > summary::-webkit-details-marker{display:none}
+.mv > summary .amt{margin-left:auto;font-weight:800}
+.mv > summary .arrow{color:var(--muted);transition:transform .2s}
+.mv[open] > summary .arrow{transform:rotate(90deg)}
+.paidbtn{border:1.5px solid var(--line);background:var(--paper);border-radius:999px;padding:4px 10px;font-size:13px;font-weight:800;color:var(--muted);cursor:pointer;white-space:nowrap}
+.paidbtn.on{background:color-mix(in srgb,var(--c4) 25%,var(--paper));border-color:var(--c4-ink);color:var(--c4-ink)}
+.paidbtn.warn{background:color-mix(in srgb,var(--c2) 35%,var(--paper));border-color:var(--c2);color:var(--ink)}
+.mv.done > summary b,.mv.done > summary .amt{opacity:.55}
+.mv-b{padding:2px 0 10px;font-size:14px}
+.mv-h{display:flex;justify-content:space-between;font-weight:800;margin:8px 0 2px;padding-top:6px;border-top:1px dashed var(--line)}
+.mv-h:first-child{border-top:0;margin-top:0}
+.mv-r{display:flex;justify-content:space-between;gap:8px;padding:2px 0}
+.mv-r small{color:var(--muted)}
+.mv-r .n{white-space:nowrap}
+.where-row{display:grid;grid-template-columns:1fr 1.4fr;gap:8px}
+.where-row select{font-size:15px;padding:10px 8px}
+.exp-row{width:100%;border:0;background:none;font:inherit;color:inherit;text-align:left;cursor:pointer}
+.btn.del-btn{background:color-mix(in srgb,var(--alert) 12%,var(--paper));color:var(--alert);width:100%;justify-content:center}
+
+/* 推薦 */
+.warn-card{border-color:var(--alert) !important;background:color-mix(in srgb,var(--alert) 7%,var(--paper)) !important}
+.warn-card h3{color:var(--alert)}
+.rcat{padding:6px 14px;margin:10px 0}
+.rcat > summary b{font-size:17px}
+.rtop{display:block;font-size:13px;font-weight:500;color:var(--c1-ink)}
+.rcat .sub-b > .card,.side .sub-b > .card{box-shadow:none;margin:8px 0}
+.stiles{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}
+.stile{border:2px solid var(--c);background:color-mix(in srgb,var(--c) 12%,var(--paper));border-radius:12px;padding:8px 10px;font:inherit;color:var(--ink);text-align:left;cursor:pointer}
+.stile b{display:block;font-size:14px}
+.stile span{font-size:12.5px;color:var(--muted)}
+.stile.on{background:var(--c);color:#fff}
+.stile.on span{color:#fff}
+.btn.wishbtn.on{background:var(--c1);color:var(--on-c1)}
+.filter-note{font-size:14px;font-weight:700;color:var(--c1-ink);margin:8px 0 0}
+.rec-h{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.rec-n{font-size:18px;display:block}
+.rec-en{font-size:13px;color:var(--muted)}
+.heart,.edit-btn{border:0;background:color-mix(in srgb,var(--c1) 18%,var(--paper));color:var(--c1-ink);border-radius:50%;width:44px;height:44px;font-size:20px;cursor:pointer;flex:0 0 auto}
+.heart.on{background:var(--c1);color:var(--on-c1)}
+.rec-btns{display:flex;gap:6px;flex:0 0 auto}
+.rec-foot{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+.rec-by{font-size:13px;color:var(--muted)}
+.like{border:2px solid var(--line);background:var(--paper);border-radius:99px;padding:6px 14px;font:inherit;font-size:15px;cursor:pointer;min-height:40px;color:var(--ink)}
+.like.on{background:var(--c3-ink);border-color:var(--c3-ink);color:#fff}
+.rec-warn{background:color-mix(in srgb,var(--alert) 10%,var(--paper));color:var(--alert);border-radius:10px;padding:6px 10px;font-size:14px;margin:6px 0}
+.shops{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:14px}
+.shop{border:0;background:color-mix(in srgb,var(--c4) 22%,var(--paper));color:var(--c4-ink);border-radius:99px;padding:4px 10px;font:inherit;font-size:13px;font-weight:700;text-decoration:none}
+button.shop{cursor:pointer}
+.vids{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;margin:10px -16px 0;padding:0 16px 6px;scrollbar-width:none}
+.vid{flex:0 0 82%;max-width:330px;scroll-snap-align:start;display:flex;flex-direction:column;gap:6px}
+.vid iframe{width:100%;height:520px;border:0;border-radius:12px;background:var(--paper)}
+
+/* 留言板 */
+.m-in{width:100%;font:inherit;font-size:16px;padding:10px 12px;border:2px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink);margin:4px 0}
+[data-theme="glass"] .m-in{background:#fff}
+.m-in:focus{outline:none;border-color:var(--c1)}
+.msg{display:flex;gap:12px;padding:14px}
+.ava{flex:0 0 auto;width:40px;height:40px;border-radius:50%;color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:17px}
+.mbody{flex:1;min-width:0}
+.mtext{white-space:pre-wrap;word-break:break-word;margin-top:2px}
+.m-del{border:0;background:color-mix(in srgb,var(--alert) 12%,var(--paper));color:var(--alert);border-radius:8px;padding:2px 8px;font-size:13px;cursor:pointer;float:right}
+.foot{text-align:center;color:var(--muted);font-size:13px;margin:28px 0 8px}
+.demo-bar{background:var(--c3-ink);color:#fff;font-size:13px;text-align:center;padding:6px 12px}
+
+/* 底部分頁列 */
+nav.tabs{position:fixed;left:0;right:0;bottom:0;background:var(--paper);border-top:var(--bw) solid var(--bc);display:flex;justify-content:center;padding-bottom:env(safe-area-inset-bottom);z-index:20}
+[data-theme="tropical"] nav.tabs,[data-theme="glass"] nav.tabs{border-top:1px solid var(--line);box-shadow:0 -4px 14px rgba(0,0,0,.05)}
+nav.tabs .in{display:flex;width:100%;max-width:560px}
+nav.tabs button{flex:1;min-width:0;border:0;background:none;padding:8px 0 10px;font:inherit;font-size:11px;color:var(--muted);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:1px;min-height:60px}
+nav.tabs button .i{font-size:20px;line-height:1.2;filter:grayscale(.6)}
+nav.tabs button.on{color:var(--ink);font-weight:800}
+nav.tabs button.on .i{filter:none;transform:scale(1.1)}
+section.page{display:none}
+section.page.on{display:block}
+
+/* 風格切換列（預覽用） */
+.switcher{position:fixed;left:50%;bottom:calc(72px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:40;display:flex;gap:4px;background:var(--paper);border:1.5px solid var(--bc);border-radius:99px;padding:5px;box-shadow:var(--shadow-lift);max-width:calc(100vw - 24px);overflow-x:auto;scrollbar-width:none}
+.switcher button{border:0;background:none;border-radius:99px;padding:7px 10px;font:inherit;font-size:13px;font-weight:700;cursor:pointer;color:var(--ink);white-space:nowrap}
+.switcher button.on{background:var(--ink);color:var(--paper)}
+</style>
+</head>
+<body>
+
+<div class="demo-bar" id="demo-bar" hidden>示範模式：這是範例資料，你按的任何東西都不會真的存起來</div>
+<header class="topbar"><div class="in"><b id="top-title"></b><span class="tz" id="clock"></span></div></header>
+
+<main class="wrap">
+  <section class="page on" id="p-home"></section>
+  <section class="page" id="p-plan"></section>
+  <section class="page" id="p-money"></section>
+  <section class="page" id="p-stay"></section>
+  <section class="page" id="p-contact"></section>
+  <section class="page" id="p-list"></section>
+  <section class="page" id="p-rec"></section>
+  <section class="page" id="p-msg"></section>
+  <div id="sheet" class="sheet"><div class="sheet-in"></div></div>
+  <p class="foot" id="foot"></p>
+</main>
+
+<nav class="tabs"><div class="in">
+  <button data-tab="home" class="on"><span class="i">🏠</span>首頁</button>
+  <button data-tab="plan"><span class="i">🗓️</span>行程</button>
+  <button data-tab="money"><span class="i">💰</span>花費</button>
+  <button data-tab="stay"><span class="i">🏨</span>住宿</button>
+  <button data-tab="contact"><span class="i">☎️</span>聯絡</button>
+  <button data-tab="list"><span class="i">✅</span>清單</button>
+  <button data-tab="rec"><span class="i">🎁</span>推薦</button>
+  <button data-tab="msg"><span class="i">💬</span>留言</button>
+</div></nav>
+
+<script>
+/* =========================================================
+   ✏️ 設定區：換旅程只要改這一段到「以下是程式」之前
+   ========================================================= */
+const THEME = "picturebook"; // picturebook 繪本｜tropical 熱帶｜scrapbook 手帳｜boarding 登機證｜glass 玻璃｜magazine 雜誌
+const SHOW_SWITCHER = false;  // true = 畫面下方出現風格切換列（預覽頁用）
+const PHOTO = "";             // 玻璃風的背景照片網址（選填）
+
+const TRIP = {
+  title: "北海道夏日家族旅行", short: "北海道 6 日", kicker: "HOKKAIDO ・ SUMMER 2027",
+  dates: "2027 / 07 / 15（四）– 07 / 20（二）・6 天 5 夜",
+  start: "2027-07-15", end: "2027-07-20",
+  place: "日本", utc: 9, homeUtc: 8, tzIana: "Asia/Tokyo",   // 當地時區（UTC+9）、台灣（UTC+8）
+  tzNote: "行程時間一律為日本時間（比台灣快 1 小時）",
+  cur: { sym: "¥", name: "日幣", rate: 0.21 },              // 結算匯率：1 日幣 = 0.21 台幣（全團統一，改這裡就好）
+  stats: [["6","天"],["4","座城市"],["2","晚溫泉"],["8","位家人"]],
+  intro: "從札幌出發，坐 JR 看小樽運河的夕陽，在富良野的薰衣草田裡吃哈密瓜，最後泡進登別的溫泉。一家八口、三代同行，每天都排得剛剛好，留時間給阿嬤午睡。",
+  lang: "ja-JP",                // 實用外語發音用的語言（瀏覽器內建語音）
+  footer: "有變動以家族 LINE 群組公告為準",
+  admin: false,                 // 進階領隊版改成 true：頁尾會出現「🧭 領隊後台」入口
+  credit: { text: "用 trip-guide skill 製作", url: "https://github.com/Joanne9N/trip-guide-skill" },
+};
+
+// 首頁插圖：線條 class="k"、填色 f1～f4，換風格自動變色。換目的地時請畫當地的地標、交通工具、風景
+const HERO_SVG = `
+<svg class="ill" viewBox="0 0 360 200" role="img" aria-label="北海道的山、薰衣草花田和小火車">
+  <rect class="fp" x="0" y="0" width="360" height="200"/>
+  <g class="twinkle"><circle class="f2 sun" cx="300" cy="46" r="22"/><circle class="k" cx="300" cy="46" r="22"/></g>
+  <g class="drift"><path class="fp" d="M40 52h46a12 12 0 0 0-22-10a14 14 0 0 0-24 10z"/><path class="k" d="M40 52h46a12 12 0 0 0-22-10a14 14 0 0 0-24 10z"/></g>
+  <g class="drift" style="animation-delay:-3s"><path class="fp" d="M190 34h38a10 10 0 0 0-18-8a12 12 0 0 0-20 8z"/><path class="k" d="M190 34h38a10 10 0 0 0-18-8a12 12 0 0 0-20 8z"/></g>
+  <path class="f3" d="M0 130L70 66l40 30 50-52 70 70 40-28 90 60v54H0z"/>
+  <path class="fp" d="M146 58l14-14 18 18-10-2-8 8-6-6z"/>
+  <path class="k" d="M0 130L70 66l40 30 50-52 70 70 40-28 90 60"/>
+  <path class="k" d="M146 58l14-14 18 18-10-2-8 8-6-6"/>
+  <path class="f4" d="M0 150c60-18 120-18 180-6s120 12 180-4v60H0z"/>
+  <path class="k" d="M0 150c60-18 120-18 180-6s120 12 180-4"/>
+  <g class="f1"><path d="M10 200c20-30 40-40 60-42v42z"/><path d="M80 200c14-28 34-40 56-42v42z"/><path d="M150 200c16-26 36-36 58-38v38z"/></g>
+  <g class="k"><path d="M18 196c14-18 30-28 46-30"/><path d="M90 196c12-18 26-28 42-30"/><path d="M160 196c12-16 28-24 44-26"/></g>
+  <g class="ride">
+    <rect class="f1" x="236" y="148" width="54" height="24" rx="6"/><rect class="k" x="236" y="148" width="54" height="24" rx="6"/>
+    <rect class="fp" x="244" y="154" width="12" height="8" rx="2"/><rect class="fp" x="262" y="154" width="12" height="8" rx="2"/>
+    <rect class="f2" x="292" y="152" width="34" height="20" rx="6"/><rect class="k" x="292" y="152" width="34" height="20" rx="6"/>
+    <circle class="fi" cx="250" cy="176" r="5"/><circle class="fi" cx="278" cy="176" r="5"/><circle class="fi" cx="312" cy="176" r="5"/>
+  </g>
+  <path class="k" d="M220 182h140"/>
+</svg>`;
+
+/* 👥 成員（記帳、分房、分組都用這份名單） */
+const MEMBERS = ["阿公","阿嬤","爸爸","媽媽","小叔","小嬸","大寶","二寶"];
+const SETTLER = "媽媽";          // 結算人：公積金在誰手上，大家最後只跟他對帳
+const FUND = "公積金";
+const FUND_PER_PERSON = 5000;    // 每人繳多少「台幣」公積金；不收公積金就填 0
+
+/* 🔒 私人資料區：空白的欄位會自動隱藏。護照號碼、保單號碼、管理密碼「絕對不要」放這裡 */
+const PRIVATE = {
+  stays: [
+    { name:"札幌站前飯店（示範）", type:"飯店", nights:"07/15–07/17、07/18–07/19", checkin:"15:00", checkout:"11:00",
+      address:"北海道札幌市北區（示範地址）", local:"札幌駅前のホテルまでお願いします", map:"Sapporo Station",
+      notes:["走路 3 分鐘到 JR 札幌站","樓下有便利商店，大浴場開到 24:00"], rules:["🚭 全館禁菸","🌙 22:00 後走廊請小聲"], checkoutTasks:[] },
+    { name:"富良野民宿（示範）", type:"民宿", nights:"07/17–07/18", checkin:"16:00", checkout:"10:00",
+      address:"北海道富良野市（示範地址）", local:"", map:"Furano",
+      notes:["有廚房和洗衣機","早餐是自家種的蔬菜"], rules:["👟 室內請脫鞋"], checkoutTasks:["🗑️ 垃圾分類放門口","🔑 鑰匙放回玄關的盒子"] },
+    { name:"登別溫泉旅館（示範）", type:"溫泉旅館", nights:"07/19–07/20", checkin:"15:00", checkout:"10:00",
+      address:"北海道登別市登別溫泉町（示範地址）", local:"登別温泉の旅館までお願いします", map:"Noboribetsu Onsen",
+      notes:["含晚餐和早餐","房間有露天風呂"], rules:["♨️ 大浴場不能穿泳衣"], checkoutTasks:[] },
+  ],
+  // 聯絡人：host:true 的會另外顯示在「住宿」分頁
+  contacts: [
+    { role:"領隊（爸爸）", name:"爸爸", phone:"+886900000000", show:"0900-000-000（示範）" },
+    { role:"富良野包車司機", name:"示範包車公司", phone:"+81000000000", show:"（示範號碼）" },
+    { role:"富良野民宿", name:"民宿主人", phone:"+81000000001", show:"（示範號碼）", host:true },
+  ],
+  vans: [ { name:"Day 3 包車 1 號車", people:["阿公","阿嬤","爸爸","媽媽"] }, { name:"Day 3 包車 2 號車", people:["小叔","小嬸","大寶","二寶"] } ],
+  bookingNos: { car:"DEMO-001", zoo:"" },
+};
+
+/* 🛂 出發前準備（簽證、入境申報） */
+const PREP = {
+  lead: "台灣護照入境日本免簽（觀光 90 天內）。建議出發前先在 Visit Japan Web 填好入境資料，落地掃 QR Code 就能快速通關。",
+  steps: [
+    ["確認護照效期","建議效期超過回國日 6 個月，每個人都要檢查，小孩也一樣"],
+    ["註冊 Visit Japan Web","用 Email 註冊，同行家人可以加在同一個帳號裡"],
+    ["填入境與海關資料","照護照資料填寫，住宿填第一晚的飯店"],
+    ["截圖 QR Code","入境審查、海關各一個，出發前截圖存在手機"],
+  ],
+  fees: [["免費","Visit Japan Web"],["免簽","觀光 90 天內"]],
+  note: "規定以官方網站最新公告為準。",
+  links: [["Visit Japan Web 官網","https://services.digital.go.jp/visit-japan-web/"],["外交部領事事務局","https://www.boca.gov.tw/"]],
+};
+
+/* ✈️ 航班 */
+const FLIGHTS = [
+  { dir:"去程", airline:"示範航空", no:"XX123", date:"07/15（四）", from:"TPE", fromName:"桃園國際機場", dep:"08:30", depTz:"台灣時間",
+    to:"CTS", toName:"新千歲機場", arr:"13:10", arrTz:"日本時間", dur:"約 3 小時 40 分", bag:"1 件 × 23 公斤",
+    note:"🕖 <b>06:30</b> 第二航廈集合，8 個人一起報到比較從容" },
+  { dir:"回程", airline:"示範航空", no:"XX124", date:"07/20（二）", from:"CTS", fromName:"新千歲機場", dep:"14:20", depTz:"日本時間",
+    to:"TPE", toName:"桃園國際機場", arr:"17:30", arrTz:"台灣時間", dur:"約 4 小時 10 分", bag:"1 件 × 23 公斤",
+    note:"🕚 11:30 前到機場，伴手禮記得放託運" },
+];
+const BAG_PEOPLE = []; // 只有部分人買托運時填名字；空白代表全員都有
+
+/* 👥 分組（某天要分開行動時用；行程項目加 group:"A"） */
+const GROUPS = {
+  A: { name:"🎨 玻璃體驗組", color:"#C8553D", members:["爸爸","媽媽","大寶","二寶"] },
+  B: { name:"☕ 慢慢逛組", color:"#2F6F8C", members:["阿公","阿嬤","小叔","小嬸"] },
+};
+
+/* 🗓️ 行程：k＝固定編號（記帳用，新增時給該天沒用過的數字，舊的不要改）
+   meet:true＝集合（首頁會倒數）｜place＝Google 地圖搜尋字｜cat＝分類篩選｜tags＝交通標籤｜must＝必去｜cost＝預估每人花費（當地貨幣）
+   group:"A"＝只有某組｜only:["名字"]＝只有部分人 */
+const CATS_PLAN = [["sight","📍 景點"],["food","🍜 用餐"],["shop","🛍️ 購物"],["move","🚃 交通"],["stay","🛏️ 住宿"]];
+const TAG = { walk:"🚶 步行", train:"🚃 電車", bus:"🚌 巴士", car:"🚐 包車", flight:"✈️ 飛機", boat:"⛴️ 船", taxi:"🚕 計程車" };
+const DAYS = [
+  { date:"2027-07-15", w:"四", label:"抵達札幌", title:"Day 1・飛向涼爽的夏天", move:"JR 快速 Airport 約 40 分", stay:"札幌站前飯店", tip:"7 月的北海道早晚只有 15～18 度，記得帶一件薄外套。", items:[
+    { k:0, t:"06:30", meet:true, where:"桃園機場第二航廈 出境大廳", title:"✈️ 機場集合・報到", cat:"move", tags:["flight"], place:"Taoyuan International Airport Terminal 2",
+      body:"<p>8 個人一起辦團體報到，先確認每個人都帶了護照。</p><div class='tip'>🧳 行動電源一定要放隨身行李。</div>" },
+    { k:1, t:"13:10", e:"14:30", title:"🛬 抵達新千歲・入境", cat:"move", place:"New Chitose Airport",
+      body:"<p>準備好 Visit Japan Web 的 QR Code，入境審查和海關各掃一次。</p>" },
+    { k:2, t:"14:30", e:"15:30", meet:true, where:"機場 B1 JR 售票口前", title:"🚃 JR 前往札幌", cat:"move", tags:["train"], place:"New Chitose Airport Station",
+      body:"<div class='route'><b>JR 快速 Airport</b> 新千歲機場 → <b>札幌</b>，約 40 分鐘</div><p class='muted'>買 Kitaca 或用手機 Suica 搭車最方便。</p>", cost:1230 },
+    { k:3, t:"16:00", title:"🏨 飯店 Check-in", cat:"stay", tags:["walk"], place:"Sapporo Station", body:"<p>放行李、休息一下。</p><div class='btns'><button class='btn' data-go='stay'>🏨 看住宿資訊</button></div>" },
+    { k:4, t:"18:00", e:"19:30", meet:true, where:"飯店大廳", title:"🍖 成吉思汗烤肉晚餐", cat:"food", tags:["walk"], must:true, place:"Sapporo Jingisukan",
+      body:"<p>北海道必吃的羊肉燒烤，記得穿不怕沾味道的衣服。</p>", cost:3500 },
+  ]},
+  { date:"2027-07-16", w:"五", label:"小樽", title:"Day 2・運河與玻璃的港町", move:"JR 約 40 分", stay:"札幌站前飯店", groups:["A","B"], tip:"堺町通是一段長坡，阿嬤走累了可以在 LeTAO 二樓坐著休息。", items:[
+    { k:0, t:"09:00", meet:true, where:"飯店大廳", title:"🚃 JR 前往小樽", cat:"move", tags:["train"], place:"Sapporo Station", body:"<p>坐右側靠窗可以看到海。</p>", cost:750 },
+    { k:1, t:"10:00", e:"11:30", title:"🌉 小樽運河散步", cat:"sight", tags:["walk"], must:true, place:"Otaru Canal", body:"<p>白天拍石造倉庫，傍晚再回來看點燈。</p>" },
+    { k:2, t:"11:30", e:"12:30", title:"🍣 三角市場海鮮丼", cat:"food", tags:["walk"], place:"Otaru Sankaku Market", body:"<p>排隊人多，建議 11:30 前到。</p>", cost:2500 },
+    { k:3, t:"13:00", e:"15:00", group:"A", title:"🎨 玻璃杯體驗", cat:"sight", place:"Otaru glass workshop", body:"<p>自己吹一顆玻璃杯，隔天可以寄回台灣（示範內容）。</p>", cost:3000 },
+    { k:4, t:"13:00", e:"15:00", group:"B", title:"☕ 北一硝子三號館喝咖啡", cat:"food", place:"Kitaichi Hall Otaru", body:"<p>167 盞煤油燈的咖啡廳，坐著慢慢喝。</p>" },
+    { k:5, t:"15:00", e:"17:00", meet:true, where:"小樽音樂盒堂門口", title:"🛍️ 全員會合・逛堺町通", cat:"shop", tags:["walk"], place:"Otaru Music Box Museum", body:"<p>LeTAO 起司蛋糕、六花亭、音樂盒。</p>" },
+  ]},
+  { date:"2027-07-17", w:"六", label:"富良野", title:"Day 3・紫色的薰衣草海", move:"包車約 2 小時", stay:"富良野民宿", tip:"花田的蜜蜂很多，噴香水的人要小心；防曬和帽子一定要帶。", items:[
+    { k:0, t:"08:00", meet:true, where:"飯店大廳", title:"🚐 包車出發", cat:"move", tags:["car"], body:"<p>今天 2 台車，分車名單在「聯絡」分頁。</p>" },
+    { k:1, t:"10:30", e:"12:30", title:"💜 富田農場", cat:"sight", tags:["walk"], must:true, place:"Farm Tomita", body:"<p>7 月中是薰衣草最盛開的時候，薰衣草霜淇淋一定要吃。</p>" },
+    { k:2, t:"12:30", e:"13:30", title:"🍈 哈密瓜午餐", cat:"food", place:"Furano", body:"<p>整顆哈密瓜切開分著吃。</p>", cost:2000 },
+    { k:3, t:"15:00", e:"16:00", title:"🩵 美瑛青池", cat:"sight", tags:["car"], place:"Shirogane Blue Pond", body:"<p>湖水是不可思議的藍色，步道平坦好走。</p>" },
+    { k:4, t:"17:00", title:"🏡 民宿 Check-in", cat:"stay", place:"Furano", body:"<p>晚餐在民宿吃。</p>" },
+  ]},
+  { date:"2027-07-18", w:"日", label:"旭川", title:"Day 4・企鵝在頭上游泳", move:"包車＋JR", stay:"札幌站前飯店", tip:"動物園是上坡地形，推嬰兒車的話從正門進比較好走。", items:[
+    { k:0, t:"09:00", meet:true, where:"民宿門口", title:"🚐 前往旭山動物園", cat:"move", tags:["car"], body:"<p>車程約 1 小時 20 分。</p>" },
+    { k:1, t:"10:30", e:"13:00", title:"🐧 旭山動物園", cat:"sight", tags:["walk"], must:true, place:"Asahiyama Zoo", body:"<p>企鵝館的水中隧道、北極熊館，小朋友最愛。</p>", cost:1000 },
+    { k:2, t:"13:30", e:"14:30", title:"🍜 旭川醬油拉麵", cat:"food", tags:["walk"], place:"Asahikawa ramen", body:"<p>有兒童碗。</p>", cost:1100 },
+    { k:3, t:"16:00", meet:true, where:"JR 旭川站 剪票口", title:"🚃 JR 回札幌", cat:"move", tags:["train"], place:"Asahikawa Station", body:"<div class='route'><b>特急 Lilac</b> 旭川 → 札幌 約 1 小時 25 分，要先劃位</div>", cost:4690 },
+  ]},
+  { date:"2027-07-19", w:"一", label:"登別溫泉", title:"Day 5・地獄谷冒著白煙", move:"高速巴士約 1 小時 40 分", stay:"登別溫泉旅館", tip:"大浴場不能穿泳衣，有刺青的人可能不能進，可以改用房間的露天風呂。", items:[
+    { k:0, t:"10:00", meet:true, where:"札幌站前巴士總站", title:"🚌 高速巴士到登別", cat:"move", tags:["bus"], place:"Sapporo Station Bus Terminal", body:"<p>要先買票。</p>", cost:2200 },
+    { k:1, t:"13:00", e:"14:30", title:"♨️ 地獄谷散步", cat:"sight", tags:["walk"], must:true, place:"Noboribetsu Jigokudani", body:"<p>木棧道約 20 分鐘，可以看到冒煙的火山口。</p>" },
+    { k:2, t:"15:00", title:"🏯 溫泉旅館 Check-in", cat:"stay", place:"Noboribetsu Onsen", body:"<p>換上浴衣，晚餐前先泡一輪。</p>" },
+    { k:3, t:"18:30", title:"🍱 旅館會席料理", cat:"food", body:"<p>在房間用餐。</p>" },
+    { k:4, t:"20:30", only:["媽媽","小嬸"], title:"💆 旅館按摩（已預約）", cat:"stay", body:"<p>20:30 在 1 樓按摩室。</p>", cost:6000 },
+  ]},
+  { date:"2027-07-20", w:"二", label:"回家", title:"Day 6・帶著白色戀人回家", move:"JR", stay:"溫暖的家", tip:"生鮮蔬果、肉製品不能帶回台灣，罰款很重。", items:[
+    { k:0, t:"09:30", meet:true, where:"旅館大廳", title:"🚃 前往新千歲機場", cat:"move", tags:["train"], place:"Noboribetsu Station", body:"<p>JR 登別站到南千歲轉車。</p>", cost:2000 },
+    { k:1, t:"11:30", e:"13:30", title:"🍫 機場伴手禮最後衝刺", cat:"shop", tags:["walk"], must:true, place:"New Chitose Airport", body:"<p>Royce 巧克力、白色戀人、六花亭。</p>" },
+    { k:2, t:"14:20", title:"✈️ 起飛回台灣", cat:"move", tags:["flight"], body:"<p>17:30 抵達桃園，愉快回家！🎉</p>" },
+  ]},
+];
+
+/* 🥚 素食可參考（選填）：VEG 放各區素食店，VEG_MAP 指定哪個行程顯示哪一區；用不到就讓 VEG 保持空的 */
+const VEG = {
+  sapporo: { area:"札幌站周邊", list:[ { n:"示範素食餐廳", t:"素食菜單", d:"示範資料：實際使用時請查 HappyCow 或店家官網" } ], tip:"點餐可以說「ベジタリアンです」（我吃素）" },
+};
+const VEG_MAP = [[0,4,"sapporo"]]; // [第幾天(0 起算), 行程 k, 區域]
+const VEG_TYPE = { "全素":"grp-back", "素食菜單":"soft", "可調整":"meet" };
+
+/* 👗 Dress Code（選填）：DRESS 空的就不會顯示 */
+const DRESS = {
+  purple: { name:"薰衣草紫", emoji:"💜", desc:"全家穿紫色或白色，在花田拍全家福" },
+  yukata: { name:"浴衣之夜", emoji:"👘", desc:"旅館提供浴衣，晚餐全員穿浴衣" },
+};
+const DRESS_BY_DAY = [null, "none", "purple", "none", "yukata", "none"]; // 每天一格："none"＝不顯示、null＝待公布
+
+const BOOKINGS = [
+  { id:"car", ico:"🚐", name:"富良野・美瑛包車（2 台）", when:"07/17 08:00 飯店接" },
+  { id:"zoo", ico:"🐧", name:"旭山動物園門票", when:"07/18 現場購票" },
+];
+
+const EMERGENCY = [
+  { role:"日本報警", phone:"110" },
+  { role:"日本救護車・消防", phone:"119" },
+  { role:"日本觀光局 訪日外國人熱線（24 小時，中文可）", phone:"+81503816-2787", show:"050-3816-2787" },
+  { role:"外交部 旅外國人急難救助", phone:"+886800085095", show:"+886-800-085-095" },
+];
+
+const PACKING = [
+  "護照（效期 6 個月以上）",
+  "Visit Japan Web QR Code 截圖",
+  "網卡 / eSIM",
+  "日幣現金＋信用卡",
+  "行動電源（只能放隨身行李）＋充電線",
+  "薄外套（早晚 15 度）",
+  "防曬、帽子、墨鏡",
+  "好走的鞋子",
+  "個人常備藥品",
+  "💜 紫色或白色衣服（Day 3 花田全家福）",
+];
+
+// 實用外語：[中文, 當地語言, 拼音提示]，點 🔊 用瀏覽器內建語音唸
+const PHRASES = [
+  { cat:"🙏 禮貌", list:[ ["你好","こんにちは","kon-ni-chi-wa"], ["謝謝","ありがとうございます","a-ri-ga-tou go-zai-masu"], ["不好意思","すみません","su-mi-ma-sen"] ]},
+  { cat:"🍜 點餐", list:[ ["我要這個","これをください","ko-re o ku-da-sai"], ["我吃素","ベジタリアンです","be-ji-ta-ri-an de-su"], ["買單","お会計お願いします","o-kai-kei o-ne-gai-shi-masu"] ]},
+  { cat:"🆘 緊急", list:[ ["救命！","助けて！","ta-su-ke-te"], ["我不舒服","気分が悪いです","ki-bun ga wa-ru-i de-su"] ]},
+];
+
+/* 🗂️ 花費自動歸類（依標題關鍵字） */
+const CATS = [
+  ["stay","🏨 住宿", /住宿|飯店|旅館|民宿|hotel/i],
+  ["go","🚕 交通", /交通|jr|電車|巴士|計程車|包車|車票|機場|租車|油錢|taxi|uber/i],
+  ["act","🎟️ 門票・體驗", /門票|體驗|課程|纜車|動物園|入場/],
+  ["eat","🍜 餐飲", /餐|飯|麵|咖啡|壽司|烤肉|海鮮|甜點|飲料/],
+  ["shop","🛍️ 購物", /購物|伴手禮|超市|藥妝|超商|便利商店/],
+];
+
+/* 🛏️ 分房（主要住宿的房間；cap＝可睡人數、sofa＝可加睡 1 人） */
+const ROOMS_FOR = "登別溫泉旅館";
+const ROOMS = [
+  { no:1, beds:"🛏️ 和室（4 床被褥）", cap:4 },
+  { no:2, beds:"🛏️ 和室（4 床被褥）", cap:4 },
+];
+
+/* 🎁 推薦：分類（代號 2–12 個小寫英文字母）、在哪買、獨立大區塊 */
+const REC_CATS = [["snack","🍪 零食甜點"],["care","💊 藥妝"],["gift","🛍️ 質感小物"],["food","🍽️ 美食"]];
+const SIDE_CATS = { food: { title:"🍽️ 美食推薦", hint:"依地區分組・點地址直接開地圖" } }; // 這些分類另外放一大區
+const SHOPS = {
+  otaru:  { name:"Day 2 小樽堺町通", day:1, color:"#C8553D" },
+  airport:{ name:"Day 6 新千歲機場", day:5, color:"#2F6F8C" },
+  drug:   { name:"藥妝店", color:"#3F6E2C" },
+  conv:   { name:"便利商店／超市", color:"#B08A1E" },
+};
+const FOOD_AREAS = [
+  { key:"sapporo", name:"🏙️ 札幌", re:/sapporo|札幌|susukino|薄野/i },
+  { key:"otaru",   name:"🌉 小樽", re:/otaru|小樽/i },
+  { key:"etc",     name:"📍 其他", re:/.*/ },
+];
+const REC_WARN = { title:"🚫 海關紅線：肉製品不能帶回台灣！", body:"肉乾、香腸、含肉塊的泡麵都不行，罰款 <b>1 萬～100 萬元</b>。看不懂成分就別買，或到機場動植物檢疫櫃檯問。" };
+const VIDEOS = []; // 要一起拍的 IG Reels：{ id:"Reel 網址中間那串", title, note, by }
+
+/* 🌦️ 天氣（Open-Meteo，免費免註冊）：每天用哪個地點預報 */
+const WX_PLACES = [ { name:"札幌", lat:43.06, lon:141.35 }, { name:"富良野", lat:43.34, lon:142.38 }, { name:"登別", lat:42.49, lon:141.15 } ];
+const WX_DAY_PLACE = [0, 0, 1, 1, 2, 0];
+
+/* 🎭 示範資料（只有示範模式會用；正式網站資料都存在雲端） */
+const DEMO_SEED = {
+  expenses: [
+    { id:1, day:0, item:2, title:"JR 快速 Airport", amount:9840, currency:"LOC", payer:FUND, split:MEMBERS },
+    { id:2, day:0, item:4, title:"成吉思汗烤肉晚餐", amount:28000, currency:"LOC", payer:"爸爸", split:MEMBERS },
+    { id:3, day:1, item:3, title:"玻璃杯體驗", amount:12000, currency:"LOC", payer:"媽媽", split:["爸爸","媽媽","大寶","二寶"] },
+    { id:4, day:2, item:-1, title:"富良野包車", amount:9000, currency:"TWD", payer:FUND, split:MEMBERS },
+    { id:5, day:2, item:2, title:"哈密瓜午餐", amount:16000, currency:"LOC", payer:"小叔", split:MEMBERS },
+  ],
+  recs: [
+    { id:1, cat:"snack", name:"白色戀人", en:"Shiroi Koibito", why:"北海道代表伴手禮，送同事最安全", warn:"", shops:["airport"], place:"", author:"媽媽", likes:3, liked:0 },
+    { id:2, cat:"snack", name:"LeTAO 雙層起司蛋糕", en:"LeTAO", why:"小樽本店現場吃最好吃，冷凍版可以帶回台灣", warn:"要保冷", shops:["otaru","airport"], place:"", author:"小嬸", likes:2, liked:0 },
+    { id:3, cat:"care", name:"北海道限定護手霜", en:"", why:"示範資料", warn:"", shops:["drug"], place:"", author:"大寶", likes:0, liked:0 },
+    { id:4, cat:"food", name:"示範拉麵店", en:"Demo Ramen", why:"示範資料：濃厚味噌湯頭", warn:"", shops:[], place:"Sapporo", author:"爸爸", likes:1, liked:0 },
+  ],
+  rooms: [ { name:"阿公", room:1 }, { name:"阿嬤", room:1 }, { name:"爸爸", room:2 }, { name:"媽媽", room:2 } ],
+  messages: [ { id:1, name:"二寶", body:"我要看企鵝！🐧", created_at: Date.parse("2027-07-10T12:00:00Z") }, { id:2, name:"阿嬤", body:"大家記得帶外套喔", created_at: Date.parse("2027-07-11T01:00:00Z") } ],
+  paid: [],
+};
+
+/* =========================================================
+   以下是程式，一般不用改
+   ========================================================= */
+const THEMES = [["picturebook","🎨 繪本"],["tropical","🌴 熱帶"],["scrapbook","📒 手帳"],["boarding","🎫 登機證"],["glass","🫧 玻璃"],["magazine","📰 雜誌"]];
+const FONTS = {
+  picturebook:"Huninn", tropical:"Chiron+GoRound+TC:wght@400;700;800", scrapbook:"LXGW+WenKai+TC:wght@400;700",
+  boarding:"Noto+Sans+TC:wght@400;700&family=Noto+Serif+TC:wght@700;900&family=Space+Mono:wght@700",
+  glass:"Noto+Sans+TC:wght@400;700;800", magazine:"Noto+Sans+TC:wght@400;700&family=Noto+Serif+TC:wght@700;900",
+};
+function setTheme(t){
+  if (!FONTS[t]) t = "picturebook";
+  document.documentElement.dataset.theme = t;
+  document.getElementById("font-link").href = "https://fonts.googleapis.com/css2?family=" + FONTS[t] + "&display=swap";
+  if (t === "glass" && PHOTO) document.body.style.setProperty("--photo", `linear-gradient(rgba(255,255,255,.15),rgba(255,255,255,.15)),url("${encodeURI(PHOTO)}") center/cover`);
+  document.querySelectorAll(".switcher button").forEach(b => b.classList.toggle("on", b.dataset.t === t));
+}
+
+const esc = t => String(t ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const map = q => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q);
+const $ = s => document.querySelector(s);
+const store = {
+  get(k, d){ try { const v = localStorage.getItem(TRIP.start + ":" + k); return v == null ? d : JSON.parse(v); } catch(e){ return d; } },
+  set(k, v){ try { localStorage.setItem(TRIP.start + ":" + k, JSON.stringify(v)); } catch(e){} }
+};
+VEG_MAP.forEach(([di, k, key]) => { const it = DAYS[di]?.items.find(x => x.k === k); if (it) it.veg = key; });
+
+/* ---------- 雲端資料（示範模式改用上面的 DEMO_SEED，不會真的存） ---------- */
+const DEMO = new URLSearchParams(location.search).has("demo") || /github\.io$/.test(location.hostname) || location.protocol === "file:";
+const demoDB = JSON.parse(JSON.stringify(DEMO_SEED));
+async function api(path, opt = {}){
+  if (!DEMO){
+    const r = await fetch(path, { cache:"no-store", ...opt, headers:{ "Content-Type":"application/json", ...(opt.headers || {}) } });
+    if (!r.ok) throw r.status;
+    return r.json();
+  }
+  const u = new URL(path, location.href), id = +u.searchParams.get("id"), m = opt.method || "GET", body = opt.body ? JSON.parse(opt.body) : {};
+  const nextId = list => Math.max(0, ...list.map(x => x.id)) + 1;
+  const table = { "/api/expenses":"expenses", "/api/recs":"recs", "/api/messages":"messages" }[u.pathname];
+  if (table){
+    const list = demoDB[table];
+    if (m === "POST") list.push({ ...body, id: nextId(list), currency: body.currency === "TWD" ? "TWD" : "LOC", likes:0, liked:0, created_at: Date.now() });
+    if (m === "PUT") Object.assign(list.find(x => x.id === id) || {}, body);
+    if (m === "DELETE") demoDB[table] = list.filter(x => x.id !== id);
+    return JSON.parse(JSON.stringify(table === "messages" ? [...demoDB[table]].reverse() : demoDB[table]));
+  }
+  if (u.pathname === "/api/rooms"){
+    if (m === "POST"){ demoDB.rooms = demoDB.rooms.filter(a => a.room !== body.room && !body.names.includes(a.name)).concat(body.names.map(name => ({ name, room: body.room }))); }
+    return JSON.parse(JSON.stringify(demoDB.rooms));
+  }
+  if (u.pathname === "/api/settle"){
+    if (m === "POST") demoDB.paid = body.paid ? demoDB.paid.filter(p => p.name !== body.name).concat({ ...body, paid_at: Date.now() }) : demoDB.paid.filter(p => p.name !== body.name);
+    return JSON.parse(JSON.stringify(demoDB.paid));
+  }
+  if (u.pathname === "/api/likes"){
+    const r = demoDB.recs.find(x => x.id === body.rec); r.liked = r.liked ? 0 : 1; r.likes = (r.likes || 0) + (r.liked ? 1 : -1);
+    return { likes: r.likes, liked: !!r.liked };
+  }
+  return [];
+}
+
+/* ---------- 時間（全部用當地時間） ---------- */
+function localNow(){
+  const q = new URLSearchParams(location.search).get("now"); // 測試用：?now=2027-07-17T09:00
+  if (q){ const [d, t = "00:00"] = q.split("T"); return stamp(d, t); }
+  return Date.now() + TRIP.utc * 3600 * 1000;
+}
+function stamp(date, hm){
+  const [y, m, d] = date.split("-").map(Number), [h, mi] = hm.split(":").map(Number);
+  return Date.UTC(y, m - 1, d, h, mi);
+}
+const isTime = s => /^\d\d:\d\d$/.test(s);
+const todayStr = () => new Date(localNow()).toISOString().slice(0, 10);
+const hmNow = () => new Date(localNow()).toISOString().slice(11, 16);
+const mdw = day => `${+day.date.slice(5, 7)}/${+day.date.slice(8, 10)}（${day.w}）`;
+function fmtLeft(ms){
+  const m = Math.round(ms / 60000);
+  if (m < 1) return "就是現在！";
+  if (m < 60) return `還有 ${m} 分鐘`;
+  const h = Math.floor(m / 60), r = m % 60;
+  return `還有 ${h} 小時${r ? " " + r + " 分" : ""}`;
+}
+function allItems(){
+  return DAYS.flatMap((d, di) => d.items.map(it => ({ ...it, di, day: d,
+    s: isTime(it.t) ? stamp(d.date, it.t) : null, en: it.e ? stamp(d.date, it.e) : null })));
+}
+function statusOf(it, now){
+  if (it.s == null) return "";
+  const end = it.en ?? it.s + 30 * 60000;
+  if (now >= end) return "past";
+  if (now >= it.s) return "nowon";
+  return "";
+}
+
+/* ---------- 共用小元件 ---------- */
+const mapBtn = (q, label = "📍 開地圖") => q ? `<a class="btn" href="${map(q)}" target="_blank" rel="noopener">${label}</a>` : "";
+const telBtn = (p, label) => `<a class="btn call" href="tel:${esc(p)}">📞 ${label || "撥打"}</a>`;
+const sub = (title, body, open) => `<details class="sub" ${open ? "open" : ""}><summary>${title}<span class="arrow">›</span></summary><div class="sub-b">${body}</div></details>`;
+const groupPill = g => g && GROUPS[g] ? `<span class="pill grp" style="background:${GROUPS[g].color}">${GROUPS[g].name}</span>` : "";
+const tagsHTML = it => (it.tags?.length || it.must) ? `<div class="tags">${it.must ? `<span class="tag must">必去</span>` : ""}${(it.tags || []).map(t => `<span class="tag ${esc(t)}">${esc(TAG[t] || t)}</span>`).join("")}</div>` : "";
+
+let vegOpenKeys = new Set();
+function vegHTML(keys, vk){
+  const areas = [].concat(keys).map(k => VEG[k]).filter(Boolean);
+  if (!areas.length) return "";
+  return `<details class="sub veg" data-vk="${vk}" ${vegOpenKeys.has(vk) ? "open" : ""}><summary><span>🥚 素食可參考</span><span class="arrow">›</span></summary><div class="sub-b">${areas.map(a => `
+    <div class="muted" style="font-size:13px">📍 ${a.area}</div>
+    ${a.list.map(v => `<p style="margin:6px 0"><b>${v.n}</b> <span class="pill ${VEG_TYPE[v.t] || "soft"}">${v.t}</span><br><span class="muted">${v.d}</span><br><a href="${map(v.q || v.n)}" target="_blank" rel="noopener">📍 看地圖</a></p>`).join("")}
+    ${a.tip ? `<div class="tip">${a.tip}</div>` : ""}`).join("")}</div></details>`;
+}
+function dressHTML(key){
+  const d = DRESS[key]; if (!d) return "";
+  let h = `<div class="dress"><div><b>${d.emoji} ${d.name}</b></div><div class="muted">${d.desc}</div>`;
+  if (d.groups) h += `<div class="dress-groups">${d.groups.map(g => `<div class="dg"><span class="dot" style="background:${g.hex}"></span><b style="color:${g.hex}">${g.color}</b><span>${g.people.join("、")}</span></div>`).join("")}</div>`;
+  return h + `</div>`;
+}
+function todayDress(di){
+  if (!Object.keys(DRESS).length) return "";
+  const k = DRESS_BY_DAY[di];
+  if (k === "none" || k === undefined) return "";
+  return `<div class="dress-day"><span class="dress-label">👗 今日 Dress Code</span>${k ? dressHTML(k) : `<span class="muted">待公布，會在群組通知</span>`}</div>`;
+}
+
+/* ---------- 時間軸 ---------- */
+let planCat = "all";
+function itemHTML(it, now, openIt, di){
+  const st = statusOf(it, now);
+  const time = isTime(it.t) ? `${it.t}${it.e ? `<small>– ${it.e}</small>` : ""}` : `<span style="font-size:14px">${esc(it.t)}</span>`;
+  const badge = st === "nowon" ? `<span class="pill now">進行中</span>` : it.meet ? `<span class="pill meet">集合</span>` : "";
+  const ex = expOf(di, it.k);
+  const hide = planCat !== "all" && it.cat !== planCat ? " hide" : "";
+  return `<li class="item ${it.meet ? "meet" : ""} ${st}${hide}">
+    <div class="t">${time}</div>
+    <details data-key="${di}-${it.k}" ${openIt ? "open" : ""}><summary><span>${groupPill(it.group)} ${it.title} ${badge}${ex.length ? ` <span class="pill cost">💰 ${sumLabel(ex)}</span>` : it.cost ? ` <span class="pill cost-est">約 ${fmtLOC(it.cost)}/人</span>` : ""}</span><span class="arrow">›</span></summary>
+      <div class="body">${tagsHTML(it)}${it.group ? `<p>👥 <b>${GROUPS[it.group].name}：</b>${GROUPS[it.group].members.join("、")}</p>` : ""}${it.only ? `<p>👥 <b>參加：</b>${it.only.map(esc).join("、")}</p>` : ""}${it.where ? `<p>📌 <b>集合地點：</b>${it.where}</p>` : ""}${it.body || ""}${it.veg ? vegHTML(it.veg, `${di}-${it.k}`) : ""}
+      <div class="btns">${mapBtn(it.place)}</div>${itemMoneyHTML(it, di, it.k)}</div>
+    </details></li>`;
+}
+function timelineHTML(di, items, now, isOpen){
+  vegOpenKeys = new Set([...document.querySelectorAll("details.veg[open]")].map(x => x.dataset.vk));
+  const li = (it, i) => itemHTML(it, now, isOpen(it, i), di);
+  const gs = DAYS[di].groups;
+  if (!gs) return `<ul class="tl">${items.map(li).join("")}</ul>`;
+  const idx = items.map((it, i) => [it, i]);
+  const gi = idx.filter(([it]) => it.group).map(([, i]) => i);
+  const firstG = Math.min(...gi), lastG = Math.max(...gi);
+  const sec = (head, list) => list.length ? `<div class="sec">${head}<ul class="tl">${list.map(([it, i]) => li(it, i)).join("")}</ul></div>` : "";
+  const onlyOf = idx.filter(([it]) => it.only);
+  return sec(`<div class="sec-h all">🤝 全員</div>`, idx.filter(([it, i]) => !it.group && !it.only && i < firstG))
+    + gs.map(g => sec(`<div class="sec-h" style="background:${GROUPS[g].color}">${GROUPS[g].name}<small>${GROUPS[g].members.join("、")}</small></div>`, idx.filter(([it]) => it.group === g))).join("")
+    + sec(`<div class="sec-h all">🤝 全員會合</div>`, idx.filter(([it, i]) => !it.group && !it.only && i > lastG))
+    + sec(onlyOf.length ? `<div class="sec-h all">👥 部分成員<small>${onlyOf[0][0].only.join("、")}</small></div>` : "", onlyOf);
+}
+
+/* ---------- 🏠 首頁 ---------- */
+function heroHTML(){
+  return `<div class="hero"><div class="hero-art">${HERO_SVG}</div>
+    <div class="kicker">${esc(TRIP.kicker)}</div><h1>${esc(TRIP.title)}</h1><p class="sub">${esc(TRIP.dates)}</p>
+    <div class="stats">${TRIP.stats.map(([b, s]) => `<div class="stat"><b>${esc(b)}</b><span>${esc(s)}</span></div>`).join("")}</div></div>`;
+}
+function flightsHTML(){
+  const started = localNow() >= stamp(TRIP.start, "00:00") + 86400000;
+  return `<h2>✈️ 航班</h2>${FLIGHTS.filter(f => !started || f.dir === "回程").map(f => `<div class="card ticket">
+    <div class="fl-h"><span class="pill ${f.dir === "去程" ? "soft" : "grp-back"}">${f.dir}</span><b>${esc(f.airline)} <span class="mono">${esc(f.no)}</span></b></div>
+    <div class="fl-route">
+      <div><div class="fl-code">${f.from}</div><div class="fl-time">${f.dep}</div><div class="fl-sub">${f.fromName}<br>${f.date}・${f.depTz}</div></div>
+      <div class="fl-mid">✈︎<small>${f.dur}</small></div>
+      <div style="text-align:right"><div class="fl-code">${f.to}</div><div class="fl-time">${f.arr}</div><div class="fl-sub">${f.toName}<br>${f.date}・${f.arrTz}</div></div>
+    </div>
+    <div class="perf"></div>
+    ${f.bag ? `<div class="fl-foot">🧳 托運：${f.bag}${BAG_PEOPLE.length ? `（${BAG_PEOPLE.join("、")}）` : ""}</div>` : ""}
+    ${f.note ? `<div class="tip" style="margin-bottom:0">${f.note}</div>` : ""}</div>`).join("")}`;
+}
+function renderHome(){
+  const now = localNow(), today = todayStr(), start = stamp(TRIP.start, "00:00"), items = allItems();
+  const di = DAYS.findIndex(d => d.date === today);
+  let html = heroHTML();
+  if (now < start){
+    const days = Math.ceil((start - now) / 86400000);
+    html += `<div class="card"><div class="muted">距離出發還有</div><div class="big">${days} 天 🧳</div>
+      <p style="margin:6px 0 0">${esc(TRIP.intro)}</p>
+      <div class="btns"><button class="btn orange" data-prep>🛂 出發前準備</button><button class="btn" data-go="list">✅ 行前清單</button><button class="btn main" data-go="plan">🗓️ 完整行程</button></div></div>${weatherStrip()}`;
+  } else if (di === -1){
+    html += `<div class="card"><div class="big">旅程結束 🎉</div><p>謝謝大家，一起創造好多回憶！照片記得上傳到群組相簿～</p></div>`;
+  } else {
+    const d = DAYS[di];
+    const upcoming = items.filter(it => it.meet && it.s != null && it.s + 5 * 60000 > now);
+    const shared = upcoming.findIndex(it => !it.group);
+    const before = shared < 0 ? upcoming : upcoming.slice(0, shared);
+    const seen = new Set(), nexts = [];
+    for (const it of before) if (it.group && !seen.has(it.group)){ seen.add(it.group); nexts.push(it); }
+    if (nexts.length && shared >= 0) nexts.push(upcoming[shared]);
+    if (!nexts.length && upcoming[0]) nexts.push(upcoming[0]);
+    const cur = items.filter(it => it.di === di && statusOf(it, now) === "nowon").pop();
+    html += `<div class="card"><span class="pill soft">Day ${di + 1}・${mdw(d)}</span>
+      <h3 style="margin-top:8px;font-size:19px">${d.title}</h3>${cur ? `<p style="margin:4px 0 0">現在：<b>${cur.title}</b></p>` : ""}</div>${weatherHTML(di)}${todayDress(di)}`;
+    for (const next of nexts){
+      html += `<div class="card next"><div class="muted">⏰ ${next.group ? GROUPS[next.group].name + " 的下一個集合" : nexts.length > 1 ? "下一次全員集合" : "下一個集合"}</div>
+        <div class="time">${next.di === di ? "" : `<span style="font-size:18px">Day ${next.di + 1} ${mdw(next.day)}</span><br>`}${next.t}</div>
+        <div class="left">${fmtLeft(next.s - now)}</div>
+        <p style="margin:8px 0 0;font-size:18px">${groupPill(next.group)} <b>${next.title}</b></p>
+        <p style="margin:2px 0 0">📌 ${next.where || "詳見行程"}</p>
+        <div class="btns">${mapBtn(next.place)}<button class="btn main" data-go="plan" data-day="${next.di}">看細節</button></div></div>`;
+    }
+    html += `<h2>今天的行程</h2>${timelineHTML(di, d.items.map(it => ({ ...it, s: isTime(it.t) ? stamp(d.date, it.t) : null, en: it.e ? stamp(d.date, it.e) : null })), now, () => false)}`;
+  }
+  html += flightsHTML();
+  html += `<div class="card"><h3>📲 加到手機桌面，像 App 一樣一點就開</h3>
+    <p class="muted" style="margin:0"><b>iPhone：</b>Safari 下方「分享」→「加入主畫面」<br><b>Android：</b>Chrome 右上「⋮」→「加到主畫面」</p></div>`;
+  $("#p-home").innerHTML = html;
+}
+
+/* ---------- 🗓️ 行程 ---------- */
+let planDay = null, planAnim = false;
+function renderPlan(){
+  const now = localNow(), today = todayStr();
+  if (planDay == null){ const i = DAYS.findIndex(d => d.date === today); planDay = i < 0 ? 0 : i; }
+  const d = DAYS[planDay];
+  // 旅途中：當天排最前面，已經過的天數接到最後面（Day 編號不變）
+  const t0 = DAYS.findIndex(x => x.date === today), rot = t0 > 0 ? t0 : 0;
+  const order = DAYS.map((_, i) => (i + rot) % DAYS.length);
+  const chips = order.map(i => { const x = DAYS[i]; return `<button class="day-chip ${i === planDay ? "on" : ""} ${x.date === today ? "today" : ""}" data-day="${i}"><b>Day ${i + 1}</b><span>${esc(x.label || mdw(x))}</span></button>`; }).join("");
+  const items = d.items.map(it => ({ ...it, s: isTime(it.t) ? stamp(d.date, it.t) : null, en: it.e ? stamp(d.date, it.e) : null }));
+  const opened = new Set([...document.querySelectorAll("#p-plan details[open]")].map(x => x.dataset.key));
+  const filters = [["all", "全部"], ...CATS_PLAN].map(([k, n]) => `<button data-pcat="${k}" class="${k === planCat ? "on" : ""}">${n}</button>`).join("");
+  $("#p-plan").innerHTML = `<div class="days">${chips}</div>
+    <div id="daybody" class="${planAnim ? "boing" : ""}">${weatherHTML(planDay)}
+    <div class="day-title">${d.title}</div>
+    ${d.move || d.stay ? `<div class="day-meta">${d.move ? `<span>🚃 交通｜${esc(d.move)}</span>` : ""}${d.stay ? `<span>🛏️ 住宿｜${esc(d.stay)}</span>` : ""}</div>` : ""}
+    ${todayDress(planDay)}
+    <div class="filters">${filters}</div>
+    <p class="muted" style="margin:0">點一下每個行程可以看交通、細節和記帳</p>
+    ${timelineHTML(planDay, items, now, it => statusOf(it, now) === "nowon" || opened.has(`${planDay}-${it.k}`))}
+    ${d.tip ? `<div class="tipbox"><b>旅人提醒</b>　${d.tip}</div>` : ""}
+    ${dayMoneyHTML(planDay)}
+    <div class="daynav"><button class="btn" data-pday="-1" ${planDay === 0 ? "disabled" : ""}>← 前一天</button><button class="btn" data-pday="1" ${planDay === DAYS.length - 1 ? "disabled" : ""}>下一天 →</button></div></div>`;
+  planAnim = false;
+  const on = document.querySelector("#p-plan .day-chip.on");
+  if (on) on.parentNode.scrollLeft = on.offsetLeft - 16;
+}
+
+/* ---------- 🏨 住宿＋分房 ---------- */
+let ASSIGN = store.get("rooms", []), roomSig = JSON.stringify(ASSIGN);
+async function loadRooms(){
+  try { const list = await api("/api/rooms"), sig = JSON.stringify(list); if (sig === roomSig) return;
+    ASSIGN = list; roomSig = sig; store.set("rooms", ASSIGN); if (tab === "stay") renderStay(); } catch(e){}
+}
+const roomOf = name => (ASSIGN.find(a => a.name === name) || {}).room;
+const peopleIn = no => ASSIGN.filter(a => a.room === no).map(a => a.name);
+function roomsHTML(){
+  if (!ROOMS.length) return "";
+  const unassigned = MEMBERS.filter(m => !roomOf(m));
+  return `<h2 id="rooms">🛏️ 分房清單${ROOMS_FOR ? `<span class="muted" style="font-weight:500">　${esc(ROOMS_FOR)}</span>` : ""}</h2>
+    <div class="card ${unassigned.length ? "warn-soft" : "ok-soft"}">${unassigned.length ? `<b>還沒分房（${unassigned.length} 人）：</b>${unassigned.join("、")}` : `✅ ${MEMBERS.length} 人都分好房間了！`}</div>
+    ${ROOMS.map(r => { const ppl = peopleIn(r.no), over = ppl.length > r.cap + (r.sofa ? 1 : 0), full = ppl.length >= r.cap;
+      return `<div class="card room ${over ? "over" : ""}">
+        <div class="room-h"><b>房間 ${r.no}</b><span class="room-n ${over ? "bad" : full ? "good" : ""}">${ppl.length} / ${r.cap}${r.sofa ? "（+沙發 1）" : ""}</span></div>
+        <div class="muted">${r.beds}</div>
+        <div class="van">${ppl.length ? ppl.map(p => `<span>${esc(p)}</span>`).join("") : `<span class="empty">還沒有人</span>`}</div>
+        ${over ? `<div class="rec-warn">⚠️ 超過床位囉</div>` : ""}
+        <div class="btns"><button class="btn" data-room-edit="${r.no}">✏️ 編輯這間</button></div></div>`; }).join("")}`;
+}
+let rmDraft = null;
+function openRoomForm(no){
+  const r = ROOMS.find(x => x.no === no);
+  rmDraft = { no, names: peopleIn(no) };
+  openSheet(`<h2 style="margin-top:0">🛏️ 房間 ${no}</h2>
+    <p class="muted" style="margin:0 0 8px">${r.beds}・睡 ${r.cap} 人${r.sofa ? "（沙發可再加 1 人）" : ""}</p>
+    <label class="f-l">誰睡這間？<span class="muted" id="rm-count"></span></label>
+    <p class="muted" style="margin:0 0 6px;font-size:13px">選已經在別間的人，儲存後會自動換到這間</p>
+    <div class="chips">${MEMBERS.map(m => { const cur = roomOf(m);
+      return `<button data-rm="${esc(m)}" class="${rmDraft.names.includes(m) ? "on" : ""}">${esc(m)}${cur && cur !== no ? `<small class="elsewhere">（房間 ${cur}）</small>` : ""}</button>`; }).join("")}</div>
+    <div class="btns"><button class="btn orange big-btn" id="rm-save">儲存</button></div><p id="rm-tip" class="muted"></p>`, "room");
+  rmCount();
+}
+function rmCount(){
+  const r = ROOMS.find(x => x.no === rmDraft.no), n = rmDraft.names.length;
+  $("#rm-count").textContent = `（${n} 人${n > r.cap + (r.sofa ? 1 : 0) ? "，超過床位了！" : ""}）`;
+}
+async function saveRoom(){
+  const btn = $("#rm-save"), tip = $("#rm-tip"); btn.disabled = true; tip.textContent = "儲存中…";
+  try { await api("/api/rooms", { method:"POST", body: JSON.stringify({ room: rmDraft.no, names: rmDraft.names }) }); closeSheet(); await loadRooms(); }
+  catch(e){ tip.textContent = "儲存失敗，請檢查網路再試一次"; btn.disabled = false; }
+}
+function renderStay(){
+  let html = `<h2>🏨 住宿</h2>`;
+  html += PRIVATE.stays.map(s => `<div class="card">
+    <h3>${esc(s.name)}</h3><p class="muted" style="margin:-2px 0 8px">${esc(s.type || "")}${s.nights ? "・" + esc(s.nights) : ""}</p>
+    <dl class="kv">${s.checkin ? `<dt>入住</dt><dd>${esc(s.checkin)} 之後</dd>` : ""}${s.checkout ? `<dt>退房</dt><dd>${esc(s.checkout)} 之前</dd>` : ""}${s.address ? `<dt>地址</dt><dd style="font-weight:500">${esc(s.address)}</dd>` : ""}</dl>
+    ${s.local ? `<p class="muted" style="margin:10px 0 0">🚕 搭計程車時把這段拿給司機看：</p><div class="local">${esc(s.local)}</div>` : ""}
+    ${s.notes?.length ? `<ul class="dots">${s.notes.map(n => `<li>${n}</li>`).join("")}</ul>` : ""}
+    ${s.rules?.length ? sub("🏠 住宿規定", `<ul class="plain">${s.rules.map(n => `<li>${n}</li>`).join("")}</ul>`) : ""}
+    ${s.checkoutTasks?.length ? sub("🧳 退房前記得", `<ul class="plain">${s.checkoutTasks.map(n => `<li>${n}</li>`).join("")}</ul>`) : ""}
+    <div class="btns">${mapBtn(s.map || s.address, "📍 導航")}</div></div>`).join("");
+  html += roomsHTML();
+  const hosts = PRIVATE.contacts.filter(c => c.host);
+  if (hosts.length) html += `<h2>📞 聯絡住宿</h2><div class="card">${hosts.map(c => `<div class="contact"><div class="who"><b>${esc(c.name)}</b><span class="muted">${esc(c.role)}・${esc(c.show || c.phone)}</span></div>${telBtn(c.phone)}</div>`).join("")}</div>`;
+  html += `<div class="card tip">💡 建議把這一頁<b>截圖</b>存在手機，沒網路時也能拿給司機看。</div>`;
+  $("#p-stay").innerHTML = html;
+}
+
+/* ---------- ☎️ 聯絡 ---------- */
+function renderContact(){
+  let html = "";
+  if (PRIVATE.contacts.length) html += `<h2>📇 重要聯絡人</h2><div class="card">${PRIVATE.contacts.map(c => `<div class="contact"><div class="who"><b>${esc(c.name)}</b><span class="muted">${esc(c.role)}${c.show ? "・" + esc(c.show) : ""}</span></div>${c.phone ? telBtn(c.phone) : ""}</div>`).join("")}</div>`;
+  if (PRIVATE.vans.length) html += `<h2>🚐 分車名單</h2>${PRIVATE.vans.map(v => `<div class="card"><h3>${esc(v.name)}</h3><div class="van">${v.people.map(p => `<span>${esc(p)}</span>`).join("")}</div></div>`).join("")}`;
+  if (Object.keys(GROUPS).length) html += `<h2>👥 分組</h2><div class="card">${Object.values(GROUPS).map(g => `<div class="grprow"><span class="pill grp" style="background:${g.color}">${g.name}</span><span>${g.members.join("、")}</span></div>`).join("")}</div>`;
+  html += `<h2>🆘 緊急電話</h2><div class="card">${EMERGENCY.map(c => `<div class="contact"><div class="who"><b>${esc(c.show || c.phone)}</b><span class="muted">${esc(c.role)}</span></div>${telBtn(c.phone)}</div>`).join("")}
+    <p class="muted" style="margin:6px 0 0;font-size:13px">電話號碼出發前請再確認一次</p></div>
+    <div class="card tip">走散了先別慌：① 在群組說自己在哪 ② 待在原地或回到上一個集合點 ③ 真的找不到就回住宿</div>`;
+  $("#p-contact").innerHTML = html;
+}
+
+/* ---------- ✅ 清單 ---------- */
+function prepHTML(){
+  if (!PREP) return "";
+  return `<details class="card jj" id="prep" ${store.get("prepOpen", true) ? "open" : ""}><summary><div><b>🛂 出發前準備</b><span class="muted jj-hint">簽證・入境申報・官方連結</span></div><span class="arrow">›</span></summary>
+    <p>${PREP.lead}</p>
+    <ol class="steps">${PREP.steps.map(([t, d], i) => `<li class="step"><span class="no">${i + 1}</span><div><b>${t}</b><p>${d}</p></div></li>`).join("")}</ol>
+    ${PREP.fees?.length ? `<div class="fees" style="margin-top:12px">${PREP.fees.map(([b, s]) => `<div class="card fee"><b>${b}</b><span>${s}</span></div>`).join("")}</div>` : ""}
+    <p class="muted">${PREP.note || ""}</p>
+    <div class="btns">${PREP.links.map(([t, u]) => `<a class="btn" href="${esc(u)}" target="_blank" rel="noopener">${esc(t)} ↗</a>`).join("")}</div></details>`;
+}
+let audioEl = null;
+function speak(text, btn){
+  try {
+    if (!("speechSynthesis" in window)) return alert("這支手機的瀏覽器不支援朗讀");
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text); u.lang = TRIP.lang; u.rate = .85;
+    document.querySelectorAll(".play.on").forEach(b => b.classList.remove("on")); btn.classList.add("on");
+    u.onend = u.onerror = () => btn.classList.remove("on");
+    speechSynthesis.speak(u);
+  } catch(e){}
+}
+function renderList(){
+  const done = store.get("packing", {});
+  const n = PACKING.filter((_, i) => done[i]).length;
+  const packing = `<h2>🧳 行前打包清單</h2><div class="card">
+    <div class="muted" id="pack-count">已完成 ${n} / ${PACKING.length}（勾選只存在你自己的手機）</div>
+    <div class="progress"><i id="pack-bar" style="width:${PACKING.length ? n / PACKING.length * 100 : 0}%"></i></div>
+    ${PACKING.map((p, i) => `<label class="check ${done[i] ? "done" : ""}"><input type="checkbox" data-pack="${i}" ${done[i] ? "checked" : ""}><span>${p}</span></label>`).join("")}</div>`;
+  const dress = Object.keys(DRESS).length ? `<h2>👗 Dress Code 一覽</h2><div class="card">${Object.keys(DRESS).map(dressHTML).join("")}</div>` : "";
+  const bookings = BOOKINGS.length ? `<h2>📋 預約確認</h2><div class="card">${BOOKINGS.map(b => { const no = PRIVATE.bookingNos[b.id];
+    return `<div class="booking"><span class="ico">${b.ico}</span><div><b>${b.name}</b><br><span class="muted">${b.when}</span>${no ? `<br><span class="pill soft">訂單號 ${esc(no)}</span>` : ""}</div></div>`; }).join("")}</div>` : "";
+  const rate = store.get("rate", TRIP.cur.rate);
+  const conv = `<h2>💱 ${TRIP.cur.name}換算</h2><div class="card">
+    <div class="conv"><div><label>${TRIP.cur.name} ${TRIP.cur.sym}</label><input id="loc" type="number" inputmode="decimal" placeholder="1000"></div>
+    <div class="eq">＝</div><div><label>台幣 NT$</label><input id="twd" type="number" inputmode="decimal" placeholder="${Math.round(1000 * TRIP.cur.rate)}"></div></div>
+    <div class="rate">1 ${TRIP.cur.name} ≈ <input id="rate" type="number" step="0.001" inputmode="decimal" value="${rate}"> 台幣（可依當天匯率修改）</div></div>`;
+  const phrases = PHRASES.length ? `<h2>🗣️ 實用外語</h2><div class="card tip">點 🔊 會用手機內建的語音唸給你聽</div>
+    ${PHRASES.map(g => `<div class="card"><h3>${g.cat}</h3>${g.list.map(p => `<div class="phrase"><button class="play" data-say="${esc(p[1])}" aria-label="播放發音">🔊</button><div><b>${esc(p[0])}</b><span class="lo">${esc(p[1])}</span><span class="say">${esc(p[2])}</span></div></div>`).join("")}</div>`).join("")}` : "";
+  const tz = `<h2>🕐 時差</h2><div class="card"><p style="margin:0">${esc(TRIP.tzNote)}</p></div>`;
+  // 出發前：準備、打包、Dress Code、預約排前面；出發後移到最下面
+  const started = localNow() >= stamp(TRIP.start, "00:00");
+  const pre = [prepHTML(), packing, dress, bookings], mid = [tz, conv, phrases];
+  $("#p-list").innerHTML = (started ? [...mid, ...pre] : [...pre, ...mid]).join("");
+  const loc = $("#loc"), twd = $("#twd"), r = $("#rate");
+  const rv = () => parseFloat(r.value) || TRIP.cur.rate, round = v => Math.round(v * 100) / 100;
+  loc.oninput = () => { twd.value = loc.value === "" ? "" : round(loc.value * rv()); };
+  twd.oninput = () => { loc.value = twd.value === "" ? "" : round(twd.value / rv()); };
+  r.oninput = () => { store.set("rate", rv()); loc.oninput(); };
+}
+
+/* ---------- 💰 記帳 ---------- */
+const payerText = e => e.payer === FUND ? "💰 公積金支付" : `${esc(e.payer)} 先付`;
+let EXP = store.get("exp", []), expSig = JSON.stringify(EXP);
+const fmtLOC = n => TRIP.cur.sym + Math.round(n).toLocaleString();
+const fmtTWD = n => "NT$" + Math.round(n).toLocaleString();
+const isTWD = e => e.currency === "TWD";
+const fmtAmt = e => isTWD(e) ? fmtTWD(e.amount) : fmtLOC(e.amount);
+const toTWD = e => isTWD(e) ? e.amount : e.amount * TRIP.cur.rate;
+const expOf = (di, k) => EXP.filter(e => e.day === di && e.item === k);
+const stripEmoji = t => t.replace(/^\S+\s+/, "");
+const allLabel = n => n === MEMBERS.length ? `${MEMBERS.length} 人均分` : n + " 人分";
+async function loadExpenses(){
+  try { const list = await api("/api/expenses"), sig = JSON.stringify(list); if (sig === expSig) return;
+    EXP = list; expSig = sig; store.set("exp", EXP); if (["plan","home","money"].includes(tab)) render(); } catch(e){}
+}
+let PAID = store.get("paid", []), paidSig = "";
+async function loadPaid(){
+  try { const list = await api("/api/settle"), sig = JSON.stringify(list); if (sig === paidSig) return;
+    PAID = list; paidSig = sig; store.set("paid", PAID); if (tab === "money") renderMoney(); } catch(e){}
+}
+async function togglePaid(name, amount, dir){
+  const had = PAID.find(p => p.name === name);
+  PAID = had ? PAID.filter(p => p.name !== name) : [...PAID, { name, amount, dir, paid_at: Date.now() }];
+  renderMoney();
+  try { await api("/api/settle", { method:"POST", body: JSON.stringify({ name, amount, dir, paid: !had }) }); } catch(e){}
+  paidSig = ""; loadPaid();
+}
+function sumLabel(list){
+  if (!list.length) return "";
+  return list.every(e => !isTWD(e)) ? fmtLOC(list.reduce((a, e) => a + e.amount, 0)) : fmtTWD(list.reduce((a, e) => a + toTWD(e), 0));
+}
+function itemMoneyHTML(it, di, k){
+  const list = expOf(di, k);
+  return `<div class="money">${it.cost ? `<div class="est">💰 預估 <b>${fmtLOC(it.cost)}</b> / 人</div>` : ""}
+    ${list.map(e => `<div class="exp"><div><b>${esc(e.title)}</b> ${fmtAmt(e)}<br><span class="muted">${payerText(e)}・${e.split.length === MEMBERS.length ? allLabel(e.split.length) : esc(e.split.join("、")) + " 分"}</span></div>
+      <button class="x" data-exp-del="${e.id}" aria-label="刪除">✕</button></div>`).join("")}
+    <button class="btn add" data-add="${di}|${k}">＋ 記一筆實際花費</button></div>`;
+}
+function dayMoneyHTML(di){
+  const est = DAYS[di].items.reduce((a, it) => a + (it.cost || 0), 0);
+  const list = EXP.filter(e => e.day === di), total = list.reduce((a, e) => a + toTWD(e), 0);
+  return `<div class="card daymoney"><div class="dm-h">💰 今日花費</div>
+    <div class="dm-row"><span>預估每人</span><b>${est ? fmtLOC(est) : "—"}</b></div>
+    <div class="dm-row"><span>實際全團</span><b>${list.length ? fmtTWD(total) : "尚未記帳"}</b></div>
+    ${list.length ? `<div class="dm-row"><span>平均每人</span><b>${fmtTWD(total / MEMBERS.length)}</b></div>` : ""}
+    <div class="btns"><button class="btn add" data-add="${di}|-1">＋ 記其他花費</button><button class="btn main" data-go="money">📊 看全部花費</button></div></div>`;
+}
+function openSheet(html, mode){
+  const sh = $("#sheet"); sh.dataset.mode = mode;
+  sh.querySelector(".sheet-in").innerHTML = `<button class="sheet-x" data-close aria-label="關閉">✕</button>${html}`;
+  sh.classList.add("on"); document.body.style.overflow = "hidden";
+}
+function closeSheet(){ const sh = $("#sheet"); sh.classList.remove("on"); sh.dataset.mode = ""; document.body.style.overflow = ""; }
+let draft = null;
+function openExpForm({ id = null, day = 0, item = -1, payer = null } = {}){
+  const e = id ? EXP.find(x => x.id === +id) : null;
+  if (e){ day = e.day; item = e.item; }
+  const it = item >= 0 ? DAYS[day].items.find(x => x.k === item) : null;
+  draft = e ? { id: e.id, day, item, currency: isTWD(e) ? "TWD" : "LOC", payer: e.payer, split: MEMBERS.filter(m => e.split.includes(m)) }
+            : { id: null, day, item, currency: "LOC", payer: payer || store.get("payer", ""), split: it && it.group ? [...GROUPS[it.group].members] : it && it.only ? [...it.only] : [...MEMBERS] };
+  const title = e ? e.title : it ? stripEmoji(it.title) : "";
+  openSheet(`<h2 style="margin-top:0">${e ? "✏️ 編輯花費" : "＋ 記一筆花費"}</h2>
+    <label class="f-l">哪一天、哪個行程？</label>
+    <div class="where-row"><select id="x-day" class="m-in">${DAYS.map((d, i) => `<option value="${i}" ${i === day ? "selected" : ""}>Day ${i + 1}・${mdw(d)}</option>`).join("")}</select>
+      <select id="x-item" class="m-in">${itemOptions(day, item)}</select></div>
+    <label class="f-l">項目</label><input id="x-title" class="m-in" maxlength="40" placeholder="例如：晚餐、包車、門票" value="${esc(title)}">
+    <label class="f-l">金額</label>
+    <div class="amt"><input id="x-amt" class="m-in" type="number" inputmode="decimal" placeholder="0" value="${e ? e.amount : ""}">
+      <div class="seg"><button data-cur="LOC" class="${draft.currency === "LOC" ? "on" : ""}">${TRIP.cur.sym} ${TRIP.cur.name}</button><button data-cur="TWD" class="${draft.currency === "TWD" ? "on" : ""}">NT$ 台幣</button></div></div>
+    <label class="f-l">誰先付的？</label><div class="chips" id="x-payer">${[...(FUND_PER_PERSON ? [FUND] : []), ...MEMBERS].map(m => `<button data-payer="${esc(m)}" class="${m === FUND ? "fund " : ""}${draft.payer === m ? "on" : ""}">${m === FUND ? "💰 公積金" : esc(m)}</button>`).join("")}</div>
+    <label class="f-l">分給誰？<span class="muted" id="x-per"></span></label>
+    <div class="btns" style="margin-top:0"><button class="btn" data-all="1">全選</button><button class="btn" data-all="0">全不選</button></div>
+    <div class="chips" id="x-split">${MEMBERS.map(m => `<button data-split="${esc(m)}" class="${draft.split.includes(m) ? "on" : ""}">${esc(m)}</button>`).join("")}</div>
+    <div class="btns"><button class="btn orange big-btn" id="x-save">${e ? "儲存修改" : "儲存"}</button></div>
+    ${e ? `<div class="btns"><button class="btn del-btn" data-exp-del="${e.id}">🗑 刪除這筆</button></div>` : ""}
+    <p id="x-tip" class="muted"></p>`, "add");
+  updatePer();
+}
+function itemOptions(day, sel){
+  return DAYS[day].items.map(it => `<option value="${it.k}" ${it.k === sel ? "selected" : ""}>${it.t}｜${esc(stripEmoji(it.title))}</option>`).join("")
+    + `<option value="-1" ${sel === -1 ? "selected" : ""}>其他花費</option>`;
+}
+function onWhereChange(changedDay){
+  const oldIt = draft.item >= 0 ? DAYS[draft.day].items.find(x => x.k === draft.item) : null;
+  const t = $("#x-title"), auto = !t.value.trim() || (oldIt && t.value === stripEmoji(oldIt.title));
+  if (changedDay){ draft.day = +$("#x-day").value; draft.item = -1; $("#x-item").innerHTML = itemOptions(draft.day, -1); }
+  else draft.item = +$("#x-item").value;
+  const it = draft.item >= 0 ? DAYS[draft.day].items.find(x => x.k === draft.item) : null;
+  if (auto) t.value = it ? stripEmoji(it.title) : "";
+}
+function updatePer(){
+  const a = parseFloat($("#x-amt")?.value) || 0, n = draft.split.length;
+  $("#x-per").textContent = n ? `（${n} 人${a ? `，每人 ${draft.currency === "TWD" ? fmtTWD(a / n) : fmtLOC(a / n)}` : ""}）` : "（至少選 1 人）";
+}
+async function saveExpense(){
+  const title = $("#x-title").value.trim(), amount = parseFloat($("#x-amt").value), tip = $("#x-tip");
+  if (!title) return tip.textContent = "請填項目名稱";
+  if (!(amount > 0)) return tip.textContent = "請填金額";
+  if (!draft.payer) return tip.textContent = "請選誰先付的";
+  if (!draft.split.length) return tip.textContent = "請至少選 1 個分帳的人";
+  const btn = $("#x-save"); btn.disabled = true; tip.textContent = "儲存中…";
+  try {
+    await api("/api/expenses" + (draft.id ? "?id=" + draft.id : ""), { method: draft.id ? "PUT" : "POST", body: JSON.stringify({ ...draft, title, amount }) });
+    if (draft.payer !== FUND) store.set("payer", draft.payer);
+    closeSheet(); expSig = ""; await loadExpenses();
+  } catch(e){ tip.textContent = "儲存失敗，請檢查網路再試一次"; btn.disabled = false; }
+}
+async function deleteExpense(id){
+  const e = EXP.find(x => x.id === +id);
+  if (!confirm(`確定刪除「${e ? e.title + " " + fmtAmt(e) : "這筆"}」嗎？全團都會看不到喔`)) return;
+  try { await api("/api/expenses?id=" + id, { method:"DELETE" }); } catch(err){}
+  if ($("#sheet").dataset.mode === "add") closeSheet();
+  expSig = ""; await loadExpenses();
+}
+// 💸 結算：所有人只跟結算人對一次帳
+// 每人最終 ＝ 繳的公積金 − 應分攤的全部花費 ＋ 自己墊的錢；正數＝結算人退給他、負數＝他補給結算人
+function settlement(){
+  const bal = Object.fromEntries(MEMBERS.map(m => [m, { paid:0, share:0 }]));
+  for (const e of EXP){
+    const v = toTWD(e);
+    if (e.payer !== FUND) (bal[e.payer] ||= { paid:0, share:0 }).paid += v;
+    for (const m of e.split) (bal[m] ||= { paid:0, share:0 }).share += v / e.split.length;
+  }
+  const net = {}, moves = [];
+  for (const m of MEMBERS){
+    net[m] = FUND_PER_PERSON - bal[m].share + bal[m].paid;
+    const x = Math.round(net[m]);
+    if (m === SETTLER || Math.abs(x) < 1) continue;
+    moves.push(x > 0 ? [SETTLER, m, x] : [m, SETTLER, -x]);
+  }
+  moves.sort((p, q) => q[2] - p[2]);
+  return { bal, net, moves };
+}
+const catOf = e => { const c = CATS.find(([, , re]) => re.test(e.title)); return c ? c[0] : "other"; };
+const CAT_NAME = Object.fromEntries([...CATS.map(([k, n]) => [k, n]), ["other", "📦 其他"]]);
+function fundHTML(){
+  if (!FUND_PER_PERSON) return "";
+  const list = EXP.filter(e => e.payer === FUND).sort((a, b) => b.day - a.day || b.id - a.id);
+  const pool = FUND_PER_PERSON * MEMBERS.length, spent = list.reduce((a, e) => a + toTWD(e), 0), left = pool - spent;
+  const pct = pool ? Math.min(100, spent / pool * 100) : 0;
+  return `<h3>💰 公積金帳本</h3><div class="card fundcard">
+    <div class="dm-row"><span>總共收（每人 ${fmtTWD(FUND_PER_PERSON)} × ${MEMBERS.length} 人）</span><b>${fmtTWD(pool)}</b></div>
+    <div class="dm-row"><span>已經花掉（${list.length} 筆）</span><b>${fmtTWD(spent)}</b></div>
+    <div class="progress fund-bar"><i style="width:${pct}%;background:${left < 0 ? "var(--alert)" : pct > 80 ? "var(--c1)" : "var(--c4-ink)"}"></i></div>
+    <div class="dm-row"><span>還剩下</span><b style="color:${left < 0 ? "var(--alert)" : "var(--c4-ink)"};font-size:20px">${fmtTWD(left)}</b></div>
+    <p class="muted" style="margin:4px 0 0">${left < 0 ? `⚠️ 超支了！平均每人要再補 ${fmtTWD(-left / MEMBERS.length)}` : `如果旅程現在結束，每人可退回 ${fmtTWD(left / MEMBERS.length)}`}</p>
+    <div class="btns"><button class="btn orange big-btn" data-fund-new>＋ 記一筆公積金花費</button></div>
+    <div class="fund-list">${list.length ? list.map(e => `<button class="exp exp-row" data-edit="${e.id}"><div><b>${esc(e.title)}</b> ${fmtAmt(e)}${!isTWD(e) ? ` <span class="muted">≈ ${fmtTWD(toTWD(e))}</span>` : ""}<br>
+      <span class="muted">Day ${e.day + 1}・${mdw(DAYS[e.day])}・${allLabel(e.split.length)}</span></div><span>✏️</span></button>`).join("") : `<p class="muted" style="margin:8px 0 0">還沒有公積金花費紀錄</p>`}</div>
+    <p class="muted" style="margin:8px 0 0">${TRIP.cur.name}以 1 : ${TRIP.cur.rate} 換算成台幣。</p></div>`;
+}
+let moneyDay = "all";
+const isPaid = name => PAID.some(p => p.name === name);
+function paidBtn(name, x, dir){
+  const rec = PAID.find(p => p.name === name), changed = rec && Math.abs(rec.amount - x) >= 1;
+  const label = dir === "refund" ? (rec ? "✅ 已退款" : "☐ 已退款？") : (rec ? "✅ 已付款" : "☐ 已付款？");
+  return `<button class="paidbtn ${rec ? (changed ? "warn" : "on") : ""}" data-paid="${esc(name)}" data-amt="${x}" data-dir="${dir}">${changed ? "⚠️ 金額變了" : label}</button>`;
+}
+function breakdownHTML(m){
+  const f = n => fmtTWD(Math.abs(n));
+  const mine = EXP.filter(e => e.split.includes(m)).map(e => ({ e, v: toTWD(e) / e.split.length })).sort((a, b) => b.v - a.v);
+  const paid = EXP.filter(e => e.payer === m).map(e => ({ e, v: toTWD(e) })).sort((a, b) => b.v - a.v);
+  const shareT = mine.reduce((a, x) => a + x.v, 0), paidT = paid.reduce((a, x) => a + x.v, 0);
+  const fin = Math.round(FUND_PER_PERSON - shareT + paidT);
+  const row = (t, s, v, sign) => `<div class="mv-r"><span>${esc(t)}${s ? ` <small>${s}</small>` : ""}</span><span class="n">${sign}${f(v)}</span></div>`;
+  return `<div class="mv-b">
+    ${FUND_PER_PERSON ? `<div class="mv-h"><span>＋ 繳公積金</span><span>${f(FUND_PER_PERSON)}</span></div>` : ""}
+    <div class="mv-h"><span>－ 應分攤的花費（${mine.length} 筆）</span><span>${f(shareT)}</span></div>
+    ${mine.map(({ e, v }) => row(e.title, `${e.payer === FUND ? "公積金付" : esc(e.payer) + " 付"}・${e.split.length} 人分`, v, "−")).join("")}
+    ${paid.length ? `<div class="mv-h"><span>＋ 自己先墊的（${paid.length} 筆）</span><span>${f(paidT)}</span></div>${paid.map(({ e, v }) => row(e.title, `分給 ${e.split.length} 人`, v, "＋")).join("")}` : ""}
+    <div class="mv-h"><span>${fin > 0 ? `${SETTLER}退給${esc(m)}` : fin < 0 ? `${esc(m)}補給${SETTLER}` : "剛好打平"}</span><span>${f(fin)}</span></div></div>`;
+}
+function renderMoney(){
+  const mvOpen = new Set([...document.querySelectorAll("#p-money details.mv[open]")].map(x => x.dataset.mvk));
+  const { bal, net, moves } = settlement();
+  const total = EXP.reduce((a, e) => a + toTWD(e), 0);
+  const days = moneyDay === "all" ? DAYS.map((_, i) => i) : [+moneyDay];
+  const groups = days.map(di => ({ di, d: DAYS[di], list: EXP.filter(e => e.day === di) }));
+  const shown = groups.reduce((a, g) => a + g.list.length, 0);
+  const itemName = e => { if (e.item < 0) return "其他花費"; const it = DAYS[e.day].items.find(x => x.k === e.item); return it ? stripEmoji(it.title) : "其他花費"; };
+  const pay = moves.filter(m => m[1] === SETTLER), refund = moves.filter(m => m[0] === SETTLER), sum = l => l.reduce((a, m) => a + m[2], 0);
+  const catList = [...CATS.map(([k]) => k), "other"].map(k => ({ k, list: EXP.filter(e => catOf(e) === k) })).filter(c => c.list.length).map(c => ({ ...c, t: c.list.reduce((a, e) => a + toTWD(e), 0) }));
+  const who = m => m[0] === SETTLER ? m[1] : m[0];
+  $("#p-money").innerHTML = `<h2>💰 花費</h2>
+    <div class="card daymoney"><div class="dm-row"><span>全團總花費</span><b>${fmtTWD(total)}</b></div>
+      <div class="dm-row"><span>平均每人</span><b>${fmtTWD(total / MEMBERS.length)}</b></div>
+      <p class="muted" style="margin:6px 0 0">${TRIP.cur.name}以 1 : ${TRIP.cur.rate} 換算成台幣</p>
+      <div class="btns"><button class="btn orange big-btn" data-new-exp>＋ 新增花費</button></div></div>
+    ${fundHTML()}
+    <h3>💸 結算：大家只跟${esc(SETTLER)}對帳</h3><div class="card">
+      <p class="muted" style="margin:0 0 6px;font-size:13px">每人一筆：補給${esc(SETTLER)}，或${esc(SETTLER)}退給他。<b>點一筆看明細</b>。</p>
+      ${moves.length ? moves.map(mv => `<details class="mv ${isPaid(who(mv)) ? "done" : ""}" data-mvk="${esc(who(mv))}" ${mvOpen.has(who(mv)) ? "open" : ""}><summary><b>${esc(mv[0])}</b> → <b>${esc(mv[1])}</b><span class="amt" style="color:${mv[0] === SETTLER ? "var(--c4-ink)" : "var(--alert)"}">${fmtTWD(mv[2])}</span>${paidBtn(who(mv), mv[2], mv[0] === SETTLER ? "refund" : "pay")}<span class="arrow">›</span></summary>${breakdownHTML(who(mv))}</details>`).join("") : `<p class="muted" style="margin:0">目前大家都不用轉帳 🎉</p>`}
+      <div class="dm-row" style="margin-top:8px"><span>${esc(SETTLER)}會收到</span><b>${fmtTWD(sum(pay))}</b></div>
+      <div class="dm-row"><span>${esc(SETTLER)}要退出去</span><b>${fmtTWD(sum(refund))}</b></div></div>
+    <h3>👥 每個人</h3><div class="card"><div class="person head"><span>成員</span><span>先墊</span><span>應負擔</span><span>最終</span></div>
+      ${Object.entries(bal).map(([m, b]) => { const n = Math.round(net[m] ?? 0);
+        return `<div class="person"><b>${esc(m)}</b><span>${fmtTWD(b.paid)}</span><span>${fmtTWD(b.share)}</span><span class="${n > 0 ? "pos" : n < 0 ? "neg" : ""}">${m === SETTLER ? "—" : (n > 0 ? "退 " : n < 0 ? "補 " : "") + Math.abs(n).toLocaleString()}</span></div>`; }).join("")}</div>
+    ${catList.length ? `<h3>📊 錢花在哪（自動歸類）</h3><div class="card">${catList.map(c => sub(`<span>${CAT_NAME[c.k]}<span class="muted" style="font-weight:500">　${c.list.length} 筆</span></span><b>${fmtTWD(c.t)}</b>`, c.list.map(e => `<div class="dm-row"><span>${esc(e.title)} <span class="muted">${payerText(e)}</span></span><b>${fmtAmt(e)}</b></div>`).join(""))).join("")}</div>` : ""}
+    <details class="card jj" id="expbox" ${store.get("expBox", false) ? "open" : ""}><summary><div><b>🧾 完整花費明細（${EXP.length} 筆）</b><span class="muted jj-hint">點一筆可以編輯</span></div><span class="arrow">›</span></summary>
+    <div class="days" style="position:static;padding-top:8px"><button class="day-chip ${moneyDay === "all" ? "on" : ""}" data-mday="all"><b>全部</b><span>${EXP.length} 筆</span></button>
+      ${DAYS.map((d, i) => `<button class="day-chip ${moneyDay === String(i) ? "on" : ""}" data-mday="${i}"><b>Day ${i + 1}</b><span>${EXP.filter(e => e.day === i).length} 筆</span></button>`).join("")}</div>
+    ${shown ? groups.filter(g => g.list.length).map(({ di, d, list }) => `<div class="card"><div class="dm-row"><b style="color:var(--ink)">Day ${di + 1}・${mdw(d)}</b><b>${fmtTWD(list.reduce((a, e) => a + toTWD(e), 0))}</b></div>
+      ${list.map(e => `<button class="exp exp-row" data-edit="${e.id}"><div><b>${esc(e.title)}</b> ${fmtAmt(e)}<br><span class="muted">${itemName(e) !== e.title ? esc(itemName(e)) + "・" : ""}${payerText(e)}・${e.split.length} 人分</span></div><span>✏️</span></button>`).join("")}</div>`).join("")
+      : `<p class="muted">${EXP.length ? "這天還沒有花費紀錄" : "還沒有任何花費紀錄，按上面的「＋ 新增花費」開始記吧！"}</p>`}</details>`;
+}
+
+/* ---------- 🎁 推薦 ---------- */
+let RECS = store.get("recs", []), recSig = JSON.stringify(RECS);
+let VOTER = store.get("voter", "");
+if (!VOTER){ VOTER = crypto.randomUUID ? crypto.randomUUID() : String(Math.random()).slice(2) + Date.now(); store.set("voter", VOTER); }
+async function loadRecs(){
+  try { const list = await api("/api/recs?voter=" + encodeURIComponent(VOTER)), sig = JSON.stringify(list); if (sig === recSig) return;
+    RECS = list; recSig = sig; store.set("recs", RECS); if (tab === "rec") renderRec(); } catch(e){}
+}
+let recShop = null, recWishOnly = false;
+const byLikes = (a, b) => (b.likes || 0) - (a.likes || 0) || a.id - b.id;
+function recCardHTML(r, wish){
+  return `<div class="card rec">
+    <div class="rec-h"><div><b class="rec-n">${esc(r.name)}</b><span class="rec-en">${esc(r.en || "")}</span></div>
+      <div class="rec-btns"><button class="edit-btn" data-rec-edit="${r.id}" aria-label="編輯">✏️</button>
+      <button class="heart ${wish[r.id] ? "on" : ""}" data-wish="${r.id}" aria-label="加入我的清單">${wish[r.id] ? "♥" : "♡"}</button></div></div>
+    ${r.why ? `<p style="margin:6px 0">${esc(r.why)}</p>` : ""}
+    ${r.warn ? `<div class="rec-warn">⚠️ ${esc(r.warn)}</div>` : ""}
+    ${r.shops.length || r.place ? `<div class="shops">📍 ${r.shops.filter(k => SHOPS[k]).map(k => SHOPS[k].day != null ? `<button class="shop" data-go="plan" data-day="${SHOPS[k].day}">${SHOPS[k].name}</button>` : `<span class="shop">${SHOPS[k].name}</span>`).join("")}${r.place ? `<a class="shop" href="${map((r.en || r.name) + " " + r.place)}" target="_blank" rel="noopener">📍 ${esc(r.place)}</a>` : ""}</div>` : ""}
+    <div class="rec-foot"><span class="rec-by">👤 ${esc(r.author)} 推薦</span>
+      <button class="like ${r.liked ? "on" : ""}" data-like="${r.id}" aria-label="按讚">👍 <b>${r.likes || 0}</b></button></div></div>`;
+}
+function sideHTML(cat, wish){
+  const conf = SIDE_CATS[cat], list = RECS.filter(r => r.cat === cat).sort(byLikes);
+  const areaOf = r => { const t = [r.place, r.en, r.name].join(" "); return (FOOD_AREAS.find(a => a.re.test(t)) || {}).key; };
+  const body = cat === "food" && FOOD_AREAS.length
+    ? FOOD_AREAS.map(a => ({ a, items: list.filter(r => areaOf(r) === a.key) })).filter(g => g.items.length).map(({ a, items }) => `<details class="card sub rcat" open><summary><div><b>${a.name}</b><span class="muted">（${items.length}）</span></div><span class="arrow">›</span></summary><div class="sub-b">${items.map(r => recCardHTML(r, wish)).join("")}</div></details>`).join("")
+    : `<div class="sub-b">${list.map(r => recCardHTML(r, wish)).join("")}</div>`;
+  return `<details class="card jj side" data-side="${cat}" ${store.get("side-" + cat, true) ? "open" : ""}><summary><div><b>${conf.title}</b><span class="muted jj-hint">${list.length} 項・${conf.hint || ""}</span></div><span class="arrow">›</span></summary>
+    <div class="btns" style="margin:10px 0 4px"><button class="btn orange big-btn" data-rec-new="${cat}">＋ 新增</button></div>
+    ${list.length ? body : `<p class="muted" style="margin:0">還沒有推薦，按上面的按鈕新增！</p>`}</details>`;
+}
+function videosHTML(){
+  if (!VIDEOS.length) return "";
+  return `<div class="card"><h3>🎬 一起拍的影片</h3><div class="vids">${VIDEOS.map((v, i) => `<div class="vid"><b>${i + 1}. ${esc(v.title)}</b><small class="muted">${esc(v.note || "")}</small>
+    <iframe src="https://www.instagram.com/reel/${esc(v.id)}/embed/" loading="lazy" allowfullscreen scrolling="no" title="${esc(v.title)}"></iframe>
+    <a class="btn" href="https://www.instagram.com/reel/${esc(v.id)}/" target="_blank" rel="noopener">▶️ 在 IG 打開 ${esc(v.by || "")}</a></div>`).join("")}</div></div>`;
+}
+function renderRec(){
+  const wish = store.get("wish", {}), opened = store.get("recOpen", {});
+  const filtering = !!recShop || recWishOnly;
+  const match = r => (!recShop || r.shops.includes(recShop)) && (!recWishOnly || wish[r.id]);
+  const GIFTS = RECS.filter(r => !SIDE_CATS[r.cat]);
+  const nWish = GIFTS.filter(r => wish[r.id]).length;
+  const shopTiles = Object.entries(SHOPS).map(([k, v]) => `<button class="stile ${recShop === k ? "on" : ""}" data-rshop="${k}" style="--c:${v.color || "#888"}"><b>${v.name}</b><span>${GIFTS.filter(r => r.shops.includes(k)).length} 項</span></button>`).join("");
+  const cats = REC_CATS.filter(([k]) => !SIDE_CATS[k]).map(([k, label]) => {
+    const all = RECS.filter(r => r.cat === k).sort(byLikes), list = all.filter(match);
+    if (filtering && !list.length) return "";
+    const top = all.find(r => (r.likes || 0) > 0);
+    return `<details class="card sub rcat" data-rsec="${k}" ${filtering || opened[k] ? "open" : ""}><summary><div><b>${label}</b><span class="muted">（${filtering ? list.length + " / " + all.length : all.length}）</span>
+      ${top && !filtering ? `<span class="rtop">🔥 ${esc(top.name)}</span>` : ""}</div><span class="arrow">›</span></summary>
+      <div class="sub-b">${list.length ? list.map(r => recCardHTML(r, wish)).join("") : `<p class="muted" style="margin:0">這個分類還沒有推薦，按「＋ 新增推薦」來當第一個！</p>`}</div></details>`;
+  }).join("");
+  $("#p-rec").innerHTML = `${videosHTML()}<h2>🎁 伴手禮推薦</h2>
+    ${REC_WARN ? `<div class="card warn-card"><h3>${REC_WARN.title}</h3><p style="margin:0">${REC_WARN.body}</p></div>` : ""}
+    <details class="card jj" id="recbox" ${store.get("recBox", true) ? "open" : ""}><summary><div><b>🎁 大家的推薦</b><span class="muted jj-hint">${GIFTS.length} 項・點店家看在哪買得到</span></div><span class="arrow">›</span></summary>
+      <div class="btns" style="margin:10px 0 4px"><button class="btn orange big-btn" data-rec-new>＋ 新增推薦</button></div>
+      ${Object.keys(SHOPS).length ? sub("🏪 在哪買", `<div class="stiles">${shopTiles}</div>
+        <div class="btns"><button class="btn wishbtn ${recWishOnly ? "on" : ""}" data-rwish>${recWishOnly ? "♥" : "♡"} 只看我的清單（${nWish}）</button>${filtering ? `<button class="btn" data-rclear>✕ 清除篩選</button>` : ""}</div>
+        ${filtering ? `<p class="filter-note">🔎 正在看：${[recShop ? SHOPS[recShop].name : "", recWishOnly ? "♡ 我的清單" : ""].filter(Boolean).join(" ＋ ")}</p>` : ""}`, true) : ""}
+      ${cats || `<p class="muted">${RECS.length ? "沒有符合的推薦" : "推薦清單載入中…"}</p>`}
+      <p class="muted" style="font-size:13px">♡ 加入「我的清單」只存在你的手機；👍 最多人推的排最上面</p></details>
+    ${Object.keys(SIDE_CATS).map(c => sideHTML(c, wish)).join("")}`;
+}
+async function toggleLike(id, btn){
+  const r = RECS.find(x => x.id === id); if (!r) return;
+  const prev = { likes: r.likes || 0, liked: !!r.liked };
+  const show = () => { btn.classList.toggle("on", !!r.liked); btn.querySelector("b").textContent = r.likes || 0; };
+  r.liked = !prev.liked; r.likes = prev.likes + (r.liked ? 1 : -1); show();
+  try { const d = await api("/api/likes", { method:"POST", body: JSON.stringify({ rec: id, voter: VOTER }) }); r.likes = d.likes; r.liked = d.liked; }
+  catch(e){ Object.assign(r, prev); }
+  show(); recSig = JSON.stringify(RECS); store.set("recs", RECS);
+}
+let rdraft = null;
+function openRecForm(id, defCat){
+  const r = id ? RECS.find(x => x.id === +id) : null;
+  rdraft = { id: r ? r.id : null, cat: r ? r.cat : (defCat || REC_CATS[0][0]), shops: r ? [...r.shops] : [] };
+  const nick = r ? r.author : store.get("nick", store.get("msgName", ""));
+  openSheet(`<h2 style="margin-top:0">${r ? "✏️ 編輯推薦" : "＋ 新增推薦"}</h2>
+    <label class="f-l">分類</label><div class="chips">${REC_CATS.map(([k, l]) => `<button data-rc="${k}" class="${rdraft.cat === k ? "on" : ""}">${l}</button>`).join("")}</div>
+    <label class="f-l">名稱</label><input id="r-name" class="m-in" maxlength="40" value="${esc(r ? r.name : "")}">
+    <label class="f-l">外文／品牌 <span class="muted">（選填，方便給店員看）</span></label><input id="r-en" class="m-in" maxlength="40" value="${esc(r ? r.en || "" : "")}">
+    <label class="f-l">推薦原因</label><textarea id="r-why" class="m-in" maxlength="300" rows="3" placeholder="好在哪？適合送誰？">${esc(r ? r.why || "" : "")}</textarea>
+    <label class="f-l">注意事項 <span class="muted">（選填）</span></label><input id="r-warn" class="m-in" maxlength="100" value="${esc(r ? r.warn || "" : "")}">
+    ${Object.keys(SHOPS).length ? `<label class="f-l">在哪買？</label><div class="chips">${Object.entries(SHOPS).map(([k, v]) => `<button data-rs="${k}" class="${rdraft.shops.includes(k) ? "on" : ""}">${v.name}</button>`).join("")}</div>` : ""}
+    <input id="r-place" class="m-in" maxlength="40" placeholder="地點（選填，例如：Sapporo）" value="${esc(r ? r.place || "" : "")}" style="margin-top:8px">
+    <label class="f-l">推薦人（你的暱稱）</label><input id="r-author" class="m-in" maxlength="20" value="${esc(nick)}">
+    <div class="btns"><button class="btn orange big-btn" id="r-save">${r ? "儲存修改" : "新增推薦"}</button></div>
+    ${r ? `<div class="btns"><button class="btn del-btn" id="r-del">🗑 刪除這個推薦</button></div>` : ""}
+    <p id="r-tip" class="muted"></p>`, "rec");
+}
+async function saveRec(){
+  const v = id => $(id).value.trim(), tip = $("#r-tip");
+  const data = { cat: rdraft.cat, name: v("#r-name"), en: v("#r-en"), why: v("#r-why"), warn: v("#r-warn"), shops: rdraft.shops, place: v("#r-place"), author: v("#r-author") };
+  if (!data.name) return tip.textContent = "請填名稱";
+  if (!data.author) return tip.textContent = "請填你的暱稱";
+  const btn = $("#r-save"); btn.disabled = true; tip.textContent = "儲存中…";
+  try { await api("/api/recs" + (rdraft.id ? "?id=" + rdraft.id : ""), { method: rdraft.id ? "PUT" : "POST", body: JSON.stringify(data) });
+    store.set("nick", data.author); closeSheet(); recSig = ""; await loadRecs(); }
+  catch(e){ tip.textContent = "儲存失敗，請檢查網路再試一次"; btn.disabled = false; }
+}
+async function deleteRec(){
+  const r = RECS.find(x => x.id === rdraft.id);
+  if (!confirm(`確定刪除「${r ? r.name : "這個推薦"}」嗎？全團都會看不到喔`)) return;
+  try { await api("/api/recs?id=" + rdraft.id, { method:"DELETE" }); } catch(e){}
+  closeSheet(); recSig = ""; await loadRecs();
+}
+
+/* ---------- 🌦️ 天氣 ---------- */
+const WX_CODE = {0:["☀️","晴朗"],1:["🌤️","大致晴朗"],2:["⛅","局部多雲"],3:["☁️","陰天"],45:["🌫️","有霧"],48:["🌫️","有霧"],
+  51:["🌦️","毛毛雨"],53:["🌦️","毛毛雨"],55:["🌦️","毛毛雨"],61:["🌧️","小雨"],63:["🌧️","中雨"],65:["🌧️","大雨"],71:["🌨️","小雪"],73:["🌨️","下雪"],75:["❄️","大雪"],
+  80:["🌦️","短暫陣雨"],81:["🌧️","陣雨"],82:["⛈️","豪大陣雨"],95:["⛈️","雷陣雨"],96:["⛈️","雷陣雨"],99:["⛈️","強烈雷雨"]};
+let WX = store.get("wx", null);
+async function loadWeather(){
+  if (!WX_PLACES.length || (WX && Date.now() - WX.at < 3600000)) return;
+  if (stamp(TRIP.start, "00:00") - (Date.now() + TRIP.utc * 3600000) > 15 * 86400000) return; // 預報只有 16 天內，太早問會被拒絕
+  try {
+    const q = new URLSearchParams({ latitude: WX_PLACES.map(p => p.lat).join(","), longitude: WX_PLACES.map(p => p.lon).join(","),
+      daily: "weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max", timezone: TRIP.tzIana, start_date: TRIP.start, end_date: TRIP.end });
+    const r = await fetch("https://api.open-meteo.com/v1/forecast?" + q); if (!r.ok) return;
+    const data = [].concat(await r.json());
+    WX = { at: Date.now(), days: data.map(loc => loc.daily.time.map((t, i) => ({ date: t, code: loc.daily.weather_code[i], max: loc.daily.temperature_2m_max[i], min: loc.daily.temperature_2m_min[i], rain: loc.daily.precipitation_probability_max[i] }))) };
+    store.set("wx", WX); if (tab === "home" || tab === "plan") render();
+  } catch(e){}
+}
+function wxOf(di){ if (!WX) return null; const w = WX.days[WX_DAY_PLACE[di] || 0]?.find(x => x.date === DAYS[di].date); return w && w.max != null ? w : null; }
+function weatherHTML(di){
+  const w = wxOf(di); if (!w) return "";
+  const [ico, txt] = WX_CODE[w.code] || ["🌡️", "—"], tips = [];
+  if (w.rain >= 60) tips.push("☔ 降雨機率高，記得帶傘或輕便雨衣"); else if (w.rain >= 30) tips.push("🌂 可能會下雨，包包放把摺疊傘");
+  if (w.max >= 33) tips.push("🥵 很熱！多補水、做好防曬"); if (w.min <= 10) tips.push("🧥 早晚偏冷，記得帶外套");
+  return `<div class="wx"><div class="wx-ico">${ico}</div><div class="wx-main"><div class="wx-place">🌦️ ${WX_PLACES[WX_DAY_PLACE[di] || 0].name}天氣預報</div>
+    <div class="wx-txt">${txt}<span class="wx-t">${Math.round(w.min)}° – ${Math.round(w.max)}°C</span></div><div class="muted">💧 降雨機率 ${w.rain ?? "—"}%</div>
+    ${tips.map(t => `<div class="wx-tip">${t}</div>`).join("")}<div class="wx-upd">越接近當天越準</div></div></div>`;
+}
+function weatherStrip(){
+  if (!WX) return "";
+  const cells = DAYS.map((d, i) => { const w = wxOf(i); if (!w) return ""; return `<div class="wxs"><b>D${i + 1}</b><span class="wxs-i">${(WX_CODE[w.code] || ["🌡️"])[0]}</span><span>${Math.round(w.max)}°</span><span class="muted">💧${w.rain ?? "—"}%</span></div>`; }).join("");
+  return cells ? `<h2>🌦️ 旅途天氣預報</h2><div class="card"><div class="wx-strip">${cells}</div></div>` : "";
+}
+
+/* ---------- 💬 留言板 ---------- */
+const AVA = ["var(--c1-ink)","var(--c3-ink)","var(--c4-ink)","var(--alert)","#8E44AD","#B08A1E"];
+const avaColor = n => AVA[[...n].reduce((a, c) => a + c.codePointAt(0), 0) % AVA.length];
+const fmtMsgTime = ms => { const d = new Date(ms + TRIP.utc * 3600000).toISOString(); return `${+d.slice(5, 7)}/${+d.slice(8, 10)} ${d.slice(11, 16)}`; };
+let msgBuilt = false;
+function renderMsg(){
+  if (!msgBuilt){
+    $("#p-msg").innerHTML = `<h2>💬 留言板</h2>
+      <div class="card"><p class="muted" style="margin:0 0 8px">不用登入，填個暱稱就能留言！旅途心得、許願、找東西都可以 ✨</p>
+        <input id="m-name" class="m-in" maxlength="20" placeholder="你的暱稱" value="${esc(store.get("msgName", ""))}">
+        <textarea id="m-body" class="m-in" maxlength="500" rows="3" placeholder="想說什麼？"></textarea>
+        <input id="m-web" name="website" tabindex="-1" autocomplete="off" style="display:none">
+        <div class="btns"><button class="btn orange" id="m-send">送出留言</button><span id="m-tip" class="muted" style="align-self:center"></span></div></div>
+      <div id="m-list"><p class="muted">留言載入中…</p></div>
+      <p class="foot"><a href="#" id="m-admin">${store.get("adminKey", "") ? "🔓 管理模式（點此登出）" : "管理"}</a></p>`;
+    msgBuilt = true;
+  }
+  loadMessages();
+}
+async function loadMessages(){
+  const box = $("#m-list"); if (!box) return;
+  try {
+    const list = await api("/api/messages"), admin = !!store.get("adminKey", "");
+    box.innerHTML = list.length ? list.map(m => `<div class="card msg"><div class="ava" style="background:${avaColor(m.name)}">${esc([...m.name][0])}</div>
+      <div class="mbody"><div><b>${esc(m.name)}</b> <span class="muted">${fmtMsgTime(m.created_at)}</span>${admin ? `<button class="m-del" data-del="${m.id}">🗑 刪除</button>` : ""}</div>
+      <div class="mtext">${esc(m.body)}</div></div></div>`).join("") : `<div class="card"><p class="muted" style="margin:0">還沒有人留言，來當第一個吧！</p></div>`;
+  } catch(e){ box.innerHTML = `<div class="card"><p class="muted" style="margin:0">留言暫時載不到，可能是網路不穩，等一下再試試 🙏</p></div>`; }
+}
+async function sendMessage(){
+  const name = $("#m-name").value.trim(), body = $("#m-body").value.trim(), tip = $("#m-tip"), btn = $("#m-send");
+  if (!name || !body){ tip.textContent = "暱稱和留言都要填喔"; return; }
+  btn.disabled = true; tip.textContent = "送出中…";
+  try { await api("/api/messages", { method:"POST", body: JSON.stringify({ name, body, website: $("#m-web").value }) });
+    store.set("msgName", name); $("#m-body").value = ""; tip.textContent = "✅ 已送出！"; loadMessages(); }
+  catch(e){ tip.textContent = "送出失敗，請檢查網路再試一次"; }
+  btn.disabled = false;
+}
+async function deleteMessage(id){
+  if (!confirm("確定要刪除這則留言嗎？刪了就救不回來喔")) return;
+  try { await api("/api/messages?id=" + id, { method:"DELETE", headers:{ "X-Admin-Key": store.get("adminKey", "") } }); }
+  catch(s){ if (s === 403){ alert("管理密碼不對，請重新輸入"); store.set("adminKey", ""); msgBuilt = false; return renderMsg(); } }
+  loadMessages();
+}
+
+/* ---------- 分頁切換與事件 ---------- */
+let tab = "home";
+function go(t, day){
+  tab = t;
+  if (day != null){ planDay = +day; planAnim = true; }
+  document.querySelectorAll("section.page").forEach(s => s.classList.toggle("on", s.id === "p-" + t));
+  document.querySelectorAll("nav.tabs button").forEach(b => b.classList.toggle("on", b.dataset.tab === t));
+  render(); window.scrollTo({ top: 0 });
+}
+function clock(){
+  const hm = hmNow(), diff = TRIP.homeUtc - TRIP.utc;
+  const home = String(((+hm.slice(0, 2) + diff) % 24 + 24) % 24).padStart(2, "0") + hm.slice(2);
+  $("#clock").textContent = diff ? `🕐 ${TRIP.place} ${hm}（台灣 ${home}）` : `🕐 ${hm}`;
+}
+function render(){
+  clock();
+  ({ home: renderHome, plan: renderPlan, contact: renderContact, list: renderList, msg: renderMsg, money: renderMoney,
+     rec: () => { renderRec(); loadRecs(); }, stay: () => { renderStay(); loadRooms(); } })[tab]();
+}
+document.addEventListener("click", e => {
+  const T = s => e.target.closest(s);
+  const nb = T("nav.tabs button"); if (nb) return go(nb.dataset.tab);
+  const sw = T(".switcher button"); if (sw){ setTheme(sw.dataset.t); try { history.replaceState(null, "", "?theme=" + sw.dataset.t + (DEMO ? "&demo" : "")); } catch(err){} return; }
+  const g = T("[data-go]"); if (g) return go(g.dataset.go, g.dataset.day);
+  const c = T(".day-chip[data-day]"); if (c){ planDay = +c.dataset.day; planAnim = true; return renderPlan(); }
+  const pd = T("[data-pday]"); if (pd){ planDay = Math.min(DAYS.length - 1, Math.max(0, planDay + +pd.dataset.pday)); planAnim = true; renderPlan(); return window.scrollTo({ top: 0 }); }
+  const pc = T("[data-pcat]"); if (pc){ planCat = pc.dataset.pcat; return renderPlan(); }
+  if (T("[data-prep]")){ store.set("prepOpen", true); go("list"); setTimeout(() => document.getElementById("prep")?.scrollIntoView({ behavior:"smooth" }), 50); return; }
+  const pl = T("[data-say]"); if (pl) return speak(pl.dataset.say, pl);
+  if (T("[data-close]") || e.target.id === "sheet") return closeSheet();
+  const ad = T("[data-add]"); if (ad){ const [a, b] = ad.dataset.add.split("|"); return openExpForm({ day: +a, item: +b }); }
+  const todayIdx = () => { const i = DAYS.findIndex(d => d.date === todayStr()); return i < 0 ? 0 : i; };
+  if (T("[data-fund-new]")) return openExpForm({ day: todayIdx(), payer: FUND });
+  if (T("[data-new-exp]")) return openExpForm({ day: moneyDay !== "all" ? +moneyDay : todayIdx() });
+  const ed = T("[data-edit]"); if (ed) return openExpForm({ id: ed.dataset.edit });
+  const lk = T("[data-like]"); if (lk) return toggleLike(+lk.dataset.like, lk);
+  const cp = T("[data-copy]");
+  if (cp){ const t = cp.dataset.copy, done = () => { cp.textContent = "✅"; setTimeout(() => cp.textContent = "📋", 1200); };
+    (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(done).catch(() => prompt("長按複製：", t)); return; }
+  const rme = T("[data-room-edit]"); if (rme) return openRoomForm(+rme.dataset.roomEdit);
+  if ($("#sheet").dataset.mode === "room"){
+    const rm = T("[data-rm]");
+    if (rm){ const m = rm.dataset.rm; rmDraft.names = rmDraft.names.includes(m) ? rmDraft.names.filter(x => x !== m) : [...rmDraft.names, m]; rm.classList.toggle("on"); return rmCount(); }
+    if (e.target.id === "rm-save") return saveRoom();
+  }
+  const rn = T("[data-rec-new]"); if (rn) return openRecForm(null, rn.dataset.recNew || null);
+  const re = T("[data-rec-edit]"); if (re) return openRecForm(re.dataset.recEdit);
+  if ($("#sheet").dataset.mode === "rec"){
+    const c1 = T("[data-rc]"); if (c1){ rdraft.cat = c1.dataset.rc; document.querySelectorAll("[data-rc]").forEach(b => b.classList.toggle("on", b === c1)); return; }
+    const s1 = T("[data-rs]"); if (s1){ const k = s1.dataset.rs; rdraft.shops = rdraft.shops.includes(k) ? rdraft.shops.filter(x => x !== k) : [...rdraft.shops, k]; s1.classList.toggle("on"); return; }
+    if (e.target.id === "r-save") return saveRec();
+    if (e.target.id === "r-del") return deleteRec();
+  }
+  const rs = T("[data-rshop]"); if (rs){ recShop = recShop === rs.dataset.rshop ? null : rs.dataset.rshop; return renderRec(); }
+  if (T("[data-rwish]")){ recWishOnly = !recWishOnly; return renderRec(); }
+  if (T("[data-rclear]")){ recShop = null; recWishOnly = false; return renderRec(); }
+  const wh = T("[data-wish]"); if (wh){ const w = store.get("wish", {}); w[wh.dataset.wish] = !w[wh.dataset.wish]; store.set("wish", w); return renderRec(); }
+  const pb = T("[data-paid]"); if (pb){ e.preventDefault(); e.stopPropagation(); return togglePaid(pb.dataset.paid, +pb.dataset.amt, pb.dataset.dir); }
+  const md = T("[data-mday]"); if (md){ moneyDay = md.dataset.mday; return renderMoney(); }
+  const xd = T("[data-exp-del]"); if (xd) return deleteExpense(xd.dataset.expDel);
+  if (draft && $("#sheet").dataset.mode === "add"){
+    const cu = T("[data-cur]"); if (cu){ draft.currency = cu.dataset.cur; document.querySelectorAll("[data-cur]").forEach(b => b.classList.toggle("on", b === cu)); return updatePer(); }
+    const py = T("[data-payer]"); if (py){ draft.payer = py.dataset.payer; document.querySelectorAll("[data-payer]").forEach(b => b.classList.toggle("on", b === py)); return; }
+    const sp = T("[data-split]"); if (sp){ const m = sp.dataset.split; draft.split = draft.split.includes(m) ? draft.split.filter(x => x !== m) : MEMBERS.filter(x => x === m || draft.split.includes(x)); sp.classList.toggle("on"); return updatePer(); }
+    const al = T("[data-all]"); if (al){ draft.split = al.dataset.all === "1" ? [...MEMBERS] : []; document.querySelectorAll("[data-split]").forEach(b => b.classList.toggle("on", al.dataset.all === "1")); return updatePer(); }
+    if (e.target.id === "x-save") return saveExpense();
+  }
+  if (e.target.id === "m-send") return sendMessage();
+  const del = T("[data-del]"); if (del) return deleteMessage(del.dataset.del);
+  if (e.target.id === "m-admin"){
+    e.preventDefault();
+    if (store.get("adminKey", "")) store.set("adminKey", ""); else { const k = prompt("請輸入管理密碼"); if (k) store.set("adminKey", k.trim()); }
+    msgBuilt = false; renderMsg();
+  }
+});
+document.addEventListener("input", e => { if (e.target.id === "x-amt") updatePer(); });
+document.addEventListener("toggle", e => {
+  const id = e.target.id, ds = e.target.dataset || {};
+  if (id === "recbox") store.set("recBox", e.target.open);
+  if (id === "prep") store.set("prepOpen", e.target.open);
+  if (id === "expbox") store.set("expBox", e.target.open);
+  if (ds.side) store.set("side-" + ds.side, e.target.open);
+  if (ds.rsec && !recShop && !recWishOnly){ const o = store.get("recOpen", {}); o[ds.rsec] = e.target.open; store.set("recOpen", o); }
+}, true);
+document.addEventListener("change", e => {
+  if (e.target.id === "x-day") return onWhereChange(true);
+  if (e.target.id === "x-item") return onWhereChange(false);
+  const p = e.target.dataset.pack; if (p == null) return;
+  const done = store.get("packing", {}); done[p] = e.target.checked; store.set("packing", done);
+  e.target.closest(".check").classList.toggle("done", e.target.checked);
+  const n = PACKING.filter((_, i) => done[i]).length;
+  $("#pack-count").textContent = `已完成 ${n} / ${PACKING.length}（勾選只存在你自己的手機）`;
+  $("#pack-bar").style.width = n / PACKING.length * 100 + "%";
+});
+
+/* ---------- 啟動 ---------- */
+document.title = TRIP.title;
+$("#top-title").textContent = TRIP.short;
+$("#foot").innerHTML = `${esc(TRIP.tzNote)}<br>${esc(TRIP.footer || "")}${TRIP.admin ? `<br><a href="/admin.html">🧭 領隊後台</a>` : ""}${TRIP.credit?.text ? `<br><a href="${esc(TRIP.credit.url || "#")}" target="_blank" rel="noopener">${esc(TRIP.credit.text)}</a>` : ""}`;
+if (DEMO) $("#demo-bar").hidden = false;
+const qTheme = new URLSearchParams(location.search).get("theme");
+setTheme(FONTS[qTheme] ? qTheme : THEME);
+if ((SHOW_SWITCHER || new URLSearchParams(location.search).has("switcher")) && !new URLSearchParams(location.search).has("bare")){
+  const bar = document.createElement("div"); bar.className = "switcher";
+  bar.innerHTML = THEMES.map(([t, n]) => `<button data-t="${t}">${n}</button>`).join("");
+  document.body.appendChild(bar); setTheme(document.documentElement.dataset.theme);
+  document.body.style.paddingBottom = "140px";
+}
+render();
+loadWeather(); setInterval(loadWeather, 3600000);
+loadExpenses(); setInterval(loadExpenses, 60000);
+loadPaid(); setInterval(loadPaid, 60000);
+loadRecs();
+setInterval(() => { if (tab === "home") render(); else { clock(); if (tab === "msg") loadMessages(); if (tab === "rec") loadRecs(); if (tab === "stay") loadRooms(); } }, 30000);
+</script>
+</body>
+</html>

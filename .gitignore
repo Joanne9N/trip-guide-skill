@@ -1,0 +1,7 @@
+.DS_Store
+node_modules/
+.wrangler/
+admin.key
+.dev.vars
+archive/
+review/

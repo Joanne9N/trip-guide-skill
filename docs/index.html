@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" data-theme="picturebook">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>trip-guide 旅遊手冊網頁</title>
+<meta name="description" content="一句話請 Claude 幫你做旅遊手冊網頁：6 種風格、個人／團體／領隊三個版本，記帳分帳、集合倒數、分房、留言板，全部免費。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧳</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Huninn&display=swap">
+<link rel="stylesheet" href="themes.css">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-size:16.5px;line-height:1.7;overflow-x:hidden}
+a{color:inherit}
+.wrap{max-width:980px;margin:0 auto;padding:0 16px}
+header.top{border-bottom:var(--bw) solid var(--bc);background:var(--hero-bg)}
+header.top .wrap{padding-top:36px;padding-bottom:30px;display:grid;gap:18px;align-items:center}
+@media (min-width:760px){ header.top .wrap{grid-template-columns:1.1fr .9fr} }
+.kicker{font-size:13px;font-weight:700;letter-spacing:2px;color:var(--muted)}
+h1{font-size:clamp(30px,6vw,44px);line-height:1.2;margin:4px 0 10px}
+h2{font-size:26px;margin:46px 0 6px}
+.lead{font-size:17px;margin:0 0 14px}
+.btns{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 16px;font:inherit;font-weight:700;text-decoration:none;cursor:pointer;background:var(--paper);color:var(--ink);border:var(--bw) solid var(--bc);border-radius:var(--radius-s);box-shadow:3px 3px 0 var(--bc);min-height:46px}
+.btn.main{background:var(--c1)}
+.muted{color:var(--muted);font-size:14.5px}
+.card{padding:18px;margin:0}
+.grid3{display:grid;gap:14px;margin-top:14px}
+@media (min-width:760px){ .grid3{grid-template-columns:repeat(3,1fr)} }
+.ver h3{margin:0 0 2px;font-size:19px}
+.ver .who{font-weight:700;color:var(--c1-ink);font-size:14px}
+.ver ul{margin:8px 0 0;padding-left:20px}
+.ver li{margin:2px 0}
+.styles{display:grid;gap:18px;margin-top:16px;grid-template-columns:repeat(2,1fr)}
+@media (min-width:760px){ .styles{grid-template-columns:repeat(3,1fr)} }
+.style h3{margin:10px 0 0;font-size:17px}
+.style p{margin:2px 0 8px;font-size:14px;color:var(--muted);line-height:1.5}
+.phone{position:relative;width:100%;aspect-ratio:375/680;border:var(--bw) solid var(--bc);border-radius:22px;overflow:hidden;background:var(--paper);box-shadow:4px 4px 0 var(--bc)}
+.phone iframe{position:absolute;top:0;left:0;width:375px;height:680px;border:0;transform-origin:0 0;pointer-events:none}
+.style a.open{display:inline-block;font-size:14px;font-weight:700;color:var(--c3-ink)}
+.steps{counter-reset:s;list-style:none;padding:0;margin:14px 0 0;display:grid;gap:12px}
+.steps li{counter-increment:s;display:grid;grid-template-columns:38px 1fr;gap:12px;align-items:start}
+.steps li::before{content:counter(s);width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;background:var(--c3);border:var(--bw) solid var(--bc)}
+pre{background:var(--ink);color:#FFFCF6;border-radius:12px;padding:12px 14px;overflow-x:auto;font-size:13.5px;line-height:1.6;margin:8px 0 0;white-space:pre-wrap;word-break:break-all}
+.feat{display:grid;gap:10px;margin-top:14px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.feat div{padding:14px}
+.feat b{display:block}
+footer{margin:56px 0 0;border-top:var(--bw) solid var(--bc);padding:22px 0 40px;text-align:center;font-size:14px;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<header class="top"><div class="wrap">
+  <div>
+    <div class="kicker">TRIP-GUIDE ・ CLAUDE SKILL</div>
+    <h1>一句話，做出全團都在用的旅遊手冊網頁 🧳</h1>
+    <p class="lead">把行程丟給 Claude，它會幫你做一個手機優先的旅遊網頁：集合倒數、每日行程、記帳分帳、分房、推薦清單、留言板。<b>6 種風格任選、全部免費</b>。</p>
+    <div class="btns">
+      <a class="btn main" href="#styles">🎨 看 6 種風格</a>
+      <a class="btn" href="#install">⚡ 怎麼安裝</a>
+      <a class="btn" href="https://github.com/Joanne9N/trip-guide-skill">GitHub ↗</a>
+    </div>
+  </div>
+  <div class="phone" style="max-width:300px;justify-self:center"><iframe data-src="group.html?theme=picturebook&now=2027-07-16T12:40&bare" title="團體版示範畫面" loading="lazy" scrolling="no"></iframe></div>
+</div></header>
+
+<main class="wrap">
+
+  <h2>三個版本，看人數選</h2>
+  <div class="grid3">
+    <div class="card ver"><h3>🌿 個人輕量版</h3><div class="who">1–4 人・自己或情侶出遊</div>
+      <ul><li>單一網頁，丟到 GitHub Pages 就能用</li><li>出發前準備、航班、每日行程、待辦清單、住宿</li><li>不用註冊雲端服務</li></ul>
+      <div class="btns" style="margin-top:12px"><a class="btn" href="lite.html?now=2027-07-17">打開示範 →</a></div></div>
+    <div class="card ver"><h3>👥 團體基本版</h3><div class="who">5–20 人・朋友、家族、公司旅遊</div>
+      <ul><li>下一個集合大字倒數（分組也算得出來）</li><li>共用帳本、公積金、「大家只跟一個人對帳」</li><li>分房、推薦按讚、留言板，全團同步</li></ul>
+      <div class="btns" style="margin-top:12px"><a class="btn" href="group.html?now=2027-07-16T12:40">打開示範 →</a></div></div>
+    <div class="card ver"><h3>🧭 進階領隊版</h3><div class="who">領隊、導遊帶團</div>
+      <ul><li>團體版全部功能＋需登入的領隊後台</li><li>當地幣＋匯率＋台幣、導遊代付／刷卡／現金</li><li>收據拍照 AI 判讀、一鍵匯出 Excel 結算表</li></ul>
+      <p class="muted" style="margin:12px 0 0">後台需要登入，示範請自己部署後試用</p></div>
+  </div>
+
+  <h2 id="styles">🎨 6 種風格</h2>
+  <p class="muted">同一個示範旅程（虛構的北海道 6 日家族旅行），換一個設定就換一種長相。點進去可以在畫面下方切換風格。</p>
+  <div class="styles" id="style-grid"></div>
+
+  <h2>每個版本都有的貼心設計</h2>
+  <div class="feat">
+    <div class="card"><b>⏰ 打開就知道現在要做什麼</b><span class="muted">依當地時間自動跳到今天、標出進行中的行程</span></div>
+    <div class="card"><b>🛂 出發前準備步驟卡</b><span class="muted">簽證、入境申報一步一步列好，附官方連結</span></div>
+    <div class="card"><b>🗺️ 每段行程一鍵開地圖</b><span class="muted">交通彩色標籤、「必去」標記、分類篩選</span></div>
+    <div class="card"><b>📱 加到手機主畫面</b><span class="muted">像 App 一樣一點就開，不用下載</span></div>
+    <div class="card"><b>🔒 隱私優先</b><span class="muted">隨機網址、不被搜尋引擎收錄、護照密碼一律不放</span></div>
+    <div class="card"><b>🌙 尊重「減少動態效果」</b><span class="muted">插圖會輕輕動，但手機關掉動畫就停</span></div>
+  </div>
+
+  <h2 id="install">⚡ 怎麼安裝</h2>
+  <ol class="steps">
+    <li><div><b>準備 Claude Code</b><br><span class="muted">團體版和領隊版需要 AI 幫你上傳網站，要用 Claude Code（Claude 桌面版的 Code 分頁也可以）。只做個人輕量版的話，一般的 Claude 對話也做得出網頁檔。</span></div></li>
+    <li><div><b>把 skill 裝進 Claude</b><br><span class="muted">打開「終端機」，貼上這兩行：</span>
+      <pre>git clone https://github.com/Joanne9N/trip-guide-skill.git
+mkdir -p ~/.claude/skills && cp -R trip-guide-skill/trip-guide ~/.claude/skills/</pre></div></li>
+    <li><div><b>跟 Claude 說你要做什麼</b><br><span class="muted">例如：「幫我們做一個旅遊手冊網頁，7 月去北海道 6 天，一家 8 個人」。它會先問你要哪個版本、哪種風格，再列計畫給你確認。</span></div></li>
+    <li><div><b>需要你親自按的地方，它會停下來</b><br><span class="muted">註冊 Cloudflare、登入授權、設定管理密碼都要你本人操作，不會經過 AI 對話。完整說明在 GitHub 的 README。</span></div></li>
+  </ol>
+
+</main>
+
+<footer><div class="wrap">
+  整理自一個曼谷 13 人朋友團實際用過的網頁。<br>
+  授權：CC BY-NC 4.0（可以免費使用、修改、分享，請註明出處，不能拿去販售）<br>
+  製作：<a href="https://www.instagram.com/9n.flowlab/" target="_blank" rel="noopener">@9n.flowlab</a>
+</div></footer>
+
+<script>
+const STYLES = [
+  ["picturebook","🎨 日系繪本風","和紙白、墨灰粗框、手繪插圖。適合親子、閨蜜、日韓"],
+  ["tropical","🌴 熱帶活潑風","芒果橘、廟綠，陽光度假感。適合東南亞、海島"],
+  ["scrapbook","📒 手帳剪貼簿風","方格紙、紙膠帶、拍立得。適合朋友出遊、畢旅"],
+  ["boarding","🎫 復古登機證風","海軍藍、票根、打孔線。適合出國、蜜月"],
+  ["glass","🫧 液態玻璃風","毛玻璃卡片浮在風景上。適合海島、極光、雪景"],
+  ["magazine","📰 雜誌編輯風","大字標題、細線、留白。適合質感旅行、長輩團"],
+];
+document.getElementById("style-grid").innerHTML = STYLES.map(([t, n, d]) => `
+  <div class="style">
+    <a href="group.html?theme=${t}&now=2027-07-16T12:40" aria-label="打開${n}示範"><div class="phone"><iframe data-src="lite.html?theme=${t}&now=2027-07-17&bare" title="${n}示範畫面" loading="lazy" tabindex="-1" scrolling="no"></iframe></div></a>
+    <h3>${n}</h3><p>${d}</p>
+    <a class="open" href="group.html?theme=${t}&now=2027-07-16T12:40">團體版 →</a>　<a class="open" href="lite.html?theme=${t}&now=2027-07-17">輕量版 →</a>
+  </div>`).join("");
+// 縮圖：把 375px 寬的手機畫面縮放到卡片寬度；捲到附近才載入
+const frames = [...document.querySelectorAll(".phone iframe")];
+const fit = () => frames.forEach(f => { f.style.transform = `scale(${f.parentNode.clientWidth / 375})`; });
+fit(); addEventListener("resize", fit);
+const load = f => { if (!f.src) f.src = f.dataset.src; };
+if ("IntersectionObserver" in window){
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ load(e.target); io.unobserve(e.target); } }), { rootMargin: "300px" });
+  frames.forEach(f => io.observe(f));
+} else frames.forEach(load);
+</script>
+</body>
+</html>

@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" data-theme="picturebook">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>北海道夏日家族旅行</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗻</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link id="font-link" rel="stylesheet" href="">
+<style>
+/* ===== THEMES START（由 tools/sync-themes.mjs 從 assets/themes/themes.css 同步，不要直接改這段） ===== */
+/* =========================================================
+   trip-guide 風格系統（6 種）
+   用法：<html data-theme="picturebook">，換風格只要改這個值
+   picturebook 日系繪本｜tropical 熱帶活潑｜scrapbook 手帳剪貼簿
+   boarding 復古登機證｜glass 液態玻璃｜magazine 雜誌編輯
+   這份是母版：改完執行 node tools/sync-themes.mjs，
+   會把內容同步進各版本 index.html 的 THEMES 區塊
+   ========================================================= */
+
+/* ---------- 共用變數（每種風格覆寫） ---------- */
+:root{
+  --bg:#FFFCF6; --paper:#FFFFFF; --ink:#3E3A39; --muted:#6B6563; --line:#E8DCCB;
+  --c1:#F2A497; --c2:#F6D27A; --c3:#A8D3E6; --c4:#B9DAA5;
+  --c1-ink:#9A3E2E; --c3-ink:#2F6F8C; --c4-ink:#3F6E2C;
+  --on-c1:#3E3A39; --alert:#C8553D;
+  --bw:3px; --bc:#3E3A39; --radius:22px; --radius-s:14px;
+  --shadow:none; --shadow-lift:none;
+  --font-body:"Huninn",-apple-system,"PingFang TC","Noto Sans TC",sans-serif;
+  --font-head:var(--font-body);
+  --font-mono:ui-monospace,"SF Mono",Menlo,monospace;
+  --hero-bg:var(--bg);
+}
+
+/* 🎨 日系繪本：和紙白、墨灰粗框、大圓角、平塗 */
+[data-theme="picturebook"]{
+  --alert:#C8553D;
+  --bg:#FFFCF6; --paper:#FFFFFF; --ink:#3E3A39; --muted:#6B6563; --line:#E8DCCB;
+  --c1:#F2A497; --c2:#F6D27A; --c3:#A8D3E6; --c4:#B9DAA5;
+  --c1-ink:#9A3E2E; --c3-ink:#2F6F8C; --c4-ink:#3F6E2C; --on-c1:#3E3A39;
+  --bw:3px; --bc:#3E3A39; --radius:22px; --radius-s:14px;
+  --shadow:4px 4px 0 #3E3A39; --shadow-lift:6px 6px 0 #3E3A39;
+  --font-body:"Huninn",-apple-system,"PingFang TC",sans-serif;
+  --hero-bg:#FFF3D6;
+}
+
+/* 🌴 熱帶活潑：芒果橘、廟綠、辣椒紅（曼谷團原版） */
+[data-theme="tropical"]{
+  --alert:#E0452B;
+  --bg:#FFF8EC; --paper:#FFFFFF; --ink:#2B1B0E; --muted:#7A6450; --line:#F1E3CC;
+  --c1:#FF8A1F; --c2:#F5B700; --c3:#2F7DD1; --c4:#1F7A5C;
+  --c1-ink:#A4520A; --c3-ink:#2F7DD1; --c4-ink:#1F7A5C; --on-c1:#FFFFFF;
+  --bw:0px; --bc:transparent; --radius:18px; --radius-s:12px;
+  --shadow:0 4px 14px rgba(120,70,10,.08); --shadow-lift:0 8px 22px rgba(120,70,10,.14);
+  --font-body:"Chiron GoRound TC",-apple-system,"PingFang TC",sans-serif;
+  --hero-bg:linear-gradient(135deg,#FF8A1F,#F5B700);
+}
+
+/* 📒 手帳剪貼簿：方格紙、紙膠帶、微歪的卡片 */
+[data-theme="scrapbook"]{
+  --alert:#B9503F;
+  --bg:#F7F1E6; --paper:#FFFEFA; --ink:#4A3F35; --muted:#7D6E60; --line:#E6DACB;
+  --c1:#E89A8B; --c2:#EBC868; --c3:#9CC3D5; --c4:#A9C79A;
+  --c1-ink:#9C4A3B; --c3-ink:#3D6E85; --c4-ink:#4C6E3D; --on-c1:#4A3F35;
+  --bw:1.5px; --bc:#CDBFAE; --radius:6px; --radius-s:6px;
+  --shadow:0 2px 0 rgba(74,63,53,.08),0 6px 14px rgba(74,63,53,.10); --shadow-lift:0 10px 22px rgba(74,63,53,.16);
+  --font-body:"LXGW WenKai TC",-apple-system,"PingFang TC",serif;
+  --hero-bg:#F7F1E6;
+}
+
+/* 🎫 復古登機證：奶油紙、海軍藍、票根與打孔線 */
+[data-theme="boarding"]{
+  --alert:#C8553D;
+  --bg:#F3EBDD; --paper:#FFFBF2; --ink:#1F2A44; --muted:#5E6577; --line:#D9CDB8;
+  --c1:#C8553D; --c2:#E9B44C; --c3:#1F2A44; --c4:#4F7C6B;
+  --c1-ink:#A23F2A; --c3-ink:#1F2A44; --c4-ink:#35594B; --on-c1:#FFFBF2;
+  --bw:1.5px; --bc:#1F2A44; --radius:10px; --radius-s:8px;
+  --shadow:0 1px 0 rgba(31,42,68,.12); --shadow-lift:0 6px 16px rgba(31,42,68,.14);
+  --font-body:"Noto Sans TC",-apple-system,"PingFang TC",sans-serif;
+  --font-head:"Noto Serif TC","Songti TC",serif;
+  --font-mono:"Space Mono",ui-monospace,Menlo,monospace;
+  --hero-bg:#1F2A44;
+}
+
+/* 🫧 液態玻璃：半透明毛玻璃卡片，底下是風景照或漸層 */
+[data-theme="glass"]{
+  --alert:#D94A3A;
+  --bg:#DCE7F2; --paper:rgba(255,255,255,.55); --ink:#14202E; --muted:#3E4E60; --line:rgba(20,32,46,.12);
+  --c1:#3A7BD5; --c2:#F2B84B; --c3:#59B6C7; --c4:#6BBF8A;
+  --c1-ink:#1E5BAE; --c3-ink:#1F6E7C; --c4-ink:#2D7A4C; --on-c1:#FFFFFF;
+  --bw:1px; --bc:rgba(255,255,255,.7); --radius:26px; --radius-s:16px;
+  --shadow:0 8px 30px rgba(20,32,46,.12),inset 0 1px 0 rgba(255,255,255,.8); --shadow-lift:0 14px 40px rgba(20,32,46,.18),inset 0 1px 0 rgba(255,255,255,.9);
+  --font-body:"Noto Sans TC",-apple-system,"PingFang TC",sans-serif;
+  --hero-bg:transparent;
+}
+
+/* 📰 雜誌編輯：大字標題、細線、留白、黑白加一個重點色 */
+[data-theme="magazine"]{
+  --alert:#B5452E;
+  --bg:#FAF8F4; --paper:#FFFFFF; --ink:#151515; --muted:#6A6A6A; --line:#DEDAD2;
+  --c1:#B5452E; --c2:#C9A227; --c3:#2E5E7E; --c4:#5B7A4A;
+  --c1-ink:#B5452E; --c3-ink:#2E5E7E; --c4-ink:#4C6A3C; --on-c1:#FFFFFF;
+  --bw:1px; --bc:#151515; --radius:0px; --radius-s:0px;
+  --shadow:none; --shadow-lift:none;
+  --font-body:"Noto Sans TC",-apple-system,"PingFang TC",sans-serif;
+  --font-head:"Noto Serif TC","Songti TC",serif;
+  --hero-bg:#FAF8F4;
+}
+
+/* ---------- 共用元件（所有風格共用的骨架） ---------- */
+html{background:var(--bg)}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body)}
+h1,h2,h3,.head-font{font-family:var(--font-head)}
+.card{background:var(--paper);border:var(--bw) solid var(--bc);border-radius:var(--radius);box-shadow:var(--shadow)}
+.btn{border-radius:var(--radius-s)}
+.pill{border-radius:99px}
+.mono{font-family:var(--font-mono)}
+.tag{display:inline-block;font-size:12px;font-weight:700;padding:2px 9px;border-radius:99px;border:1.5px solid currentColor;line-height:1.5;vertical-align:2px}
+.tag.walk{color:var(--c4-ink);background:color-mix(in srgb,var(--c4) 28%,var(--paper))}
+.tag.train{color:var(--c3-ink);background:color-mix(in srgb,var(--c3) 28%,var(--paper))}
+.tag.bus{color:#7A5A00;background:color-mix(in srgb,var(--c2) 35%,var(--paper))}
+.tag.car{color:var(--c1-ink);background:color-mix(in srgb,var(--c1) 28%,var(--paper))}
+.tag.flight{color:var(--ink);background:color-mix(in srgb,var(--line) 60%,var(--paper))}
+.tag.must{color:var(--on-c1);background:var(--c1);border-color:var(--c1)}
+
+/* 插圖：線條吃 --ink，填色吃 --c1～--c4，各風格自動變色 */
+.ill .k{stroke:var(--ink);stroke-width:calc(var(--bw) + 1px);stroke-linejoin:round;stroke-linecap:round;fill:none}
+.ill .f1{fill:var(--c1)} .ill .f2{fill:var(--c2)} .ill .f3{fill:var(--c3)} .ill .f4{fill:var(--c4)}
+.ill .fp{fill:var(--paper)} .ill .fi{fill:var(--ink)}
+[data-theme="tropical"] .ill .k,[data-theme="glass"] .ill .k{stroke-width:0}
+[data-theme="magazine"] .ill .k{stroke-width:1.2px}
+[data-theme="magazine"] .ill .f1,[data-theme="magazine"] .ill .f2,[data-theme="magazine"] .ill .f3,[data-theme="magazine"] .ill .f4{fill:none}
+[data-theme="magazine"] .ill .sun{fill:var(--c1)}
+
+/* 動畫：插圖輕輕動、切換日期彈一下 */
+@keyframes bob{50%{transform:translateY(-4px)}}
+@keyframes drift{50%{transform:translateX(10px)}}
+@keyframes ride{0%{transform:translateX(-30px)}100%{transform:translateX(30px)}}
+@keyframes twinkle{50%{opacity:.35}}
+@keyframes boing{0%{transform:scale(.96) translateY(6px);opacity:.2}60%{transform:scale(1.02) translateY(-2px);opacity:1}100%{transform:none}}
+.ill .bob{animation:bob 3.2s ease-in-out infinite}
+.ill .drift{animation:drift 7s ease-in-out infinite}
+.ill .ride{animation:ride 6s ease-in-out infinite alternate}
+.ill .twinkle{animation:twinkle 2.4s ease-in-out infinite}
+.boing{animation:boing .45s cubic-bezier(.3,1.4,.5,1)}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none !important;transition:none !important;scroll-behavior:auto !important}
+}
+
+/* ---------- 各風格的裝飾 ---------- */
+
+/* 🎨 繪本：硬陰影、粗框按鈕 */
+[data-theme="picturebook"] .btn,[data-theme="picturebook"] .day-chip{border:var(--bw) solid var(--bc)}
+[data-theme="picturebook"] .day-chip.on{box-shadow:3px 3px 0 var(--bc)}
+[data-theme="picturebook"] .hero{border-bottom:var(--bw) solid var(--bc)}
+
+/* 🌴 熱帶：漸層頁首、白字 */
+[data-theme="tropical"] .hero{color:#fff;border-radius:0 0 28px 28px}
+[data-theme="tropical"] .hero .sub,[data-theme="tropical"] .hero .stat span{color:rgba(255,255,255,.92)}
+[data-theme="tropical"] .hero .stat b{color:#fff}
+[data-theme="tropical"] .hero .kicker{color:rgba(255,255,255,.85)}
+.hero .card{color:var(--ink)}
+
+/* 📒 手帳：方格紙底、紙膠帶、卡片微歪 */
+[data-theme="scrapbook"] body{background-image:linear-gradient(rgba(156,195,213,.18) 1px,transparent 1px),linear-gradient(90deg,rgba(156,195,213,.18) 1px,transparent 1px);background-size:22px 22px}
+[data-theme="scrapbook"] .card{position:relative}
+[data-theme="scrapbook"] .card::before{content:"";position:absolute;top:-10px;left:50%;width:84px;height:20px;margin-left:-42px;background:color-mix(in srgb,var(--c2) 70%,transparent);transform:rotate(-3deg);opacity:.85}
+[data-theme="scrapbook"] .card:nth-of-type(3n+2)::before{background:color-mix(in srgb,var(--c3) 70%,transparent);transform:rotate(2deg);left:22%}
+[data-theme="scrapbook"] .card:nth-of-type(3n)::before{background:color-mix(in srgb,var(--c1) 60%,transparent);transform:rotate(-1deg);left:74%}
+[data-theme="scrapbook"] .card:nth-of-type(odd){transform:rotate(-.4deg)}
+[data-theme="scrapbook"] .card:nth-of-type(even){transform:rotate(.35deg)}
+[data-theme="scrapbook"] .hero-art{background:var(--paper);padding:10px 10px 34px;box-shadow:var(--shadow-lift);transform:rotate(-1.5deg);border-radius:3px}
+
+/* 🎫 登機證：深藍頁首、打孔線、等寬字 */
+[data-theme="boarding"] .hero{color:#FFFBF2}
+[data-theme="boarding"] .hero .sub,[data-theme="boarding"] .hero .stat span{color:#E9DFC9}
+[data-theme="boarding"] .hero .stat b{color:var(--c2);font-family:var(--font-mono)}
+[data-theme="boarding"] .hero .kicker{color:var(--c2);font-family:var(--font-mono)}
+[data-theme="boarding"] .hero-art{background:#FFFBF2;border-radius:10px;padding:8px;position:relative}
+[data-theme="boarding"] .card{position:relative}
+[data-theme="boarding"] .card.ticket{border-style:solid;background:radial-gradient(circle at 0 50%,transparent 11px,var(--paper) 12px) left/51% 100% no-repeat,radial-gradient(circle at 100% 50%,transparent 11px,var(--paper) 12px) right/51% 100% no-repeat;border:0;box-shadow:0 0 0 1.5px var(--bc) inset}
+[data-theme="boarding"] .perf{border-top:2px dashed var(--line);margin:12px -16px}
+[data-theme="boarding"] .day-chip b,[data-theme="boarding"] .t{font-family:var(--font-mono)}
+[data-theme="boarding"] .stamp{display:inline-block;border:2px solid var(--c1);color:var(--c1);border-radius:8px;padding:2px 10px;transform:rotate(-6deg);font-family:var(--font-mono);font-weight:700;letter-spacing:1px}
+
+/* 🫧 玻璃：背景照片／漸層＋毛玻璃 */
+[data-theme="glass"] body{background:var(--photo,radial-gradient(1200px 600px at 10% -10%,#FFD9A8 0,transparent 60%),radial-gradient(900px 700px at 110% 10%,#A9D8F5 0,transparent 55%),radial-gradient(900px 900px at 50% 110%,#BDE8C9 0,transparent 60%),#DCE7F2);background-attachment:fixed;background-size:cover}
+[data-theme="glass"] .card,[data-theme="glass"] .topbar,[data-theme="glass"] .day-chip,[data-theme="glass"] nav.tabs{-webkit-backdrop-filter:blur(18px) saturate(1.6);backdrop-filter:blur(18px) saturate(1.6)}
+[data-theme="glass"] .topbar,[data-theme="glass"] nav.tabs{background:rgba(255,255,255,.55) !important}
+[data-theme="glass"] .day-chip{background:rgba(255,255,255,.45) !important;border:1px solid rgba(255,255,255,.7) !important}
+[data-theme="glass"] .hero-art{border-radius:26px;overflow:hidden;background:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.7)}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  [data-theme="glass"]{--paper:rgba(255,255,255,.92)}
+}
+
+/* 📰 雜誌：大標、細線分隔、沒有圓角 */
+[data-theme="magazine"] .card{border-width:0;border-top:1px solid var(--bc);background:transparent;padding-left:0;padding-right:0}
+[data-theme="magazine"] .hero h1{font-size:40px;line-height:1.15;font-weight:900;letter-spacing:-.5px}
+[data-theme="magazine"] .hero .kicker{letter-spacing:3px;text-transform:uppercase;color:var(--c1)}
+[data-theme="magazine"] h2{font-size:26px;font-weight:900;border-bottom:3px solid var(--ink);padding-bottom:6px}
+[data-theme="magazine"] .day-chip{border:0;border-bottom:2px solid transparent;border-radius:0;background:transparent}
+[data-theme="magazine"] .day-chip.on{border-bottom-color:var(--c1);background:transparent;color:var(--ink)}
+[data-theme="magazine"] .btn{border:1px solid var(--ink)}
+/* ===== THEMES END ===== */
+
+/* ===== 版面（各風格共用） ===== */
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0}
+body{font-size:16.5px;line-height:1.65;padding-top:calc(52px + env(safe-area-inset-top));overflow-x:hidden}
+a{color:inherit}
+.wrap{max-width:560px;margin:0 auto;padding:0 16px}
+section{scroll-margin-top:64px}
+
+/* 頂端固定選單 */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:30;background:var(--paper);border-bottom:var(--bw) solid var(--bc);padding-top:env(safe-area-inset-top)}
+[data-theme="tropical"] .topbar,[data-theme="glass"] .topbar{border-bottom:1px solid var(--line)}
+.topbar .in{max-width:560px;margin:0 auto;display:flex;align-items:center;gap:4px;height:52px;padding:0 10px;overflow-x:auto;scrollbar-width:none}
+.topbar .in::-webkit-scrollbar{display:none}
+.topbar .brand{font-weight:800;font-family:var(--font-head);margin-right:auto;white-space:nowrap;padding:0 6px;font-size:15px}
+.topbar a{flex:0 0 auto;text-decoration:none;font-size:14px;font-weight:700;padding:6px 10px;border-radius:99px;white-space:nowrap}
+.topbar a.on{background:var(--c2);color:var(--ink)}
+[data-theme="magazine"] .topbar a.on{background:transparent;text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:2px}
+
+/* 首頁 */
+.hero{background:var(--hero-bg);padding:18px 0 22px}
+.hero-art{margin:4px 0 14px}
+.hero-art svg{display:block;width:100%;height:auto}
+.kicker{font-size:13px;font-weight:700;color:var(--muted);letter-spacing:1px}
+.hero h1{margin:2px 0 4px;font-size:30px;line-height:1.25}
+.hero .sub{margin:0;color:var(--muted);font-size:15px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0 4px}
+.stat{text-align:center}
+.stat b{display:block;font-size:26px;line-height:1.1;color:var(--c1-ink);font-family:var(--font-head)}
+.stat span{font-size:12.5px;color:var(--muted)}
+.count{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.count .n{font-size:44px;font-weight:800;line-height:1;color:var(--c1-ink);font-family:var(--font-head)}
+.intro{margin:10px 0 0}
+
+h2{font-size:22px;margin:30px 0 10px;line-height:1.3}
+h3{font-size:17px;margin:0 0 4px}
+.card{padding:16px;margin:14px 0}
+.muted{color:var(--muted);font-size:14px}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:9px 14px;font:inherit;font-size:14.5px;font-weight:700;text-decoration:none;cursor:pointer;background:var(--paper);color:var(--ink);min-height:44px;border:1.5px solid var(--line)}
+.btn.main{background:var(--c1);color:var(--on-c1);border-color:var(--c1)}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+
+/* 出發前準備 */
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.step{display:grid;grid-template-columns:36px 1fr;gap:10px;align-items:start}
+.step .no{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;background:var(--c3);color:var(--ink);border:var(--bw) solid var(--bc)}
+[data-theme="tropical"] .step .no,[data-theme="glass"] .step .no{color:#fff;background:var(--c3)}
+.step b{display:block}
+.step p{margin:2px 0 0;font-size:14.5px;color:var(--muted)}
+.fees{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:4px}
+.fee{padding:12px;text-align:center}
+.fee b{display:block;font-size:24px;color:var(--c1-ink);font-family:var(--font-head)}
+.fee span{font-size:13px;color:var(--muted)}
+
+/* 航班 */
+.fl-h{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.fl-route{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;margin:12px 0 6px}
+.fl-code{font-size:28px;font-weight:800;letter-spacing:1px;font-family:var(--font-mono)}
+.fl-time{font-size:20px;font-weight:800;color:var(--c1-ink)}
+.fl-sub{font-size:12.5px;color:var(--muted);line-height:1.4}
+.fl-mid{text-align:center;color:var(--muted);font-size:22px}
+.fl-mid small{display:block;font-size:11.5px;white-space:nowrap}
+.fl-r{text-align:right}
+
+/* 每日行程 */
+.days{display:flex;gap:8px;overflow-x:auto;padding:10px 16px 8px;margin:0 -16px;scrollbar-width:none;position:sticky;top:calc(52px + env(safe-area-inset-top));background:var(--bg);z-index:10}
+[data-theme="glass"] .days{background:transparent}
+.days::-webkit-scrollbar{display:none}
+.day-chip{flex:0 0 auto;background:var(--paper);border:1.5px solid var(--line);border-radius:var(--radius-s);padding:6px 12px;text-align:center;cursor:pointer;font:inherit;color:var(--ink);min-width:78px}
+.day-chip b{display:block;font-size:15px}
+.day-chip span{font-size:12px;color:var(--muted);white-space:nowrap}
+.day-chip.on{background:var(--c2);color:var(--ink)}
+[data-theme="tropical"] .day-chip.on{background:var(--c1);color:#fff;border-color:var(--c1)}
+[data-theme="tropical"] .day-chip.on span{color:#fff}
+[data-theme="boarding"] .day-chip.on{background:var(--c3);color:#FFFBF2}
+[data-theme="boarding"] .day-chip.on span{color:#E9DFC9}
+.day-chip.today{outline:2px dashed var(--c4-ink);outline-offset:2px}
+.filters{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}
+.filters button{border:1.5px solid var(--line);background:var(--paper);border-radius:99px;padding:5px 12px;font:inherit;font-size:13.5px;cursor:pointer;color:var(--ink);min-height:36px}
+.filters button.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.day-head h3{font-size:20px;margin:4px 0 2px}
+.day-meta{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;color:var(--muted);margin-top:6px}
+.tl{list-style:none;margin:10px 0 0;padding:0}
+.item{display:grid;grid-template-columns:54px 1fr;gap:10px;margin-bottom:10px}
+.item .t{text-align:right;font-weight:800;padding-top:12px;color:var(--c1-ink);font-size:15px}
+.item .box{padding:12px 14px;margin:0}
+.item .box h4{margin:0;font-size:16.5px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.item .box p{margin:4px 0 0;font-size:14.5px}
+.item .tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.item .map{font-size:13.5px;font-weight:700;color:var(--c3-ink);text-decoration:none;display:inline-block;margin-top:6px}
+.item.hide{display:none}
+.tipbox{background:color-mix(in srgb,var(--c2) 26%,var(--paper));border-radius:var(--radius-s);padding:12px 14px;margin:12px 0;font-size:14.5px;border:1.5px dashed color-mix(in srgb,var(--c2) 80%,var(--ink))}
+.daynav{display:flex;justify-content:space-between;gap:8px;margin:10px 0}
+
+/* 待辦清單 */
+.check{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.check:last-child{border-bottom:0}
+.check input{width:24px;height:24px;accent-color:var(--c4-ink);flex:0 0 auto;margin-top:2px}
+.check.done span{text-decoration:line-through;color:var(--muted)}
+.check small{display:block;color:var(--muted);font-size:13px}
+.progress{height:10px;background:var(--line);border-radius:99px;overflow:hidden;margin:8px 0 2px}
+.progress i{display:block;height:100%;background:var(--c4);transition:width .3s}
+
+/* 住宿 */
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:15px;margin:8px 0 0}
+.kv dt{color:var(--muted)}
+.kv dd{margin:0;font-weight:700}
+
+.foot{text-align:center;color:var(--muted);font-size:13px;margin:34px 0 24px}
+.foot a{font-weight:700}
+
+/* 風格切換列（預覽用，平常不顯示） */
+.switcher{position:fixed;left:50%;bottom:calc(12px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:40;display:flex;gap:4px;background:var(--paper);border:1.5px solid var(--bc);border-radius:99px;padding:5px;box-shadow:var(--shadow-lift);max-width:calc(100vw - 24px);overflow-x:auto;scrollbar-width:none}
+.switcher button{border:0;background:none;border-radius:99px;padding:7px 10px;font:inherit;font-size:13px;font-weight:700;cursor:pointer;color:var(--ink);white-space:nowrap}
+.switcher button.on{background:var(--ink);color:var(--paper)}
+</style>
+</head>
+<body>
+
+<nav class="topbar" aria-label="主選單"><div class="in" id="topnav"></div></nav>
+
+<main>
+  <section id="home" class="hero"><div class="wrap" id="home-in"></div></section>
+  <div class="wrap">
+    <section id="prep"></section>
+    <section id="flights"></section>
+    <section id="days"></section>
+    <section id="list"></section>
+    <section id="stay"></section>
+    <p class="foot" id="foot"></p>
+  </div>
+</main>
+
+<script>
+/* =========================================================
+   ✏️ 設定區：換旅程只要改這裡
+   ========================================================= */
+const THEME = "picturebook"; // picturebook 繪本｜tropical 熱帶｜scrapbook 手帳｜boarding 登機證｜glass 玻璃｜magazine 雜誌
+const SHOW_SWITCHER = true;   // true = 畫面下方出現風格切換列（給預覽頁用）
+const PHOTO = "";             // 玻璃風的背景照片網址（選填）；空白就用漸層
+
+const TRIP = {
+  key: "hokkaido-2027",       // 打勾清單存在手機裡用的名字，每個旅程要不一樣
+  title: "北海道夏日家族旅行",
+  short: "北海道 6 日",
+  kicker: "HOKKAIDO ・ SUMMER 2027",
+  dates: "2027 / 07 / 15（四）– 07 / 20（二）・6 天 5 夜",
+  start: "2027-07-15", end: "2027-07-20",
+  tz: "Asia/Tokyo", tzNote: "行程時間都是日本時間（比台灣快 1 小時）",
+  stats: [["6","天"],["4","座城市"],["2","晚溫泉"],["1","片花田"]],
+  intro: "從札幌的鐘聲出發，坐上 JR 看小樽運河的夕陽，在富良野的薰衣草田裡吃哈密瓜，最後泡進登別的溫泉。一家八口、三代同行，每天都排得剛剛好，留時間給阿嬤午睡。",
+  prep: {
+    title: "出發前準備",
+    lead: "台灣護照入境日本免簽（觀光 90 天內），但建議出發前先在 Visit Japan Web 填好入境資料，落地掃 QR Code 就能快速通關。",
+    steps: [
+      ["確認護照效期","建議效期超過回國日 6 個月，每個人都要檢查，小孩也一樣"],
+      ["註冊 Visit Japan Web","用 Email 註冊，同行家人可以加在同一個帳號裡"],
+      ["填入境與海關資料","照護照資料填寫，住宿填第一晚的飯店"],
+      ["截圖 QR Code","入境審查、海關各一個，出發前截圖存在手機"],
+      ["買 eSIM／網卡","建議每 2～3 人一張，走散時才聯絡得到"],
+    ],
+    fees: [["免費","Visit Japan Web"],["免簽","觀光 90 天內"],["約 NT$300","6 天 eSIM（每張）"]],
+    note: "規定和費用以官方網站最新公告為準。",
+    links: [["Visit Japan Web 官網","https://services.digital.go.jp/visit-japan-web/"],["外交部領事事務局（日本）","https://www.boca.gov.tw/"]],
+  },
+  flights: [
+    { dir:"去程", date:"07/15（四）", airline:"示範航空", no:"XX123", from:"TPE", fromCity:"桃園", dep:"08:30", to:"CTS", toCity:"新千歲", arr:"13:10", dur:"約 3 小時 40 分", note:"06:30 第二航廈集合，託運行李每人 23 公斤" },
+    { dir:"回程", date:"07/20（二）", airline:"示範航空", no:"XX124", from:"CTS", fromCity:"新千歲", dep:"14:20", to:"TPE", toCity:"桃園", arr:"17:30", dur:"約 4 小時 10 分", note:"11:30 機場集合，伴手禮記得放託運" },
+  ],
+  cats: [["sight","📍 景點"],["food","🍜 用餐"],["shop","🛍️ 購物"],["move","🚃 交通"],["stay","🛏️ 住宿"]],
+  days: [
+    { date:"2027-07-15", label:"抵達札幌", title:"Day 1・飛向涼爽的夏天", route:"桃園 → 新千歲 → 札幌", move:"JR 快速 Airport 約 40 分", stay:"札幌站前飯店",
+      items:[
+        { k:"d1a", time:"08:30", cat:"move", title:"桃園機場起飛", desc:"機上午餐，可以先補眠", tags:["flight"] },
+        { k:"d1b", time:"14:00", cat:"move", title:"JR 前往札幌", desc:"在機場地下一樓搭車，買 Kitaca 卡比較方便", tags:["train"] },
+        { k:"d1c", time:"16:00", cat:"stay", title:"飯店 Check-in", desc:"放行李、休息一下", tags:["walk"], map:"Sapporo Station" },
+        { k:"d1d", time:"18:00", cat:"food", title:"成吉思汗烤肉", desc:"北海道必吃的羊肉燒烤，記得穿不怕沾味道的衣服", tags:["walk"], must:true, map:"Sapporo Jingisukan" },
+      ], tip:"7 月的北海道早晚只有 15～18 度，記得帶一件薄外套。" },
+    { date:"2027-07-16", label:"小樽", title:"Day 2・運河與玻璃的港町", route:"札幌 ⇄ 小樽", move:"JR 約 40 分", stay:"札幌站前飯店",
+      items:[
+        { k:"d2a", time:"09:30", cat:"move", title:"JR 前往小樽", desc:"坐右側靠窗可以看到海", tags:["train"] },
+        { k:"d2b", time:"10:30", cat:"sight", title:"小樽運河散步", desc:"白天拍石造倉庫，傍晚再回來看點燈", tags:["walk"], must:true, map:"Otaru Canal" },
+        { k:"d2c", time:"12:00", cat:"food", title:"三角市場海鮮丼", desc:"排隊人多，建議 11:30 前到", tags:["walk"], map:"Otaru Sankaku Market" },
+        { k:"d2d", time:"14:00", cat:"shop", title:"堺町通商店街", desc:"玻璃工藝、音樂盒堂、LeTAO 起司蛋糕", tags:["walk"], map:"Sakaimachi Street Otaru" },
+      ], tip:"堺町通是一段長坡，阿嬤走累了可以在 LeTAO 二樓坐著休息。" },
+    { date:"2027-07-17", label:"富良野", title:"Day 3・紫色的薰衣草海", route:"札幌 → 富良野 → 美瑛", move:"包車約 2 小時", stay:"富良野民宿",
+      items:[
+        { k:"d3a", time:"08:00", cat:"move", title:"包車出發", desc:"司機會在飯店大廳等，記得帶兒童座椅預約單", tags:["car"] },
+        { k:"d3b", time:"10:30", cat:"sight", title:"富田農場", desc:"7 月中是薰衣草最盛開的時候，薰衣草霜淇淋一定要吃", tags:["walk"], must:true, map:"Farm Tomita" },
+        { k:"d3c", time:"13:00", cat:"food", title:"富良野哈密瓜午餐", desc:"整顆哈密瓜切開分著吃", tags:["walk"] },
+        { k:"d3d", time:"15:00", cat:"sight", title:"美瑛青池", desc:"湖水是不可思議的藍色，步道平坦好走", tags:["car"], map:"Shirogane Blue Pond" },
+      ], tip:"花田的蜜蜂很多，噴香水的人要小心；防曬和帽子一定要帶。" },
+    { date:"2027-07-18", label:"旭川", title:"Day 4・企鵝在頭上游泳", route:"富良野 → 旭川 → 札幌", move:"包車＋JR", stay:"札幌站前飯店",
+      items:[
+        { k:"d4a", time:"09:00", cat:"move", title:"前往旭山動物園", desc:"車程約 1 小時 20 分", tags:["car"] },
+        { k:"d4b", time:"10:30", cat:"sight", title:"旭山動物園", desc:"企鵝館的水中隧道、北極熊館，小朋友最愛", tags:["walk"], must:true, map:"Asahiyama Zoo" },
+        { k:"d4c", time:"13:30", cat:"food", title:"旭川醬油拉麵", desc:"偏濃郁的醬油湯頭，有兒童碗", tags:["walk"] },
+        { k:"d4d", time:"16:00", cat:"move", title:"JR 回札幌", desc:"特急 Lilac 約 1 小時 25 分，要先劃位", tags:["train"] },
+      ], tip:"動物園是上坡地形，推嬰兒車的話從正門進比較好走。" },
+    { date:"2027-07-19", label:"登別溫泉", title:"Day 5・地獄谷冒著白煙", route:"札幌 → 登別", move:"高速巴士約 1 小時 40 分", stay:"登別溫泉旅館",
+      items:[
+        { k:"d5a", time:"10:00", cat:"move", title:"高速巴士到登別", desc:"札幌站前巴士總站上車，要先買票", tags:["bus"] },
+        { k:"d5b", time:"13:00", cat:"sight", title:"地獄谷散步", desc:"木棧道約 20 分鐘，可以看到冒煙的火山口", tags:["walk"], must:true, map:"Noboribetsu Jigokudani" },
+        { k:"d5c", time:"15:00", cat:"stay", title:"溫泉旅館 Check-in", desc:"換上浴衣，晚餐前先泡一輪", tags:["walk"] },
+        { k:"d5d", time:"18:30", cat:"food", title:"旅館會席料理", desc:"在房間用餐，已經告知旅館有一位吃素", tags:[] },
+      ], tip:"大浴場大多不能穿泳衣、有刺青的人可能不能進，可以改用房間的露天風呂。" },
+    { date:"2027-07-20", label:"回家", title:"Day 6・帶著白色戀人回家", route:"登別 → 新千歲 → 桃園", move:"旅館接駁＋JR", stay:"溫暖的家",
+      items:[
+        { k:"d6a", time:"09:30", cat:"move", title:"前往新千歲機場", desc:"JR 登別站到南千歲轉車", tags:["train"] },
+        { k:"d6b", time:"11:30", cat:"shop", title:"機場伴手禮最後衝刺", desc:"Royce 巧克力、白色戀人、六花亭", tags:["walk"], must:true, map:"New Chitose Airport" },
+        { k:"d6c", time:"14:20", cat:"move", title:"起飛回台灣", desc:"17:30 抵達桃園", tags:["flight"] },
+      ], tip:"生鮮蔬果、肉製品不能帶回台灣，罰款很重。" },
+  ],
+  todo: [
+    { k:"t1", t:"註冊 Visit Japan Web 並截圖 QR Code", note:"出發前 1 週" },
+    { k:"t2", t:"確認全家護照效期", note:"" },
+    { k:"t3", t:"預約富良野包車（含兒童座椅）", note:"出發前 1 個月" },
+    { k:"t4", t:"買 eSIM", note:"每 2～3 人一張" },
+    { k:"t5", t:"換日幣現金", note:"小店和巴士常常只收現金" },
+    { k:"t6", t:"帶薄外套、防曬、帽子", note:"" },
+    { k:"t7", t:"告知旅館素食需求", note:"已完成可以打勾" },
+  ],
+  stays: [
+    { name:"札幌站前飯店（示範）", nights:"07/15–07/16、07/18", address:"北海道札幌市北區（示範地址）", checkin:"15:00", checkout:"11:00", map:"Sapporo Station", note:"走路 3 分鐘到 JR 札幌站，樓下有便利商店" },
+    { name:"富良野民宿（示範）", nights:"07/17", address:"北海道富良野市（示範地址）", checkin:"16:00", checkout:"10:00", map:"Furano", note:"有廚房和洗衣機，早餐是自家種的蔬菜" },
+    { name:"登別溫泉旅館（示範）", nights:"07/19", address:"北海道登別市登別溫泉町（示範地址）", checkin:"15:00", checkout:"10:00", map:"Noboribetsu Onsen", note:"含晚餐和早餐，房間有露天風呂" },
+  ],
+  credit: { text:"用 trip-guide skill 製作", url:"https://github.com/Joanne9N/trip-guide-skill" },
+};
+
+/* 首頁插圖：線條用 class="k"，填色用 f1～f4，換風格會自動變色 */
+const HERO_SVG = `
+<svg class="ill" viewBox="0 0 360 200" role="img" aria-label="北海道的山、薰衣草花田和小火車">
+  <rect class="fp" x="0" y="0" width="360" height="200"/>
+  <g class="twinkle"><circle class="f2 sun" cx="300" cy="46" r="22"/><circle class="k" cx="300" cy="46" r="22"/></g>
+  <g class="drift"><path class="fp" d="M40 52h46a12 12 0 0 0-22-10a14 14 0 0 0-24 10z"/><path class="k" d="M40 52h46a12 12 0 0 0-22-10a14 14 0 0 0-24 10z"/></g>
+  <g class="drift" style="animation-delay:-3s"><path class="fp" d="M190 34h38a10 10 0 0 0-18-8a12 12 0 0 0-20 8z"/><path class="k" d="M190 34h38a10 10 0 0 0-18-8a12 12 0 0 0-20 8z"/></g>
+  <path class="f3" d="M0 130L70 66l40 30 50-52 70 70 40-28 90 60v54H0z"/>
+  <path class="fp" d="M146 58l14-14 18 18-10-2-8 8-6-6z"/>
+  <path class="k" d="M0 130L70 66l40 30 50-52 70 70 40-28 90 60"/>
+  <path class="k" d="M146 58l14-14 18 18-10-2-8 8-6-6"/>
+  <path class="f4" d="M0 150c60-18 120-18 180-6s120 12 180-4v60H0z"/>
+  <path class="k" d="M0 150c60-18 120-18 180-6s120 12 180-4"/>
+  <g class="f1"><path d="M10 200c20-30 40-40 60-42v42z"/><path d="M80 200c14-28 34-40 56-42v42z"/><path d="M150 200c16-26 36-36 58-38v38z"/></g>
+  <g class="k"><path d="M18 196c14-18 30-28 46-30"/><path d="M90 196c12-18 26-28 42-30"/><path d="M160 196c12-16 28-24 44-26"/></g>
+  <g class="ride">
+    <rect class="f1" x="236" y="148" width="54" height="24" rx="6"/><rect class="k" x="236" y="148" width="54" height="24" rx="6"/>
+    <rect class="fp" x="244" y="154" width="12" height="8" rx="2"/><rect class="fp" x="262" y="154" width="12" height="8" rx="2"/>
+    <rect class="f2" x="292" y="152" width="34" height="20" rx="6"/><rect class="k" x="292" y="152" width="34" height="20" rx="6"/>
+    <circle class="fi" cx="250" cy="176" r="5"/><circle class="fi" cx="278" cy="176" r="5"/><circle class="fi" cx="312" cy="176" r="5"/>
+  </g>
+  <path class="k" d="M220 182h140"/>
+</svg>`;
+
+/* =========================================================
+   以下是程式，一般不用改
+   ========================================================= */
+const THEMES = [["picturebook","🎨 繪本"],["tropical","🌴 熱帶"],["scrapbook","📒 手帳"],["boarding","🎫 登機證"],["glass","🫧 玻璃"],["magazine","📰 雜誌"]];
+const FONTS = {
+  picturebook:"Huninn", tropical:"Chiron+GoRound+TC:wght@400;700;800", scrapbook:"LXGW+WenKai+TC:wght@400;700",
+  boarding:"Noto+Sans+TC:wght@400;700&family=Noto+Serif+TC:wght@700;900&family=Space+Mono:wght@700",
+  glass:"Noto+Sans+TC:wght@400;700;800", magazine:"Noto+Sans+TC:wght@400;700&family=Noto+Serif+TC:wght@700;900",
+};
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const store = {
+  get(k, d){ try{ const v = localStorage.getItem(TRIP.key + ":" + k); return v == null ? d : JSON.parse(v); }catch(e){ return d; } },
+  set(k, v){ try{ localStorage.setItem(TRIP.key + ":" + k, JSON.stringify(v)); }catch(e){} },
+};
+const mapUrl = q => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q);
+const TAG = { walk:"🚶 步行", train:"🚃 電車", bus:"🚌 巴士", car:"🚐 包車", flight:"✈️ 飛機" };
+
+function setTheme(t){
+  if (!FONTS[t]) t = "picturebook";
+  document.documentElement.dataset.theme = t;
+  document.getElementById("font-link").href = "https://fonts.googleapis.com/css2?family=" + FONTS[t] + "&display=swap";
+  if (t === "glass" && PHOTO) document.body.style.setProperty("--photo", `linear-gradient(rgba(255,255,255,.15),rgba(255,255,255,.15)),url("${encodeURI(PHOTO)}") center/cover`);
+  document.querySelectorAll(".switcher button").forEach(b => b.classList.toggle("on", b.dataset.t === t));
+}
+
+// 目的地時間的「今天」；網址加 ?now=2027-07-17T10:00 可以模擬
+function nowLocal(){
+  const q = new URLSearchParams(location.search).get("now");
+  if (q && !isNaN(Date.parse(q))) return q.slice(0, 10);
+  try { return new Intl.DateTimeFormat("en-CA", { timeZone: TRIP.tz }).format(new Date()); }
+  catch(e){ return new Date().toISOString().slice(0, 10); }
+}
+const dayDiff = (a, b) => Math.round((Date.parse(b) - Date.parse(a)) / 864e5);
+
+function renderNav(){
+  const links = [["home","首頁"],["prep","準備"],["flights","航班"],["days","行程"],["list","清單"],["stay","住宿"]];
+  document.getElementById("topnav").innerHTML = `<span class="brand">${esc(TRIP.short)}</span>` +
+    links.map(([id, n]) => `<a href="#${id}" data-id="${id}">${n}</a>`).join("");
+}
+
+function renderHome(){
+  const today = nowLocal(), d = dayDiff(today, TRIP.start), n = dayDiff(TRIP.start, today) + 1, total = dayDiff(TRIP.start, TRIP.end) + 1;
+  let count;
+  if (d > 0) count = `<span class="muted">距離出發還有</span><span class="n">${d}</span><span class="muted">天</span>`;
+  else if (n >= 1 && n <= total) count = `<span class="muted">旅程進行中</span><span class="n">Day ${n}</span><span class="muted">/ ${total}</span>`;
+  else count = `<span class="muted">旅程已經結束，謝謝大家 🎉</span>`;
+  document.getElementById("home-in").innerHTML = `
+    <div class="hero-art">${HERO_SVG}</div>
+    <div class="kicker">${esc(TRIP.kicker)}</div>
+    <h1>${esc(TRIP.title)}</h1>
+    <p class="sub">${esc(TRIP.dates)}</p>
+    <div class="stats">${TRIP.stats.map(([b, s]) => `<div class="stat"><b>${esc(b)}</b><span>${esc(s)}</span></div>`).join("")}</div>
+    <div class="card"><div class="count">${count}</div><p class="intro">${esc(TRIP.intro)}</p></div>`;
+}
+
+function renderPrep(){
+  const p = TRIP.prep;
+  if (!p) { document.getElementById("prep").remove(); return; }
+  document.getElementById("prep").innerHTML = `
+    <h2>🛂 ${esc(p.title)}</h2>
+    <p>${esc(p.lead)}</p>
+    <div class="card"><ol class="steps">${p.steps.map(([t, d], i) => `<li class="step"><span class="no">${i + 1}</span><div><b>${esc(t)}</b><p>${esc(d)}</p></div></li>`).join("")}</ol></div>
+    <div class="fees">${p.fees.map(([b, s]) => `<div class="card fee"><b>${esc(b)}</b><span>${esc(s)}</span></div>`).join("")}</div>
+    <p class="muted">${esc(p.note)}</p>
+    <div class="btns">${p.links.map(([t, u]) => `<a class="btn" href="${esc(u)}" target="_blank" rel="noopener">${esc(t)} ↗</a>`).join("")}</div>`;
+}
+
+function renderFlights(){
+  if (!TRIP.flights?.length) { document.getElementById("flights").remove(); return; }
+  document.getElementById("flights").innerHTML = `<h2>✈️ 航班</h2>` + TRIP.flights.map(f => `
+    <div class="card ticket">
+      <div class="fl-h"><span class="tag ${f.dir === "去程" ? "must" : "train"}">${esc(f.dir)}</span><b>${esc(f.date)}</b><span class="muted">${esc(f.airline)} <span class="mono">${esc(f.no)}</span></span></div>
+      <div class="fl-route">
+        <div><div class="fl-code">${esc(f.from)}</div><div class="fl-time">${esc(f.dep)}</div><div class="fl-sub">${esc(f.fromCity)}</div></div>
+        <div class="fl-mid">✈︎<small>${esc(f.dur)}</small></div>
+        <div class="fl-r"><div class="fl-code">${esc(f.to)}</div><div class="fl-time">${esc(f.arr)}</div><div class="fl-sub">${esc(f.toCity)}</div></div>
+      </div>
+      <div class="perf"></div>
+      <div class="muted">${esc(f.note)}</div>
+    </div>`).join("");
+}
+
+let curDay = 0, curCat = "all";
+function renderDays(first){
+  const today = nowLocal(), el = document.getElementById("days");
+  if (first) {
+    const i = TRIP.days.findIndex(d => d.date === today);
+    curDay = i >= 0 ? i : 0;
+  }
+  const day = TRIP.days[curDay];
+  const chips = TRIP.days.map((d, i) => `<button class="day-chip${i === curDay ? " on" : ""}${d.date === today ? " today" : ""}" data-i="${i}"><b>Day ${i + 1}</b><span>${esc(d.label)}</span></button>`).join("");
+  const filters = [["all","全部"], ...TRIP.cats].map(([k, n]) => `<button data-c="${k}" class="${k === curCat ? "on" : ""}">${esc(n)}</button>`).join("");
+  const items = day.items.map(it => `
+    <li class="item${curCat !== "all" && it.cat !== curCat ? " hide" : ""}">
+      <div class="t">${esc(it.time)}</div>
+      <div class="card box">
+        <h4>${esc(it.title)}${it.must ? ` <span class="tag must">必去</span>` : ""}</h4>
+        ${it.desc ? `<p>${esc(it.desc)}</p>` : ""}
+        ${it.tags?.length ? `<div class="tags">${it.tags.map(t => `<span class="tag ${esc(t)}">${esc(TAG[t] || t)}</span>`).join("")}</div>` : ""}
+        ${it.map ? `<a class="map" href="${mapUrl(it.map)}" target="_blank" rel="noopener">📍 Google Maps</a>` : ""}
+      </div>
+    </li>`).join("");
+  el.innerHTML = `
+    <h2>🗓️ 每日行程</h2>
+    <div class="days" id="daychips">${chips}</div>
+    <div class="filters" id="catf">${filters}</div>
+    <div id="daybody" class="${first ? "" : "boing"}">
+      <div class="card day-head">
+        <h3>${esc(day.title)}</h3>
+        <div class="muted">${esc(day.route)}</div>
+        <div class="day-meta"><span>🚃 交通｜${esc(day.move)}</span><span>🛏️ 住宿｜${esc(day.stay)}</span></div>
+      </div>
+      <ol class="tl">${items}</ol>
+      ${day.tip ? `<div class="tipbox"><b>旅人提醒</b>　${esc(day.tip)}</div>` : ""}
+      <div class="daynav">
+        <button class="btn" data-go="-1" ${curDay === 0 ? "disabled" : ""}>← 前一天</button>
+        <button class="btn" data-go="1" ${curDay === TRIP.days.length - 1 ? "disabled" : ""}>下一天 →</button>
+      </div>
+    </div>`;
+  // 只左右捲動日期列，不要讓整頁跳走
+  const row = el.querySelector("#daychips"), on = row.querySelector(".day-chip.on");
+  if (on) row.scrollLeft = on.offsetLeft - (row.clientWidth - on.offsetWidth) / 2;
+}
+document.addEventListener("click", e => {
+  const chip = e.target.closest(".day-chip"), go = e.target.closest("[data-go]"), cat = e.target.closest("#catf button"), sw = e.target.closest(".switcher button");
+  if (chip) { curDay = +chip.dataset.i; renderDays(); }
+  else if (go) { curDay = Math.min(TRIP.days.length - 1, Math.max(0, curDay + +go.dataset.go)); renderDays(); document.getElementById("days").scrollIntoView({ block: "start" }); }
+  else if (cat) { curCat = cat.dataset.c; renderDays(); }
+  else if (sw) { setTheme(sw.dataset.t); try { history.replaceState(null, "", "?theme=" + sw.dataset.t + location.hash); } catch(e){} }
+});
+
+function renderList(){
+  const done = store.get("todo", []);
+  const n = TRIP.todo.filter(t => done.includes(t.k)).length;
+  document.getElementById("list").innerHTML = `
+    <h2>✅ 出發前待辦</h2>
+    <div class="card">
+      <div class="muted">完成 ${n} / ${TRIP.todo.length}（只存在你自己的手機裡）</div>
+      <div class="progress"><i style="width:${TRIP.todo.length ? n / TRIP.todo.length * 100 : 0}%"></i></div>
+      ${TRIP.todo.map(t => `<label class="check${done.includes(t.k) ? " done" : ""}"><input type="checkbox" data-k="${esc(t.k)}" ${done.includes(t.k) ? "checked" : ""}><span>${esc(t.t)}${t.note ? `<small>${esc(t.note)}</small>` : ""}</span></label>`).join("")}
+    </div>`;
+}
+document.addEventListener("change", e => {
+  const k = e.target.dataset?.k; if (!k) return;
+  let done = store.get("todo", []);
+  done = e.target.checked ? [...new Set([...done, k])] : done.filter(x => x !== k);
+  store.set("todo", done); renderList();
+});
+
+function renderStay(){
+  if (!TRIP.stays?.length) { document.getElementById("stay").remove(); return; }
+  document.getElementById("stay").innerHTML = `<h2>🛏️ 住宿</h2>` + TRIP.stays.map(s => `
+    <div class="card">
+      <h3>${esc(s.name)}</h3>
+      <dl class="kv"><dt>日期</dt><dd>${esc(s.nights)}</dd><dt>入住</dt><dd>${esc(s.checkin)} 之後</dd><dt>退房</dt><dd>${esc(s.checkout)} 之前</dd><dt>地址</dt><dd>${esc(s.address)}</dd></dl>
+      ${s.note ? `<p class="muted">${esc(s.note)}</p>` : ""}
+      <div class="btns"><a class="btn main" href="${mapUrl(s.map || s.address)}" target="_blank" rel="noopener">📍 開地圖</a></div>
+    </div>`).join("");
+}
+
+function renderFoot(){
+  const c = TRIP.credit;
+  document.getElementById("foot").innerHTML = `${esc(TRIP.tzNote)}<br>${c?.text ? (c.url ? `<a href="${esc(c.url)}" target="_blank" rel="noopener">${esc(c.text)}</a>` : esc(c.text)) : ""}`;
+}
+
+// 捲動時標示目前在哪一區
+function watchNav(){
+  if (!("IntersectionObserver" in window)) return;
+  const io = new IntersectionObserver(es => es.forEach(en => {
+    if (en.isIntersecting) document.querySelectorAll(".topbar a").forEach(a => a.classList.toggle("on", a.dataset.id === en.target.id));
+  }), { rootMargin: "-45% 0px -50% 0px" });
+  document.querySelectorAll("main section[id]").forEach(s => io.observe(s));
+}
+
+const qTheme = new URLSearchParams(location.search).get("theme");
+setTheme(FONTS[qTheme] ? qTheme : THEME);
+if (SHOW_SWITCHER && !new URLSearchParams(location.search).has("bare")) {
+  const bar = document.createElement("div");
+  bar.className = "switcher";
+  bar.innerHTML = THEMES.map(([t, n]) => `<button data-t="${t}">${n}</button>`).join("");
+  document.body.appendChild(bar);
+  setTheme(document.documentElement.dataset.theme);
+  document.body.style.paddingBottom = "70px";
+}
+renderNav(); renderHome(); renderPrep(); renderFlights(); renderDays(true); renderList(); renderStay(); renderFoot(); watchNav();
+</script>
+</body>
+</html>
