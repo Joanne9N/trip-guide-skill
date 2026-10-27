@@ -388,6 +388,22 @@ echo "✅ 密碼已更新，正在重新部署讓新密碼生效…"
 
 # 🆕 第九部分：領隊後台功能規格
 
+## 9-0 之後補建領隊後台（已經做好團體版的網站）
+
+出發前才決定要加、甚至旅途中才想到都可以。**已經有的行程、團員記帳、留言、推薦、分房都不會受影響**，網址也不變。
+
+跟 AI 說「幫我補建領隊後台」，AI 照以下步驟做：
+1. 從 `assets/leader/` 複製：`site/admin.html`、`site/leader-lib.js`、`functions/_lib/auth.js`、`functions/api/admin/`（login、ledger、receipts、parse、settings、`_middleware.js`）、`tools/`（至少要 `extract-days.mjs`、`set-password.sh`）
+2. 資料庫**只新增**領隊用的資料表（`schema.sql` 裡的 leader_ledger、receipts、leader_settings、login_attempts、ai_usage，全部是 `CREATE TABLE IF NOT EXISTS`），不動既有資料表：
+   ```bash
+   npx wrangler d1 execute <資料庫名> --remote --file schema.sql -y
+   ```
+3. `wrangler.toml` 加上 `[ai]` 這段（第五部分範本）
+4. 👤 **管理密碼**：AI 先問使用者「要沿用原本留言板的管理密碼，還是換一組新的？」要換的話，請使用者執行 `tools/set-password.sh`
+5. 改用 `assets/leader/deploy.sh`（會先跑 `extract-days.mjs`，並一起上傳 `admin.html`、`leader-lib.js`、`days.json`）
+6. `index.html` 設定區的 `TRIP.admin` 改成 `true`（頁尾會出現「🧭 領隊後台」入口）
+7. 部署後，請使用者填 3-16 的設定（在後台「⚙️ 設定」頁就能填），再跑第七部分的領隊測試項目
+
 ## 9-1 後台畫面（`/admin.html`，手機優先）
 
 上方 4 個分頁：
