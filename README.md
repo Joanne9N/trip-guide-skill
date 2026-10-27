@@ -37,7 +37,7 @@
 
 | 帳號 | 哪個版本要 | 用來做什麼 | 費用 |
 |---|---|---|---|
-| **Claude**（要能用 Claude Code） | 全部 | 讓 AI 幫你做網頁、上傳 | 依你的方案 |
+| **Claude**（要能用 Claude Code） | 全部 | 讓 AI 幫你做網頁、上傳 | Claude Code 要 **Pro 以上付費方案** |
 | **Cloudflare** | 團體版、領隊版 | 放網站和資料庫 | 免費，**不用綁信用卡** |
 | **GitHub** | 輕量版（放網頁用） | GitHub Pages 放網頁 | 免費 |
 
@@ -50,7 +50,7 @@
 
 | 軟體 | 確認指令 | 看到什麼代表 OK | 沒有的話 |
 |---|---|---|---|
-| **Claude Code** | `claude --version` | 版本號 | 照 Claude 官網說明安裝；也可以用 Claude 桌面版的 Code 分頁 |
+| **Claude Code** | `claude --version` | 版本號 | 最簡單是用 [Claude 桌面版](https://claude.com/download) 的 Code 分頁，不用另外裝 |
 | **Git** | `git --version` | 版本號 | Mac 會跳出「安裝開發者工具」，按「安裝」 |
 | **Node.js**（20 版以上，團體版和領隊版要） | `node -v` | `v20.x.x` 以上 | 到 https://nodejs.org 下載 LTS 版安裝 |
 
@@ -59,6 +59,21 @@
 ---
 
 ## 安裝
+
+### 方法一：請 Claude 幫你裝（最簡單，不用開終端機）
+
+1. 下載 [Claude 桌面版](https://claude.com/download)，登入後點上方的 **Code** 分頁
+2. 把下面這段話整段貼給它：
+
+   > 請幫我安裝這個 skill：https://github.com/Joanne9N/trip-guide-skill ，照 README 的說明把 trip-guide 資料夾裝到 ~/.claude/skills/
+
+3. 它要執行指令時會問你「要允許嗎？」，開頭是 `git`、`mkdir`、`cp` 的就按允許
+4. 裝好後**開一個新的對話**，skill 才會出現
+
+> 💳 Code 分頁要 **Claude Pro 以上的付費方案**，免費方案沒有。
+> 只有網頁版 claude.ai 的話：團體版、領隊版要在你的電腦上執行上傳指令，網頁版做不到；只做個人輕量版的話，可以試著把 `trip-guide` 資料夾壓成 zip，到網頁版左邊 **Customize → Skills** 上傳；做出來的網頁檔要自己傳到 GitHub Pages。
+
+### 方法二：自己在終端機貼指令
 
 在終端機貼上這兩行：
 
@@ -72,7 +87,9 @@ mkdir -p ~/.claude/skills && cp -R trip-guide-skill/trip-guide ~/.claude/skills/
 
 裝好後**重新開一個 Claude Code**，skill 才會出現。
 
-之後要更新到新版：進到 `trip-guide-skill` 資料夾執行 `git pull`，再跑一次上面第二行。
+### 之後要更新到新版
+
+跟 Claude 說「幫我把 trip-guide skill 更新到 GitHub 最新版」就好。自己來的話：進到 `trip-guide-skill` 資料夾執行 `git pull`，再跑一次上面第二行。
 
 ## 使用
 

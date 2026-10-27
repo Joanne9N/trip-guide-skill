@@ -98,10 +98,10 @@ footer{margin:56px 0 0;border-top:var(--bw) solid var(--bc);padding:22px 0 40px;
 
   <h2 id="install">⚡ 怎麼安裝</h2>
   <ol class="steps">
-    <li><div><b>準備 Claude Code</b><br><span class="muted">團體版和領隊版需要 AI 幫你上傳網站，要用 Claude Code（Claude 桌面版的 Code 分頁也可以）。只做個人輕量版的話，一般的 Claude 對話也做得出網頁檔。</span></div></li>
-    <li><div><b>把 skill 裝進 Claude</b><br><span class="muted">打開「終端機」，貼上這兩行：</span>
-      <pre>git clone https://github.com/Joanne9N/trip-guide-skill.git
-mkdir -p ~/.claude/skills && cp -R trip-guide-skill/trip-guide ~/.claude/skills/</pre></div></li>
+    <li><div><b>準備 Claude 桌面版</b><br><span class="muted">下載 <a href="https://claude.com/download" target="_blank" rel="noopener">Claude 桌面版</a>，打開上方的 Code 分頁（需要 Pro 以上付費方案）。團體版和領隊版要 AI 幫你上傳網站，一定要用 Code 分頁。</span></div></li>
+    <li><div><b>請 Claude 幫你裝 skill</b><br><span class="muted">不用開終端機，把這段話貼給 Code 分頁：</span>
+      <pre>請幫我安裝這個 skill：https://github.com/Joanne9N/trip-guide-skill ，照 README 的說明把 trip-guide 資料夾裝到 ~/.claude/skills/</pre>
+      <span class="muted">它要執行指令時會問你「要允許嗎？」，開頭是 git、mkdir、cp 的就按允許。裝好後開一個新對話。</span></div></li>
     <li><div><b>跟 Claude 說你要做什麼</b><br><span class="muted">例如：「幫我們做一個旅遊手冊網頁，7 月去北海道 6 天，一家 8 個人」。它會先問你要哪個版本、哪種風格，再列計畫給你確認。</span></div></li>
     <li><div><b>需要你親自按的地方，它會停下來</b><br><span class="muted">註冊 Cloudflare、登入授權、設定管理密碼都要你本人操作，不會經過 AI 對話。完整說明在 GitHub 的 README。</span></div></li>
   </ol>
