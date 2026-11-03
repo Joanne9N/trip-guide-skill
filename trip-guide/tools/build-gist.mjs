@@ -9,13 +9,13 @@ const body = f => readFileSync(join(ref, f), "utf8").trim().split("\n").slice(1)
 const out = process.argv[2] || "旅遊手冊網頁模板.md";
 const today = new Date().toLocaleDateString("sv-SE", { timeZone: "Asia/Taipei" });
 
-const head = `# 🧳 旅遊手冊網頁模板（v3）
+const head = `# 🧳 旅遊手冊網頁模板（v4）
 
-> 版本：${today}（v3：6 種風格、個人輕量版、團體版、領隊版通用模板）
+> 版本：${today}（v4：7 種風格、📖 景點故事、個人輕量版、團體版、領隊版通用模板）
 > 適用：1–40 人的旅行（自己或情侶出遊、朋友、家族、公司旅遊，也適用領隊／導遊帶團）
 >
 > 🆕 **最新版、現成模板都在 GitHub**：https://github.com/Joanne9N/trip-guide-skill
-> 🎨 **先看 6 種風格長什麼樣**：https://joanne9n.github.io/trip-guide-skill/
+> 🎨 **先看 7 種風格長什麼樣**：https://joanne9n.github.io/trip-guide-skill/
 >
 > **最推薦的用法是安裝成 Claude skill**（安裝步驟見 GitHub 的 README），之後跟 Claude 說「幫我們做旅遊手冊網頁」就好。
 > 這份 Gist 是給**不想安裝、想直接把一份檔案交給 AI** 的人：內容和 skill 的規格書一樣，合併成一份。
@@ -42,7 +42,7 @@ const head = `# 🧳 旅遊手冊網頁模板（v3）
    - 🌿 **個人輕量版**：1–4 人，不需要一起記帳（看 Part A）
    - 👥 **團體基本版**：5–20 人，大家一起記帳分帳、分房、推薦、留言（看 Part C）
    - 🧭 **進階領隊版**：領隊／導遊帶團，要拍收據、匯出結算 Excel（看 Part C＋Part D）。不確定就先做團體版，**之後隨時可以補建**（Part D 的 9-0）
-3. **問風格**：6 選 1（看 Part B），附上預覽網址讓使用者自己看
+3. **問風格**：7 選 1（看 Part B），附上預覽網址讓使用者自己看
 4. 先輸出簡要計畫（版本、風格、有哪些區塊），等使用者確認再動手
 5. 標 👤 的步驟一定要停下來，請使用者本人操作（註冊、登入授權、設定密碼），**不要叫使用者把密碼貼在對話裡**
 6. **不能有額外費用**：只用免費方案，不要改接會計費的 AI 服務
@@ -53,7 +53,7 @@ const head = `# 🧳 旅遊手冊網頁模板（v3）
 `;
 const parts = [
   ["# 🌿 Part A｜個人輕量版（spec-lite.md）", "spec-lite.md"],
-  ["# 🎨 Part B｜6 種風格（styles.md）", "styles.md"],
+  ["# 🎨 Part B｜7 種風格（styles.md）", "styles.md"],
   ["# 👥 Part C｜團體基本版（spec.md，主規格）", "spec.md"],
   ["# 🧭 Part D｜進階領隊版（spec-leader.md，只有領隊帶團才需要）", "spec-leader.md"],
 ];

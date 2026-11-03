@@ -141,6 +141,27 @@ h1,h2,h3,.head-font{font-family:var(--font-head)}
 .tag.flight{color:var(--ink);background:color-mix(in srgb,var(--line) 60%,var(--paper))}
 .tag.must{color:var(--on-c1);background:var(--c1);border-color:var(--c1)}
 
+/* 📖 景點故事（底部滑出的卡片內容） */
+.story-btn{display:inline-flex;align-items:center;gap:4px;font:inherit;font-size:13.5px;font-weight:700;color:var(--c1-ink);background:color-mix(in srgb,var(--c1) 14%,var(--paper));border:1.5px solid color-mix(in srgb,var(--c1) 55%,var(--paper));border-radius:99px;padding:6px 12px;min-height:36px;cursor:pointer}
+.story{padding-top:4px}
+.story-kicker{font-size:13px;font-weight:700;letter-spacing:1px;color:var(--c1-ink)}
+.story h3{font-size:22px;margin:2px 44px 6px 0;line-height:1.3}
+.story-lead{font-size:16px;font-weight:700;color:var(--ink);margin:0 0 12px;padding-left:10px;border-left:3px solid var(--c2)}
+.story figure{margin:0 0 12px}
+.story img{display:block;width:100%;max-height:260px;object-fit:cover;border-radius:var(--radius-s);background:var(--line)}
+.story figcaption{font-size:12px;color:var(--muted);margin-top:4px}
+.story p{margin:0 0 10px;font-size:15.5px;line-height:1.75}
+.story h4{font-size:16px;margin:16px 0 6px}
+.story-see{margin:0;padding-left:22px;display:grid;gap:4px;font-size:15.5px}
+.story-meta{font-size:14.5px;color:var(--muted)}
+.story-fact{background:color-mix(in srgb,var(--c3) 18%,var(--paper));border-radius:var(--radius-s);padding:12px 14px;font-size:14.5px;margin:14px 0}
+.story-src{font-size:13px;color:var(--muted)}
+.story-src a{color:var(--c3-ink)}
+.story-nav{display:flex;justify-content:space-between;gap:8px;margin-top:16px}
+.story-nav .btn{max-width:48%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block;text-align:center;line-height:26px}
+[data-theme="poem"] .story h3{font-weight:500}
+[data-theme="poem"] .story-kicker{font-family:var(--font-head);font-style:italic;font-weight:400;letter-spacing:2px}
+
 /* 插圖：線條吃 --ink，填色吃 --c1～--c4，各風格自動變色 */
 .ill .k{stroke:var(--ink);stroke-width:calc(var(--bw) + 1px);stroke-linejoin:round;stroke-linecap:round;fill:none}
 .ill .f1{fill:var(--c1)} .ill .f2{fill:var(--c2)} .ill .f3{fill:var(--c3)} .ill .f4{fill:var(--c4)}
@@ -728,7 +749,13 @@ const DAYS = [
   ]},
   { date:"2027-07-16", w:"五", label:"小樽", title:"Day 2・運河與玻璃的港町", move:"JR 約 40 分", stay:"札幌站前飯店", groups:["A","B"], tip:"堺町通是一段長坡，阿嬤走累了可以在 LeTAO 二樓坐著休息。", items:[
     { k:0, t:"09:00", meet:true, where:"飯店大廳", title:"🚃 JR 前往小樽", cat:"move", tags:["train"], place:"Sapporo Station", body:"<p>坐右側靠窗可以看到海。</p>", cost:750 },
-    { k:1, t:"10:00", e:"11:30", title:"🌉 小樽運河散步", cat:"sight", tags:["walk"], must:true, place:"Otaru Canal", body:"<p>白天拍石造倉庫，傍晚再回來看點燈。</p>" },
+    { k:1, t:"10:00", e:"11:30", title:"🌉 小樽運河散步", cat:"sight", tags:["walk"], must:true, place:"Otaru Canal", body:"<p>白天拍石造倉庫，傍晚再回來看點燈。</p>",
+      story:{ lead:"百年前的港口運河，現在是北海道最有名的散步路線",
+          body:["小樽運河在 1923 年完工，當年的貨船在這裡把貨卸進兩旁的石造倉庫，小樽也因此成為北海道熱鬧的貿易港。","後來港口沒落，運河一度差點被填平，經過市民多年爭取，最後保留一半寬度整修成散步道，倉庫也變成餐廳和商店。"],
+          see:["淺草橋上拍運河和倉庫的經典角度","傍晚點燈後的煤氣燈和水面倒影","北運河一帶比較安靜的舊港風景"],
+          how:"白天先走一趟拍倉庫，晚餐後再回來看點燈，兩種氣氛完全不一樣。", stay:"40–60 分鐘",
+          fact:"每年 2 月的「小樽雪燈之路」，運河水面會放滿浮球蠟燭。",
+          src:[["小樽觀光協會","https://otaru.gr.jp/"]] } },
     { k:2, t:"11:30", e:"12:30", title:"🍣 三角市場海鮮丼", cat:"food", tags:["walk"], place:"Otaru Sankaku Market", body:"<p>排隊人多，建議 11:30 前到。</p>", cost:2500 },
     { k:3, t:"13:00", e:"15:00", group:"A", title:"🎨 玻璃杯體驗", cat:"sight", place:"Otaru glass workshop", body:"<p>自己吹一顆玻璃杯，隔天可以寄回台灣（示範內容）。</p>", cost:3000 },
     { k:4, t:"13:00", e:"15:00", group:"B", title:"☕ 北一硝子三號館喝咖啡", cat:"food", place:"Kitaichi Hall Otaru", body:"<p>167 盞煤油燈的咖啡廳，坐著慢慢喝。</p>" },
@@ -736,7 +763,13 @@ const DAYS = [
   ]},
   { date:"2027-07-17", w:"六", label:"富良野", title:"Day 3・紫色的薰衣草海", move:"包車約 2 小時", stay:"富良野民宿", tip:"花田的蜜蜂很多，噴香水的人要小心；防曬和帽子一定要帶。", items:[
     { k:0, t:"08:00", meet:true, where:"飯店大廳", title:"🚐 包車出發", cat:"move", tags:["car"], body:"<p>今天 2 台車，分車名單在「聯絡」分頁。</p>" },
-    { k:1, t:"10:30", e:"12:30", title:"💜 富田農場", cat:"sight", tags:["walk"], must:true, place:"Farm Tomita", body:"<p>7 月中是薰衣草最盛開的時候，薰衣草霜淇淋一定要吃。</p>" },
+    { k:1, t:"10:30", e:"12:30", title:"💜 富田農場", cat:"sight", tags:["walk"], must:true, place:"Farm Tomita", body:"<p>7 月中是薰衣草最盛開的時候，薰衣草霜淇淋一定要吃。</p>",
+      story:{ lead:"讓富良野成為「薰衣草代名詞」的那片花田",
+          body:["富田農場從 1950 年代開始種薰衣草，原本是為了提煉香料。後來香料需求下滑，很多農家改種別的作物，富田家卻把花田留了下來。","1970 年代，這裡的花田照片登上日本國鐵的月曆，旅客開始慕名而來，富良野的薰衣草就這樣紅了起來。"],
+          see:["「彩色花田」好幾種顏色的花一條一條排開","傳統薰衣草田的紫色山坡","薰衣草霜淇淋"],
+          how:"7 月中旬到下旬是盛開期，早上 9 點前人比較少，拍照最輕鬆。", stay:"1.5–2 小時",
+          fact:"農場不收門票，免費入園。",
+          src:[["富田農場官網","https://www.farm-tomita.co.jp/"]] } },
     { k:2, t:"12:30", e:"13:30", title:"🍈 哈密瓜午餐", cat:"food", place:"Furano", body:"<p>整顆哈密瓜切開分著吃。</p>", cost:2000 },
     { k:3, t:"15:00", e:"16:00", title:"🩵 美瑛青池", cat:"sight", tags:["car"], place:"Shirogane Blue Pond", body:"<p>湖水是不可思議的藍色，步道平坦好走。</p>" },
     { k:4, t:"17:00", title:"🏡 民宿 Check-in", cat:"stay", place:"Furano", body:"<p>晚餐在民宿吃。</p>" },
@@ -749,7 +782,13 @@ const DAYS = [
   ]},
   { date:"2027-07-19", w:"一", label:"登別溫泉", title:"Day 5・地獄谷冒著白煙", move:"高速巴士約 1 小時 40 分", stay:"登別溫泉旅館", tip:"大浴場不能穿泳衣，有刺青的人可能不能進，可以改用房間的露天風呂。", items:[
     { k:0, t:"10:00", meet:true, where:"札幌站前巴士總站", title:"🚌 高速巴士到登別", cat:"move", tags:["bus"], place:"Sapporo Station Bus Terminal", body:"<p>要先買票。</p>", cost:2200 },
-    { k:1, t:"13:00", e:"14:30", title:"♨️ 地獄谷散步", cat:"sight", tags:["walk"], must:true, place:"Noboribetsu Jigokudani", body:"<p>木棧道約 20 分鐘，可以看到冒煙的火山口。</p>" },
+    { k:1, t:"13:00", e:"14:30", title:"♨️ 地獄谷散步", cat:"sight", tags:["walk"], must:true, place:"Noboribetsu Jigokudani", body:"<p>木棧道約 20 分鐘，可以看到冒煙的火山口。</p>",
+      story:{ lead:"火山爆發留下的山谷，也是登別溫泉的源頭",
+          body:["地獄谷是火山噴發後留下的爆裂火口，整片山谷不斷冒出白煙和硫磺味，看起來就像傳說中的地獄，名字就是這樣來的。","登別溫泉街的溫泉大多從這一帶湧出，泉質種類很多，所以有「溫泉百貨公司」的稱號。"],
+          see:["木棧道盡頭會冒泡的「鐵泉池」","整片冒白煙的山谷和彩色岩壁","溫泉街上到處都有的鬼雕像"],
+          how:"沿木棧道慢慢走，穿好走的鞋；硫磺味比較重，對氣味敏感的人可以戴口罩。", stay:"30–60 分鐘",
+          fact:"傳說地獄谷是鬼住的地方，所以登別到處都看得到鬼的雕像。",
+          src:[["登別國際觀光會議協會","https://noboribetsu-spa.jp/"]] } },
     { k:2, t:"15:00", title:"🏯 溫泉旅館 Check-in", cat:"stay", place:"Noboribetsu Onsen", body:"<p>換上浴衣，晚餐前先泡一輪。</p>" },
     { k:3, t:"18:30", title:"🍱 旅館會席料理", cat:"food", body:"<p>在房間用餐。</p>" },
     { k:4, t:"20:30", only:["媽媽","小嬸"], title:"💆 旅館按摩（已預約）", cat:"stay", body:"<p>20:30 在 1 樓按摩室。</p>", cost:6000 },
@@ -989,6 +1028,31 @@ function todayDress(di){
 
 /* ---------- 時間軸 ---------- */
 let planCat = "all";
+/* ---------- 📖 景點故事 ---------- */
+const safeUrl = u => /^https:\/\//.test(u || "") ? u : "";
+function storyHTML(it, list, di){
+  const s = it.story, have = list.filter(x => x.story), i = have.indexOf(it), prev = have[i - 1], next = have[i + 1];
+  const nav = x => x ? `<button class="btn" data-story="${di}|${esc(x.k)}">${x === prev ? "← " : ""}${esc(x.title)}${x === next ? " →" : ""}</button>` : "<span></span>";
+  const src = (s.src || []).filter(([, u]) => safeUrl(u));
+  return `<article class="story">
+    <div class="story-kicker">📖 景點故事</div>
+    <h3>${esc(it.title)}</h3>
+    ${s.lead ? `<p class="story-lead">${esc(s.lead)}</p>` : ""}
+    ${safeUrl(s.photo) ? `<figure><img src="${esc(s.photo)}" alt="${esc(it.title)}" loading="lazy">${s.credit ? `<figcaption>📷 ${esc(s.credit)}</figcaption>` : ""}</figure>` : ""}
+    ${(s.body || []).map(p => `<p>${esc(p)}</p>`).join("")}
+    ${s.see?.length ? `<h4>👀 必看</h4><ol class="story-see">${s.see.map(x => `<li>${esc(x)}</li>`).join("")}</ol>` : ""}
+    ${s.how ? `<h4>🧭 怎麼玩</h4><p>${esc(s.how)}</p>` : ""}
+    ${s.stay ? `<p class="story-meta">⏱️ 建議停留｜${esc(s.stay)}</p>` : ""}
+    ${s.fact ? `<div class="story-fact"><b>💡 小知識</b>　${esc(s.fact)}</div>` : ""}
+    ${src.length ? `<p class="story-src">資料來源：${src.map(([t, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(t)}</a>`).join("、")}</p>` : ""}
+    ${have.length > 1 ? `<div class="story-nav">${nav(prev)}${nav(next)}</div>` : ""}
+  </article>`;
+}
+function openStory(di, k){
+  const list = DAYS[di].items, it = list.find(x => String(x.k) === String(k));
+  if (!it?.story) return;
+  openSheet(storyHTML(it, list, di), "story"); $("#sheet .sheet-in").scrollTop = 0;
+}
 function itemHTML(it, now, openIt, di){
   const st = statusOf(it, now);
   const time = isTime(it.t) ? `${it.t}${it.e ? `<small>– ${it.e}</small>` : ""}` : `<span style="font-size:14px">${esc(it.t)}</span>`;
@@ -997,9 +1061,9 @@ function itemHTML(it, now, openIt, di){
   const hide = planCat !== "all" && it.cat !== planCat ? " hide" : "";
   return `<li class="item ${it.meet ? "meet" : ""} ${st}${hide}">
     <div class="t">${time}</div>
-    <details data-key="${di}-${it.k}" ${openIt ? "open" : ""}><summary><span>${groupPill(it.group)} ${it.title} ${badge}${ex.length ? ` <span class="pill cost">💰 ${sumLabel(ex)}</span>` : it.cost ? ` <span class="pill cost-est">約 ${fmtLOC(it.cost)}/人</span>` : ""}</span><span class="arrow">›</span></summary>
+    <details data-key="${di}-${it.k}" ${openIt ? "open" : ""}><summary><span>${groupPill(it.group)} ${it.title} ${badge}${it.story ? ` <span class="pill story-pill" title="有景點故事">📖</span>` : ""}${ex.length ? ` <span class="pill cost">💰 ${sumLabel(ex)}</span>` : it.cost ? ` <span class="pill cost-est">約 ${fmtLOC(it.cost)}/人</span>` : ""}</span><span class="arrow">›</span></summary>
       <div class="body">${tagsHTML(it)}${it.group ? `<p>👥 <b>${GROUPS[it.group].name}：</b>${GROUPS[it.group].members.join("、")}</p>` : ""}${it.only ? `<p>👥 <b>參加：</b>${it.only.map(esc).join("、")}</p>` : ""}${it.where ? `<p>📌 <b>集合地點：</b>${it.where}</p>` : ""}${it.body || ""}${it.veg ? vegHTML(it.veg, `${di}-${it.k}`) : ""}
-      <div class="btns">${mapBtn(it.place)}</div>${itemMoneyHTML(it, di, it.k)}</div>
+      <div class="btns">${it.story ? `<button class="btn story-btn" data-story="${di}|${esc(it.k)}">📖 景點故事</button>` : ""}${mapBtn(it.place)}</div>${itemMoneyHTML(it, di, it.k)}</div>
     </details></li>`;
 }
 function timelineHTML(di, items, now, isOpen){
@@ -1647,6 +1711,7 @@ document.addEventListener("click", e => {
   if (T("[data-prep]")){ store.set("prepOpen", true); go("list"); setTimeout(() => document.getElementById("prep")?.scrollIntoView({ behavior:"smooth" }), 50); return; }
   const pl = T("[data-say]"); if (pl) return speak(pl.dataset.say, pl);
   if (T("[data-close]") || e.target.id === "sheet") return closeSheet();
+  const sto = T("[data-story]"); if (sto){ const [a, b] = sto.dataset.story.split("|"); return openStory(+a, b); }
   const ad = T("[data-add]"); if (ad){ const [a, b] = ad.dataset.add.split("|"); return openExpForm({ day: +a, item: +b }); }
   const todayIdx = () => { const i = DAYS.findIndex(d => d.date === todayStr()); return i < 0 ? 0 : i; };
   if (T("[data-fund-new]")) return openExpForm({ day: todayIdx(), payer: FUND });
@@ -1725,6 +1790,18 @@ if ((SHOW_SWITCHER || new URLSearchParams(location.search).has("switcher")) && !
   document.body.appendChild(bar); setTheme(document.documentElement.dataset.theme);
   document.body.style.paddingBottom = "140px";
 }
+// 景點故事：在卡片上左右滑可以換到同一天的上一個／下一個景點
+(() => {
+  let x0 = null, y0 = 0;
+  document.addEventListener("touchstart", e => { if (e.target.closest(".story")) { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; } }, { passive: true });
+  document.addEventListener("touchend", e => {
+    if (x0 === null) return;
+    const dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0; x0 = null;
+    if (Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+    const btns = document.querySelectorAll(".story-nav .btn"), b = dx < 0 ? [...btns].find(x => x.textContent.endsWith("→")) : [...btns].find(x => x.textContent.startsWith("←"));
+    if (b) b.click();
+  }, { passive: true });
+})();
 render();
 loadWeather(); setInterval(loadWeather, 3600000);
 loadExpenses(); setInterval(loadExpenses, 60000);
