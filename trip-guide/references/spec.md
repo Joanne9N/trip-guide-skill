@@ -8,7 +8,7 @@
 
 ## 📖 這份檔案怎麼用
 
-0. **先選版本和風格**：個人／情侶出遊用輕量版（`spec-lite.md`）；團體用這份；領隊帶團再加 `spec-leader.md`。風格 6 選 1，見 `styles.md`
+0. **先選版本和風格**：個人／情侶出遊用輕量版（`spec-lite.md`）；團體用這份；領隊帶團再加 `spec-leader.md`。風格 7 選 1，見 `styles.md`
 1. **填寫第三部分「你的旅程資料」**：把 `【】` 裡的內容換成你自己的，不需要的區塊可以整段刪掉
 2. **把整份檔案交給 AI 寫程式工具**（例如 Claude Code），並貼上這段指令：
 
@@ -97,7 +97,7 @@
 | 項目 | 做法 |
 |---|---|
 | 網頁本體 | **單一 `index.html`**（HTML＋CSS＋原生 JavaScript，不用框架）。**以 `assets/group/index.html` 為底**，所有旅程資料集中在 `<script>` 開頭的設定區，換旅程只改設定區 |
-| 風格 | `assets/themes/themes.css` 的 6 種風格，`index.html` 開頭 `THEME` 選一種；改了 themes.css 要跑 `node tools/sync-themes.mjs` 同步 |
+| 風格 | `assets/themes/themes.css` 的 7 種風格，`index.html` 開頭 `THEME` 選一種；改了 themes.css 要跑 `node tools/sync-themes.mjs` 同步 |
 | 示範模式 | 網址加 `?demo`（或放在 github.io、直接開檔案）時，用設定區的 `DEMO_SEED` 假資料，**不讀寫雲端**，方便預覽和測試 |
 | 放置位置 | **Cloudflare Pages**（免費），網址像 `xxx-隨機碼.pages.dev` |
 | 共用資料 | **Cloudflare D1**（免費 SQLite 資料庫）＋ **Pages Functions**（`functions/api/*.js`） |

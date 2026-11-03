@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>trip-guide 旅遊手冊網頁</title>
-<meta name="description" content="一句話請 Claude 幫你做旅遊手冊網頁：6 種風格、個人／團體／領隊三個版本，記帳分帳、集合倒數、分房、留言板，全部免費。">
+<meta name="description" content="一句話請 Claude 幫你做旅遊手冊網頁：7 種風格、個人／團體／領隊三個版本，記帳分帳、集合倒數、分房、留言板，全部免費。">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧳</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -57,9 +57,9 @@ footer{margin:56px 0 0;border-top:var(--bw) solid var(--bc);padding:22px 0 40px;
   <div>
     <div class="kicker">TRIP-GUIDE ・ CLAUDE SKILL</div>
     <h1>一句話，做出全團都在用的旅遊手冊網頁 🧳</h1>
-    <p class="lead">把行程丟給 Claude，它會幫你做一個手機優先的旅遊網頁：集合倒數、每日行程、記帳分帳、分房、推薦清單、留言板。<b>6 種風格任選、全部免費</b>。</p>
+    <p class="lead">把行程丟給 Claude，它會幫你做一個手機優先的旅遊網頁：集合倒數、每日行程、記帳分帳、分房、推薦清單、留言板。<b>7 種風格任選、全部免費</b>。</p>
     <div class="btns">
-      <a class="btn main" href="#styles">🎨 看 6 種風格</a>
+      <a class="btn main" href="#styles">🎨 看 7 種風格</a>
       <a class="btn" href="#install">⚡ 怎麼安裝</a>
       <a class="btn" href="https://github.com/Joanne9N/trip-guide-skill">GitHub ↗</a>
     </div>
@@ -82,7 +82,7 @@ footer{margin:56px 0 0;border-top:var(--bw) solid var(--bc);padding:22px 0 40px;
       <p class="muted" style="margin:12px 0 0">後台需要登入，示範請自己部署後試用</p></div>
   </div>
 
-  <h2 id="styles">🎨 6 種風格</h2>
+  <h2 id="styles">🎨 7 種風格</h2>
   <p class="muted">同一個示範旅程（虛構的北海道 6 日家族旅行），換一個設定就換一種長相。點進去可以在畫面下方切換風格。</p>
   <div class="styles" id="style-grid"></div>
 
@@ -122,6 +122,7 @@ const STYLES = [
   ["boarding","🎫 復古登機證風","海軍藍、票根、打孔線。適合出國、蜜月"],
   ["glass","🫧 液態玻璃風","毛玻璃卡片浮在風景上。適合海島、極光、雪景"],
   ["magazine","📰 雜誌編輯風","大字標題、細線、留白。適合質感旅行、長輩團"],
+  ["poem","🌅 拾光成詩風","復古幾何插畫、Risograph 顆粒、纖細襯線字。適合文青旅行、海邊夕陽"],
 ];
 document.getElementById("style-grid").innerHTML = STYLES.map(([t, n, d]) => `
   <div class="style">

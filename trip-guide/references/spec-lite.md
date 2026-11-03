@@ -27,7 +27,7 @@
 ## 設定區欄位
 
 ```js
-const THEME = "picturebook";   // 6 選 1，見 styles.md
+const THEME = "picturebook";   // 7 選 1，見 styles.md
 const PHOTO = "";               // 玻璃風背景照片網址（選填）
 const TRIP = {
   key: "hokkaido-2027",         // 每個旅程不一樣（打勾紀錄用）
