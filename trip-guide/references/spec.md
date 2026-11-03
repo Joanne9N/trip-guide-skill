@@ -1,6 +1,6 @@
 # 🧳 團體旅遊手冊網頁 — 完整模板與規格書
 
-> 版本：2026-10-25（v3：6 種風格、個人輕量版、通用模板）
+> 版本：2026-11-03（v4：7 種風格、📖 景點故事、個人輕量版、通用模板）
 > 原始作品：2026/10 曼谷 13 人朋友團實際用過的旅遊手冊
 > 適用：5–20 人的團體旅行（家族旅遊、朋友出遊、公司旅遊、畢業旅行）
 
@@ -8,7 +8,7 @@
 
 ## 📖 這份檔案怎麼用
 
-0. **先選版本和風格**：個人／情侶出遊用輕量版（`spec-lite.md`）；團體用這份；領隊帶團再加 `spec-leader.md`。風格 6 選 1，見 `styles.md`
+0. **先選版本和風格**：個人／情侶出遊用輕量版（`spec-lite.md`）；團體用這份；領隊帶團再加 `spec-leader.md`。風格 7 選 1，見 `styles.md`
 1. **填寫第三部分「你的旅程資料」**：把 `【】` 裡的內容換成你自己的，不需要的區塊可以整段刪掉
 2. **把整份檔案交給 AI 寫程式工具**（例如 Claude Code），並貼上這段指令：
 
@@ -97,7 +97,7 @@
 | 項目 | 做法 |
 |---|---|
 | 網頁本體 | **單一 `index.html`**（HTML＋CSS＋原生 JavaScript，不用框架）。**以 `assets/group/index.html` 為底**，所有旅程資料集中在 `<script>` 開頭的設定區，換旅程只改設定區 |
-| 風格 | `assets/themes/themes.css` 的 6 種風格，`index.html` 開頭 `THEME` 選一種；改了 themes.css 要跑 `node tools/sync-themes.mjs` 同步 |
+| 風格 | `assets/themes/themes.css` 的 7 種風格，`index.html` 開頭 `THEME` 選一種；改了 themes.css 要跑 `node tools/sync-themes.mjs` 同步 |
 | 示範模式 | 網址加 `?demo`（或放在 github.io、直接開檔案）時，用設定區的 `DEMO_SEED` 假資料，**不讀寫雲端**，方便預覽和測試 |
 | 放置位置 | **Cloudflare Pages**（免費），網址像 `xxx-隨機碼.pages.dev` |
 | 共用資料 | **Cloudflare D1**（免費 SQLite 資料庫）＋ **Pages Functions**（`functions/api/*.js`） |
@@ -197,9 +197,29 @@ CREATE TABLE settle_paid (name TEXT PRIMARY KEY, amount INTEGER NOT NULL, dir TE
   group: "A",         // 分組行動才加
   title: "🚆 集合出發",
   place: "BTS Saphan Taksin",   // Google 地圖搜尋字（也可放經緯度 "13.71,100.51"）
-  body: "<div class='route'>交通路線</div><div class='tip'>提醒</div><div class='rain'>雨備</div><img class='guide-img' src='img/xxx.webp'>" }
+  body: "<div class='route'>交通路線</div><div class='tip'>提醒</div><div class='rain'>雨備</div><img class='guide-img' src='img/xxx.webp'>",
+  story: {                     // 📖 景點故事（選填，不填就不會出現按鈕）
+      lead: "一句話亮點",
+      body: ["故事第 1 段", "故事第 2 段"],   // 2–3 段：歷史、由來、為什麼值得去
+      see: ["必看 1", "必看 2", "必看 3"],
+      how: "怎麼玩：路線、時段、拍照位置",
+      stay: "建議停留時間，例：40–60 分鐘",
+      fact: "一則小知識（選填）",
+      photo: "https://…", credit: "照片來源（選填，只用可授權的圖片）",
+      src: [["官方網站名稱", "https://…"]],  // 必填，至少 1 個可查證的來源
+    } }
 // 說明圖（例如機場接機位置圖）放在 site/img/，deploy.sh 會一起上傳；圖片下方註明來源
 ```
+
+有 `story` 的行程，標題旁會出現 📖，展開後有「📖 景點故事」按鈕，點了從畫面底部滑出，可以左右滑到同一天的下一個景點。
+
+### 📖 景點故事怎麼寫（給 AI）
+
+- **只寫值得看的景點**：景點、博物館、老街、寺廟、自然景觀；交通、Check-in、吃飯通常不用寫
+- **每一則都要附可查證的來源**（`src`），優先用官方網站、觀光局；查不到可靠資料就不要寫，不要自己編年份、數字或傳說
+- 語氣像朋友在旅途中講故事：先講「為什麼值得去」，再講「怎麼玩」；每段 2–3 句，全部加起來 300 字以內
+- 照片選填，只用官方提供或 Wikimedia Commons 等可授權的圖片，並在 `credit` 註明；不確定授權就不放
+- 寫完列給使用者看過再放上網頁
 
 ### 💰 花費（全團共用帳本）
 - 總覽：全團總花費、平均每人、＋新增花費

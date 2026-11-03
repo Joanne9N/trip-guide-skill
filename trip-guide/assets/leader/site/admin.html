@@ -17,7 +17,8 @@ const THEME = "picturebook";
 (function(){
   const F = { picturebook:"Huninn", tropical:"Chiron+GoRound+TC:wght@400;700;800", scrapbook:"LXGW+WenKai+TC:wght@400;700",
     boarding:"Noto+Sans+TC:wght@400;700&family=Noto+Serif+TC:wght@700;900&family=Space+Mono:wght@700",
-    glass:"Noto+Sans+TC:wght@400;700;800", magazine:"Noto+Sans+TC:wght@400;700&family=Noto+Serif+TC:wght@700;900" };
+    glass:"Noto+Sans+TC:wght@400;700;800", magazine:"Noto+Sans+TC:wght@400;700&family=Noto+Serif+TC:wght@700;900",
+    poem:"Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Noto+Sans+TC:wght@400;700&family=Noto+Serif+TC:wght@500" };
   const q = new URLSearchParams(location.search).get("theme"), t = F[q] ? q : F[THEME] ? THEME : "picturebook";
   document.documentElement.dataset.theme = t;
   document.getElementById("font-link").href = "https://fonts.googleapis.com/css2?family=" + F[t] + "&display=swap";
@@ -26,10 +27,10 @@ const THEME = "picturebook";
 <style>
 /* ===== THEMES START（由 tools/sync-themes.mjs 從 assets/themes/themes.css 同步，不要直接改這段） ===== */
 /* =========================================================
-   trip-guide 風格系統（6 種）
+   trip-guide 風格系統（7 種）
    用法：<html data-theme="picturebook">，換風格只要改這個值
    picturebook 日系繪本｜tropical 熱帶活潑｜scrapbook 手帳剪貼簿
-   boarding 復古登機證｜glass 液態玻璃｜magazine 雜誌編輯
+   boarding 復古登機證｜glass 液態玻璃｜magazine 雜誌編輯｜poem 拾光成詩
    這份是母版：改完執行 node tools/sync-themes.mjs，
    會把內容同步進各版本 index.html 的 THEMES 區塊
    ========================================================= */
@@ -123,6 +124,21 @@ const THEME = "picturebook";
   --hero-bg:#FAF8F4;
 }
 
+/* 🌅 拾光成詩：米白紙纖維、Risograph 顆粒、復古幾何插畫、纖細襯線英文標題 */
+[data-theme="poem"]{
+  --alert:#C4472F;
+  --bg:#F4EEE2; --paper:#FBF7EF; --ink:#2B2723; --muted:#6B6258; --line:#DCD1C0;
+  --c1:#E0674A; --c2:#E9B44A; --c3:#3D7F8C; --c4:#9DB08A;
+  --c1-ink:#A6432B; --c3-ink:#2C6370; --c4-ink:#4C6A3C; --on-c1:#2B2723;
+  --bw:1px; --bc:#2B2723; --radius:2px; --radius-s:2px;
+  --shadow:none; --shadow-lift:none;
+  --font-body:"Noto Sans TC",-apple-system,"PingFang TC",sans-serif;
+  --font-head:"Bodoni Moda","Noto Serif TC","Songti TC",serif;
+  --hero-bg:transparent;
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .17 0 0 0 0 .15 0 0 0 0 .13 0 0 0 .16 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  --fiber:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .09' numOctaves='3' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .47 0 0 0 0 .36 0 0 0 .14 -.03'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23f)'/%3E%3C/svg%3E");
+}
+
 /* ---------- 共用元件（所有風格共用的骨架） ---------- */
 html{background:var(--bg)}
 body{background:var(--bg);color:var(--ink);font-family:var(--font-body)}
@@ -139,6 +155,27 @@ h1,h2,h3,.head-font{font-family:var(--font-head)}
 .tag.flight{color:var(--ink);background:color-mix(in srgb,var(--line) 60%,var(--paper))}
 .tag.must{color:var(--on-c1);background:var(--c1);border-color:var(--c1)}
 
+/* 📖 景點故事（底部滑出的卡片內容） */
+.story-btn{display:inline-flex;align-items:center;gap:4px;font:inherit;font-size:13.5px;font-weight:700;color:var(--c1-ink);background:color-mix(in srgb,var(--c1) 14%,var(--paper));border:1.5px solid color-mix(in srgb,var(--c1) 55%,var(--paper));border-radius:99px;padding:6px 12px;min-height:36px;cursor:pointer}
+.story{padding-top:4px}
+.story-kicker{font-size:13px;font-weight:700;letter-spacing:1px;color:var(--c1-ink)}
+.story h3{font-size:22px;margin:2px 44px 6px 0;line-height:1.3}
+.story-lead{font-size:16px;font-weight:700;color:var(--ink);margin:0 0 12px;padding-left:10px;border-left:3px solid var(--c2)}
+.story figure{margin:0 0 12px}
+.story img{display:block;width:100%;max-height:260px;object-fit:cover;border-radius:var(--radius-s);background:var(--line)}
+.story figcaption{font-size:12px;color:var(--muted);margin-top:4px}
+.story p{margin:0 0 10px;font-size:15.5px;line-height:1.75}
+.story h4{font-size:16px;margin:16px 0 6px}
+.story-see{margin:0;padding-left:22px;display:grid;gap:4px;font-size:15.5px}
+.story-meta{font-size:14.5px;color:var(--muted)}
+.story-fact{background:color-mix(in srgb,var(--c3) 18%,var(--paper));border-radius:var(--radius-s);padding:12px 14px;font-size:14.5px;margin:14px 0}
+.story-src{font-size:13px;color:var(--muted)}
+.story-src a{color:var(--c3-ink)}
+.story-nav{display:flex;justify-content:space-between;gap:8px;margin-top:16px}
+.story-nav .btn{max-width:48%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block;text-align:center;line-height:26px}
+[data-theme="poem"] .story h3{font-weight:500}
+[data-theme="poem"] .story-kicker{font-family:var(--font-head);font-style:italic;font-weight:400;letter-spacing:2px}
+
 /* 插圖：線條吃 --ink，填色吃 --c1～--c4，各風格自動變色 */
 .ill .k{stroke:var(--ink);stroke-width:calc(var(--bw) + 1px);stroke-linejoin:round;stroke-linecap:round;fill:none}
 .ill .f1{fill:var(--c1)} .ill .f2{fill:var(--c2)} .ill .f3{fill:var(--c3)} .ill .f4{fill:var(--c4)}
@@ -147,6 +184,8 @@ h1,h2,h3,.head-font{font-family:var(--font-head)}
 [data-theme="magazine"] .ill .k{stroke-width:1.2px}
 [data-theme="magazine"] .ill .f1,[data-theme="magazine"] .ill .f2,[data-theme="magazine"] .ill .f3,[data-theme="magazine"] .ill .f4{fill:none}
 [data-theme="magazine"] .ill .sun{fill:var(--c1)}
+[data-theme="poem"] .ill .k{stroke-width:0}
+[data-theme="poem"] .ill .f1,[data-theme="poem"] .ill .f2,[data-theme="poem"] .ill .f3,[data-theme="poem"] .ill .f4,[data-theme="poem"] .ill .fi{mix-blend-mode:multiply}
 
 /* 動畫：插圖輕輕動、切換日期彈一下 */
 @keyframes bob{50%{transform:translateY(-4px)}}
@@ -217,6 +256,26 @@ h1,h2,h3,.head-font{font-family:var(--font-head)}
 [data-theme="magazine"] .day-chip{border:0;border-bottom:2px solid transparent;border-radius:0;background:transparent}
 [data-theme="magazine"] .day-chip.on{border-bottom-color:var(--c1);background:transparent;color:var(--ink)}
 [data-theme="magazine"] .btn{border:1px solid var(--ink)}
+
+/* 🌅 拾光成詩：紙纖維與顆粒、套印偏差、編號小標、圓弧與圓點點綴 */
+[data-theme="poem"] body{background-color:var(--bg);background-image:var(--grain),var(--fiber);background-size:160px 160px,300px 300px;background-blend-mode:multiply}
+[data-theme="poem"] body{counter-reset:poem}
+[data-theme="poem"] .topbar{border-bottom-color:var(--line)}
+[data-theme="poem"] .hero .kicker{font-family:var(--font-head);font-weight:400;font-size:25px;line-height:1.15;letter-spacing:.5px;text-transform:none;color:var(--ink);margin-top:6px}
+[data-theme="poem"] .hero h1{font-family:var(--font-body);font-size:20px;font-weight:700;letter-spacing:1px;text-shadow:none}
+[data-theme="poem"] .hero-art{position:relative;border-radius:0;background:var(--paper);padding:14px 14px 30px;border:1px solid var(--line)}
+[data-theme="poem"] .hero-art svg{filter:drop-shadow(1.2px .8px 0 color-mix(in srgb,var(--c3) 30%,transparent))}
+[data-theme="poem"] .hero-art::after{content:"";position:absolute;inset:14px 14px 30px;background-image:var(--grain);background-size:120px 120px;mix-blend-mode:multiply;opacity:.9;pointer-events:none}
+[data-theme="poem"] .hero-art::before{content:"N° 01  ·  a trip in verse";position:absolute;left:14px;bottom:8px;font-family:var(--font-head);font-style:italic;font-size:12px;letter-spacing:1.5px;color:var(--muted)}
+[data-theme="poem"] h2{font-weight:500;counter-increment:poem;position:relative;padding-bottom:8px;border-bottom:1px solid var(--line)}
+[data-theme="poem"] h2::before{content:counter(poem,decimal-leading-zero);display:block;font-family:var(--font-head);font-style:italic;font-weight:400;font-size:13px;letter-spacing:2px;color:var(--c1-ink)}
+[data-theme="poem"] h2::after{content:"";position:absolute;right:0;bottom:-4px;width:7px;height:7px;border-radius:50%;background:var(--c1)}
+[data-theme="poem"] .card{background:radial-gradient(circle at 100% 0,color-mix(in srgb,var(--c2) 24%,transparent) 0 30px,transparent 31px),var(--paper);border-color:var(--line)}
+[data-theme="poem"] .btn{border:1px solid var(--ink)}
+[data-theme="poem"] .day-chip{border:1px solid var(--line);border-radius:99px}
+[data-theme="poem"] .day-chip.on{background:var(--c3);color:#FBF7EF;border-color:var(--c3)}
+[data-theme="poem"] .day-chip.on span{color:#E8F0EF}
+[data-theme="poem"] .topbar a.on{background:transparent;border-radius:0;box-shadow:inset 0 -2px 0 var(--c1)}
 /* ===== THEMES END ===== */
 /* 後台沿用前台的風格變數；這裡只把舊的顏色名稱接到風格變數上 */
 html{
