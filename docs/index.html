@@ -48,6 +48,13 @@ pre{background:var(--ink);color:#FFFCF6;border-radius:12px;padding:12px 14px;ove
 .feat{display:grid;gap:10px;margin-top:14px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
 .feat div{padding:14px}
 .feat b{display:block}
+.teach{display:grid;gap:18px;align-items:center;margin-top:28px;padding:22px;background:color-mix(in srgb,var(--c2) 22%,var(--paper))}
+@media (min-width:760px){ .teach{grid-template-columns:1fr 1fr} }
+.teach h2{margin:4px 0 8px}
+.teach ul{margin:8px 0 14px;padding-left:20px}
+.teach li{margin:3px 0}
+.teach .embed{width:100%;max-width:420px;justify-self:center;border-radius:var(--radius-s);overflow:hidden;background:var(--paper);border:var(--bw) solid var(--bc)}
+.teach iframe{display:block;width:100%;height:600px;border:0}
 footer{margin:56px 0 0;border-top:var(--bw) solid var(--bc);padding:22px 0 40px;text-align:center;font-size:14px;color:var(--muted)}
 </style>
 </head>
@@ -61,6 +68,7 @@ footer{margin:56px 0 0;border-top:var(--bw) solid var(--bc);padding:22px 0 40px;
     <div class="btns">
       <a class="btn main" href="#styles">🎨 看 7 種風格</a>
       <a class="btn" href="#install">⚡ 怎麼安裝</a>
+      <a class="btn" href="#teach">🙋 不會用？我教你</a>
       <a class="btn" href="https://github.com/Joanne9N/trip-guide-skill">GitHub ↗</a>
     </div>
   </div>
@@ -68,6 +76,21 @@ footer{margin:56px 0 0;border-top:var(--bw) solid var(--bc);padding:22px 0 40px;
 </div></header>
 
 <main class="wrap">
+
+  <section class="card teach" id="teach">
+    <div>
+      <div class="kicker">ONE-ON-ONE ・ CLAUDE 家教</div>
+      <h2>領了一個 skill 但不會用？別擔心，我教你！</h2>
+      <p>安裝 skill、開 Claude Code、上傳網站，第一次做卡關很正常。一對一陪你從頭做一次，做完就是你自己會的。</p>
+      <ul>
+        <li>帶著你的旅程，當場做出你們這團的手冊網頁</li>
+        <li>線上或實體（台北、新北）都可以</li>
+        <li>報名後用 LINE 約時間，課後附重點整理</li>
+      </ul>
+      <div class="btns"><a class="btn main" href="https://portaly.cc/hibilab.io/product/tGiQnCbzfh7x9DN1ihUw" target="_blank" rel="noopener">現在報名 ↗</a></div>
+    </div>
+    <div class="embed"><iframe src="https://portaly.cc/embed/hibilab.io/product/tGiQnCbzfh7x9DN1ihUw" title="Claude 一對一家教報名" loading="lazy"></iframe></div>
+  </section>
 
   <h2>三個版本，看人數選</h2>
   <div class="grid3">
